@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React, {Component} from 'react';
+import LoginForm from './LoginForm.jsx';
 
 export default class LoginPage extends Component {
   constructor(props) {
@@ -6,7 +7,11 @@ export default class LoginPage extends Component {
   }
 
   render() {
-    return (<div>MyComponent</div>);
+    return (
+      <div className="login-page">
+        <LoginForm/>
+      </div>
+    );
   }
 }
 LoginPage.propTypes = {

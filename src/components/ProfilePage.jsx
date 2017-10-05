@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, {Component} from 'react';
 
 export default class ProfilePage extends Component {
   constructor(props) {
