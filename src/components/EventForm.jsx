@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, {Component} from 'react';
 
 export default class EventForm extends Component {
   constructor(props) {
