@@ -51,3 +51,16 @@
   margin-top: 15vh;
   font-family: 'Germania One';
 }*/
+
+.navbar{
+  background-color: black;
+  color: white;
+}
+
+.navbar img{
+  margin-right: 5vw;
+}
+
+.card {
+  margin: 30px;
+}
