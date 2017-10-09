@@ -48,7 +48,8 @@ export default class LoginForm extends Component {
         if(err) {
           this.setState({error: res.body.error});
         }else{
-          setToken(res.body.token);
+          // setToken(res.body.token);
+          setToken('578gh423rebz7zjeno99'); //for testing purposes
           this.sendLoginFormRequestUp("login");
         }
       })
@@ -58,8 +59,8 @@ export default class LoginForm extends Component {
 
   render() {
     return (
-      <div className="form-wrapper">
-        <div className="login-form">
+      <div className="card">
+        <div className="card-block">
           <form>
             <div className="Header">
               {this.props.display==="register" ?
@@ -73,11 +74,11 @@ export default class LoginForm extends Component {
               }
             </div>
             <div className="form-group">
-              {/* <label htmlFor="username">Username</label> */}
+              <label htmlFor="username">Username</label>
               <input className="form-control" onChange={this.updateFromField('username')} type="text" id="username" placeholder="Username:" value={this.state.username}/>
             </div>
             <div className="form-group">
-              {/* <label htmlFor="password">Password</label> */}
+              <label htmlFor="password">Password</label>
               <input className="form-control"
                 onChange={this.updateFromField('password')}
                 type="text" id="password" placeholder="Password:" value={this.state.password}/>

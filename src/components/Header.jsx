@@ -7,9 +7,12 @@ export default class Header extends React.Component {
 
   render() {
     return (
-      <div className='header'>
-        <h4>EZ Tour</h4>
-      </div>
+      <nav class="navbar navbar-light bg-faded">
+        <a class="navbar-brand" href="#">
+          <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""/>
+          <h3>EZ Tour</h3>
+        </a>
+      </nav>
     );
   }
 }
