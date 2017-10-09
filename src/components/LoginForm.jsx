@@ -88,8 +88,13 @@ export default class LoginForm extends Component {
               <div className="form-group">
                 <button onClick={event => this.register(event)} type="submit" className="btn btn-primary">Register</button>
               </div> :
-              <div className="form-group">
-                <button onClick={event => this.login(event)} type="submit" className="btn btn-success">Login</button>
+              <div>
+                <div className="form-group">
+                  <button onClick={event => this.login(event)} type="submit" className="btn btn-success">Login</button>
+                </div>
+                <div className="g-signin2" data-onsuccess="onSignIn">
+
+                </div>
               </div>
             }
           </form>
