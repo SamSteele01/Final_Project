@@ -1,3 +1,4 @@
+/* global gapi */
 import React, {Component} from 'react';
 import request from 'superagent';
 
@@ -5,6 +6,8 @@ export default class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.toggleLoginRegisterForm = this.toggleLoginRegisterForm.bind(this);
+    this.onSignIn = this.onSignIn.bind(this);
+
     this.state = {
       register: false,
       username: "",
@@ -20,9 +23,16 @@ export default class LoginForm extends Component {
     }
   }
 
-  // sendLoginFormRequestUp(goBack){
-  //   this.props.sendLoginFormRequestUp(goBack);
-  // }
+  componentDidMount() {
+    gapi.signin2.render('g-signin2', {
+      'scope': 'https://www.googleapis.com/auth/plus.login',
+      'width': 200,
+      'height': 50,
+      'longtitle': true,
+      'theme': 'dark',
+      'onsuccess': this.onSignIn
+    });
+  }
 
   toggleLoginRegisterForm(event){
     event.preventDefault();
@@ -151,9 +161,7 @@ export default class LoginForm extends Component {
                 </div>
               </div>
             }
-            <div>
-              <a className="g-signin2" data-onsuccess="onSignIn"></a>
-            </div>
+            <div id="g-signin2" />
           </form>
         </div>
       </div>

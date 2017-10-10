@@ -13,5 +13,5 @@ export default class BaseLayout extends Component {
   }
 }
 
-BaseLayout.propTypes = {
-};
+// BaseLayout.propTypes = {
+// };
