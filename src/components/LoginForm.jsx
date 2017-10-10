@@ -4,9 +4,9 @@ import request from 'superagent';
 export default class LoginForm extends Component {
   constructor(props) {
     super(props);
-
+    this.toggleLoginRegisterForm = this.toggleLoginRegisterForm.bind(this);
     this.state = {
-      // register: false
+      register: false,
       username: "",
       password: "",
       error: false,
@@ -20,8 +20,21 @@ export default class LoginForm extends Component {
     }
   }
 
-  sendLoginFormRequestUp(goBack){
-    this.props.sendLoginFormRequestUp(goBack);
+  // sendLoginFormRequestUp(goBack){
+  //   this.props.sendLoginFormRequestUp(goBack);
+  // }
+
+  toggleLoginRegisterForm(event){
+    event.preventDefault();
+    if (event.target.id !== "" && event.target.id !== undefined && event.target.id !== null){
+      console.log(event);
+      if(event.target.id==="register"){
+        this.setState({register: true});
+      }
+      if(event.target.id==="login"){
+        this.setState({register: false});
+      }
+    }
   }
 
   register(event){
@@ -48,7 +61,8 @@ export default class LoginForm extends Component {
         if(err) {
           this.setState({error: res.body.error});
         }else{
-          setToken(res.body.token);
+          // setToken(res.body.token);
+          setToken('578gh423rebz7zjeno99'); //for testing purposes
           this.sendLoginFormRequestUp("login");
         }
       })
@@ -58,8 +72,42 @@ export default class LoginForm extends Component {
 
   render() {
     return (
-      <div className="form-wrapper">
-        <div className="login-form">
+      <div className="card">
+        <div className="card-header">
+          <ul className="nav nav-tabs card-header-tabs">
+            <li className="nav-item"
+              // onClick={this.toggleLoginRegisterForm('login')}
+              id="login"
+              >
+               { this.state.register ?
+                 <a className="nav-link "
+                   onClick={event => this.toggleLoginRegisterForm(event)}
+                   id="login"
+                   >Login</a> :
+                 <a className="nav-link active"
+                   onClick={event => this.toggleLoginRegisterForm(event)}
+                   id="login"
+                   >Login</a>
+              }
+            </li>
+            <li className="nav-item"
+              // onClick={this.toggleLoginRegisterForm('register')}
+              id="register"
+              >
+               { this.state.register ?
+                <a className="nav-link active"
+                  onClick={event => this.toggleLoginRegisterForm(event)}
+                  id="register"
+                  >Register</a> :
+                <a className="nav-link "
+                  onClick={event => this.toggleLoginRegisterForm(event)}
+                  id="register"
+                  >Register</a>
+              }
+            </li>
+          </ul>
+        </div>
+        <div className="card-block">
           <form>
             <div className="Header">
               {this.props.display==="register" ?
@@ -73,11 +121,11 @@ export default class LoginForm extends Component {
               }
             </div>
             <div className="form-group">
-              {/* <label htmlFor="username">Username</label> */}
+              <label htmlFor="username">Username</label>
               <input className="form-control" onChange={this.updateFromField('username')} type="text" id="username" placeholder="Username:" value={this.state.username}/>
             </div>
             <div className="form-group">
-              {/* <label htmlFor="password">Password</label> */}
+              <label htmlFor="password">Password</label>
               <input className="form-control"
                 onChange={this.updateFromField('password')}
                 type="text" id="password" placeholder="Password:" value={this.state.password}/>
@@ -87,8 +135,13 @@ export default class LoginForm extends Component {
               <div className="form-group">
                 <button onClick={event => this.register(event)} type="submit" className="btn btn-primary">Register</button>
               </div> :
-              <div className="form-group">
-                <button onClick={event => this.login(event)} type="submit" className="btn btn-success">Login</button>
+              <div>
+                <div className="form-group">
+                  <button onClick={event => this.login(event)} type="submit" className="btn btn-success">Login</button>
+                </div>
+                <div className="g-signin2" data-onsuccess="onSignIn">
+
+                </div>
               </div>
             }
           </form>

@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import Logo from '../styles/two_tickets_white1600.png'
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -7,9 +8,12 @@ export default class Header extends React.Component {
 
   render() {
     return (
-      <div className='header'>
-        <h4>EZ Tour</h4>
-      </div>
+      <nav className="navbar navbar-light bg-faded">
+        <a className="navbar-brand" >
+          <img src={Logo} width="50" height="50" className="d-inline-block " alt=""/>
+          EZ Tour
+        </a>
+      </nav>
     );
   }
 }
