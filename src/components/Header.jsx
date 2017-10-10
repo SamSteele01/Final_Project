@@ -8,9 +8,9 @@ export default class Header extends React.Component {
 
   render() {
     return (
-      <nav class="navbar navbar-light bg-faded">
-        <a class="navbar-brand" >
-          <img src={Logo} width="50" height="50" class="d-inline-block " alt=""/>
+      <nav className="navbar navbar-light bg-faded">
+        <a className="navbar-brand" >
+          <img src={Logo} width="50" height="50" className="d-inline-block " alt=""/>
           EZ Tour
         </a>
       </nav>
