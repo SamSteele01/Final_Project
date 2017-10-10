@@ -25,9 +25,9 @@ class App extends Component {
         // username={this.state.username} password={this.state.password} isLoggedIn={this.state.isLoggedIn} removeToken={this.removeToken.bind(this)} token={this.state.token}
         >
         <Switch>
-          <Route path='/dashboard' render={Dashboard} />
-          <Route path='/event-form' render={EventForm} />
-          <Route path='/profile-page' render={ProfilePage} />
+          <Route path='/dashboard' component={Dashboard} />
+          <Route path='/event-form' component={EventForm} />
+          <Route path='/profile-page' component={ProfilePage} />
           <Route path='/' component={LoginPage} />
         </Switch>
       </BaseLayout>

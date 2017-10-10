@@ -1,6 +1,7 @@
 /* global gapi */
 import React, {Component} from 'react';
 import request from 'superagent';
+import cookie from 'react-cookies';
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -72,7 +73,7 @@ export default class LoginForm extends Component {
   }
 
   login(event){
-    let setToken = this.props.setToken;
+    let setToken = this.setToken;
     event.preventDefault();
     request
       .post('https://murmuring-fjord-57185.herokuapp.com/api/users/login')
@@ -86,6 +87,13 @@ export default class LoginForm extends Component {
           this.sendLoginFormRequestUp("login");
         }
       })
+  }
+
+  setToken(token) {
+    this.setState({token: token});
+    cookie.save('token', token); //saves token in cookie
+    console.log(token);
+    console.log(this.state.token);
   }
 
   handleError(){}

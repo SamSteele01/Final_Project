@@ -4,20 +4,21 @@ import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 // import momentLocalizer from 'react-widgets';
 
-BigCalendar.momentLocalizer(moment);
 
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       tasks: []
     }
   }
 
+
   render() {
     return (
       <div>
+        <h1>calendar</h1>
         <BigCalendar
           culture='en-GB'
           events={this.state.tasks}
@@ -26,6 +27,7 @@ export default class Dashboard extends Component {
     );
   }
 }
+BigCalendar.momentLocalizer(moment);
 
 Dashboard.propTypes = {
 };

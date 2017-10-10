@@ -28,7 +28,7 @@ export default class Header extends React.Component {
           <img src={Logo} width="50" height="50" className="d-inline-block " alt=""/>
           EZ Tour
         </a>
-        <a href="#" onClick={this.signOut}>Sign out</a>
+        <a onClick={this.signOut}>Sign out</a>
 
       </nav>
     );
