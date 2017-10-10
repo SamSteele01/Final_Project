@@ -37,6 +37,16 @@ export default class LoginForm extends Component {
     }
   }
 
+  onSignIn(googleUser) {
+    let profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    let id_token = googleUser.getAuthResponse().id_token;
+    console.log('Token: '+ id_token);
+  }
+
   register(event){
     event.preventDefault();
     request
@@ -110,7 +120,7 @@ export default class LoginForm extends Component {
         <div className="card-block">
           <form>
             <div className="Header">
-              {this.props.display==="register" ?
+              {this.state.register ?
                 <h3>Register</h3> :
                 <h3>Login</h3>
               }
@@ -131,7 +141,7 @@ export default class LoginForm extends Component {
                 type="text" id="password" placeholder="Password:" value={this.state.password}/>
             </div>
 
-            {this.props.display==="register" ?
+            {this.state.register ?
               <div className="form-group">
                 <button onClick={event => this.register(event)} type="submit" className="btn btn-primary">Register</button>
               </div> :
@@ -139,17 +149,18 @@ export default class LoginForm extends Component {
                 <div className="form-group">
                   <button onClick={event => this.login(event)} type="submit" className="btn btn-success">Login</button>
                 </div>
-                <div className="g-signin2" data-onsuccess="onSignIn">
-
-                </div>
               </div>
             }
+            <div>
+              <a className="g-signin2" data-onsuccess="onSignIn"></a>
+            </div>
           </form>
         </div>
       </div>
     );
   }
 }
+// sign in with google button goes away after switching to register and back
 
 LoginForm.propTypes = {
 };
