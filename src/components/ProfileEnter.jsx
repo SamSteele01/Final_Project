@@ -55,7 +55,7 @@ export default class ProfileEnter extends Component {
                 <label className="col-md-4 control-label">Name</label>
                 <div className="col-md-4 inputGroupContainer">
                   <div className="input-group">
-                    <span className="input-group-addon"><i className="glyphicon glyphicon-user" ></i></span>
+                    <span className="input-group-addon"><i className="glyphicon glyphicon-user" aria-hidden="true" ></i></span>
                     <input  name="name" placeholder="Name" className="form-control"  type="text" onChange={this.handleUpdateProfile} value={this.state.name}/>
                   </div>
                 </div>
