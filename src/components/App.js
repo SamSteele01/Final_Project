@@ -9,6 +9,7 @@ import EventForm from './EventForm.jsx';
 import LoginPage from './LoginPage.jsx';
 import ProfilePage from './ProfilePage.jsx';
 import BaseLayout from './BaseLayout.jsx';
+import ProfileEnter from './ProfileEnter.jsx';
 
 class App extends Component {
   constructor(props) {
