@@ -29,7 +29,6 @@ class App extends Component {
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/event-form' component={EventForm} />
           <Route path='/profile-page' component={ProfilePage} />
-          <Route path='/profile-enter' component={ProfileEnter} />
           <Route path='/' component={LoginPage} />
         </Switch>
       </BaseLayout>
