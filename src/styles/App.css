@@ -64,3 +64,7 @@
 .card {
   margin: 30px;
 }
+
+.dashboard {
+  height: 80vh;
+}

@@ -8,7 +8,7 @@ import moment from 'moment';
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       tasks: []
     }
@@ -17,12 +17,12 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <div>
-        <h1>calendar</h1>
+      <div className="dashboard">
+        <h1>dashboard</h1>
         <BigCalendar
           culture='en-GB'
           events={this.state.tasks}
-          views={['month', 'week']}/>
+          views={['month', 'week', 'day', 'agenda']}/>
       </div>
     );
   }
