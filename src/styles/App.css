@@ -64,3 +64,11 @@
 .card {
   margin: 30px;
 }
+
+.profile_enter_container {
+  background-color: lightgrey;
+}
+
+.glyphicon{
+  width: 20px;
+}
