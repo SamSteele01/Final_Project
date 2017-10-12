@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+
 import '../styles/App.css';
 
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
@@ -15,11 +16,19 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-
+    this.state = {
+      token: null
+    }
   }
 
-  render() {
+// not sure if this is needed
+  // componentWillMount() {
+  //   this.setState({token: cookie.load('token')}); //get token from cookie, if it exists
+  // }
 
+
+
+  render() {
   return (
     <BrowserRouter>
       <BaseLayout
