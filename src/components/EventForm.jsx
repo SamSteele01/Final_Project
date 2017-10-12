@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import FormInput from './FormInput.jsx';
 
 export default class EventForm extends Component {
   constructor(props) {
@@ -6,7 +7,9 @@ export default class EventForm extends Component {
   }
 
   render() {
-    return (<div>MyComponent</div>);
+    return (<div>
+      <FormInput/>
+    </div>);
   }
 }
 EventForm.propTypes = {

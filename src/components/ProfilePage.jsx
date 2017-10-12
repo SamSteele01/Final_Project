@@ -50,12 +50,9 @@ export default class ProfilePage extends Component {
   render() {
     return (
       <div>
-        {this.state.enterForm ?
-          <ProfileEnter/> :
-          <ProfileView/>
-        }
-      </div>
-    );
+        <ProfileEnter/>
+      </div>);
+
   }
 }
 ProfilePage.propTypes = {
