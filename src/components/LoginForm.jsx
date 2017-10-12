@@ -1,5 +1,6 @@
 /* global gapi */
 import React, {Component} from 'react';
+// import Global from 'react-global';
 import request from 'superagent';
 import cookie from 'react-cookies';
 
@@ -7,15 +8,17 @@ export default class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.toggleLoginRegisterForm = this.toggleLoginRegisterForm.bind(this);
+    this.updateFromField = this.updateFromField.bind(this);
     this.onSignIn = this.onSignIn.bind(this);
 
     this.state = {
       register: false,
-      fullname: "",
-      phonenumber: "",
+      full_name: "",
+      telephone: "",
       email: "",
       password: "",
       error: false,
+      userId: false,
       token: false
     }
   }
@@ -40,7 +43,6 @@ export default class LoginForm extends Component {
   toggleLoginRegisterForm(event){
     event.preventDefault();
     if (event.target.id !== "" && event.target.id !== undefined && event.target.id !== null){
-      console.log(event);
       if(event.target.id==="register"){
         this.setState({register: true});
       }
@@ -64,12 +66,16 @@ export default class LoginForm extends Component {
     event.preventDefault();
     request
       .post('https://ez-tour.herokuapp.com/users')
-      .send({user: {username: this.state.username, password: this.state.password}})
+      .send({user: {full_name: this.state.fullname, telephone: this.state.telephone, email: this.state.email, password: this.state.password}})
       .end((err, res) =>{
         if(err) {
+          console.log(err);
+          console.log(res);
           this.setState({error: res.body.error});
         }else{
-          this.sendLoginFormRequestUp("register");
+          console.log(res);
+          this.setState({register: false});
+          // alert('Thank you for registering!');
         }
       })
   }
@@ -79,12 +85,16 @@ export default class LoginForm extends Component {
     event.preventDefault();
     request
       .post('https://ez-tour.herokuapp.com/users/login')
-      .send({username: this.state.username, password: this.state.password})
+      .send({email: this.state.email, password: this.state.password})
       .end((err, res) =>{
         if(err) {
+          console.log(err);
+          console.log(res);
           this.setState({error: res.body.error});
         }else{
+          console.log(res);
           setToken(res.body.token);
+          this.setState({userId: false, token: false});
           // setToken('578gh423rebz7zjeno99'); //for testing purposes
         }
       })
@@ -123,7 +133,7 @@ export default class LoginForm extends Component {
               // onClick={this.toggleLoginRegisterForm('register')}
               id="register"
               >
-               { this.state.register ?
+              { this.state.register ?
                 <a className="nav-link active"
                   onClick={event => this.toggleLoginRegisterForm(event)}
                   id="register"
@@ -152,21 +162,21 @@ export default class LoginForm extends Component {
             {this.state.register ?
               <div>
                 <div className="form-group">
-                  <label htmlFor="fullname">Full Name</label>
-                  <input className="form-control" onChange={this.updateFromField('fullname')} type="text" id="fullname" placeholder="Fullname:" value={this.state.fullname}/>
+                  {/* <label htmlFor="full_name">Full Name</label> */}
+                  <input className="form-control" onChange={this.updateFromField('full_name')} type="text" id="full_name" placeholder="Fullname:" value={this.state.full_name}/>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="phonenumber">Phone Number</label>
+                  {/* <label htmlFor="telephone">Phone Number</label> */}
                   <input className="form-control"
-                    onChange={this.updateFromField('phonenumber')}
-                    type="text" id="phonenumber" placeholder="Phone number:" value={this.state.phonenumber}/>
+                    onChange={this.updateFromField('telephone')}
+                    type="text" id="telephone" placeholder="Phone number:" value={this.state.telephone}/>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
+                  {/* <label htmlFor="email">Email</label> */}
                   <input className="form-control" onChange={this.updateFromField('email')} type="email" id="email" placeholder="Email:" value={this.state.email}/>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
+                  {/* <label htmlFor="password">Password</label> */}
                   <input className="form-control"
                     onChange={this.updateFromField('password')}
                     type="text" id="password" placeholder="Password:" value={this.state.password}/>
@@ -175,11 +185,11 @@ export default class LoginForm extends Component {
               :
               <div>
                 <div className="form-group">
-                  <label htmlFor="username">Username</label>
-                  <input className="form-control" onChange={this.updateFromField('username')} type="text" id="username" placeholder="Username:" value={this.state.username}/>
+                  {/* <label htmlFor="email">Email</label> */}
+                  <input className="form-control" onChange={this.updateFromField('email')} type="email" id="email" placeholder="email:" value={this.state.email}/>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
+                  {/* <label htmlFor="password">Password</label> */}
                   <input className="form-control"
                     onChange={this.updateFromField('password')}
                     type="text" id="password" placeholder="Password:" value={this.state.password}/>
@@ -194,9 +204,9 @@ export default class LoginForm extends Component {
                 <div className="form-group">
                   <button onClick={event => this.login(event)} type="submit" className="btn btn-success">Login</button>
                 </div>
+                <div id="g-signin2" />
               </div>
             }
-            <div id="g-signin2" />
           </form>
         </div>
       </div>
