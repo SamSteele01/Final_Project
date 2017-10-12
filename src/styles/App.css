@@ -53,12 +53,19 @@
 }*/
 
 .navbar{
+  /*display: flex;*/
+  flex-direction: row;
+  justify-content: space-between;
   background-color: black;
   color: white;
 }
 
 .navbar img{
   margin-right: 5vw;
+}
+
+.navbar div.sign-out-button{
+  margin: 20px 0;
 }
 
 .card {

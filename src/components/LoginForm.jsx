@@ -1,5 +1,6 @@
 /* global gapi */
 import React, {Component} from 'react';
+// import Global from 'react-global';
 import request from 'superagent';
 import cookie from 'react-cookies';
 
@@ -17,6 +18,7 @@ export default class LoginForm extends Component {
       email: "",
       password: "",
       error: false,
+      userId: false,
       token: false
     }
   }
@@ -68,8 +70,11 @@ export default class LoginForm extends Component {
       .end((err, res) =>{
         if(err) {
           console.log(err);
+          console.log(res);
           this.setState({error: res.body.error});
         }else{
+          console.log(res);
+          this.setState({register: false});
           // alert('Thank you for registering!');
         }
       })
@@ -80,12 +85,16 @@ export default class LoginForm extends Component {
     event.preventDefault();
     request
       .post('https://ez-tour.herokuapp.com/users/login')
-      .send({username: this.state.username, password: this.state.password})
+      .send({email: this.state.email, password: this.state.password})
       .end((err, res) =>{
         if(err) {
+          console.log(err);
+          console.log(res);
           this.setState({error: res.body.error});
         }else{
+          console.log(res);
           setToken(res.body.token);
+          this.setState({userId: false, token: false});
           // setToken('578gh423rebz7zjeno99'); //for testing purposes
         }
       })
@@ -124,7 +133,7 @@ export default class LoginForm extends Component {
               // onClick={this.toggleLoginRegisterForm('register')}
               id="register"
               >
-               { this.state.register ?
+              { this.state.register ?
                 <a className="nav-link active"
                   onClick={event => this.toggleLoginRegisterForm(event)}
                   id="register"
@@ -176,11 +185,11 @@ export default class LoginForm extends Component {
               :
               <div>
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
+                  {/* <label htmlFor="email">Email</label> */}
                   <input className="form-control" onChange={this.updateFromField('email')} type="email" id="email" placeholder="email:" value={this.state.email}/>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
+                  {/* <label htmlFor="password">Password</label> */}
                   <input className="form-control"
                     onChange={this.updateFromField('password')}
                     type="text" id="password" placeholder="Password:" value={this.state.password}/>
@@ -195,9 +204,9 @@ export default class LoginForm extends Component {
                 <div className="form-group">
                   <button onClick={event => this.login(event)} type="submit" className="btn btn-success">Login</button>
                 </div>
+                <div id="g-signin2" />
               </div>
             }
-            <div id="g-signin2" />
           </form>
         </div>
       </div>

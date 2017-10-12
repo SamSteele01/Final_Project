@@ -9,7 +9,7 @@ export default class Header extends React.Component {
     this.signOut = this.signOut.bind(this);
 
     this.state = {
-
+      loggedIn: true
     }
   }
 
@@ -28,8 +28,11 @@ export default class Header extends React.Component {
           <img src={Logo} width="50" height="50" className="d-inline-block " alt=""/>
           EZ Tour
         </a>
-        <a onClick={this.signOut}>Sign out</a>
-
+        {this.state.loggedIn &&
+          <div className="sign-out-button">
+            <a onClick={this.signOut}>Sign out</a>
+          </div>
+        }
       </nav>
     );
   }
