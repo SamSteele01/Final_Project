@@ -63,6 +63,13 @@ export default class FormInput extends Component {
             value={this.state.dos_contact}/>
         </div>
         <div className="form-group">
+          <label htmlFor="dos_contact">Day of Event Contact Email</label>
+          <input className="form-control"
+            onChange={this.updateFromField('dos_contact_email')}
+            type="text" id="dos_contact_email" placeholder="Venue Contact Email:"
+            value={this.state.dos_contact_email}/>
+        </div>
+        <div className="form-group">
           <label htmlFor="parking">Parking Instructions</label>
           <input className="form-control"
             onChange={this.updateFromField('parking')} type="parking"
