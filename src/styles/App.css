@@ -65,7 +65,6 @@
   margin: 30px;
 }
 
-
 .dashboard {
   height: 80vh;
 }
@@ -74,6 +73,10 @@
   background-color: lightgrey;
 }
 
-.glyphicon{
+.glyphicon   {
   width: 20px;
+}
+
+.btn-success {
+  margin-right: 35px;
 }

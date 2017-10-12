@@ -52,11 +52,11 @@ export default class ProfileEnter extends Component {
             <fieldset>
               <legend>Create a User Profile</legend>
               <div className="form-group">
-                <label className="col-md-4 control-label">Name</label>
+                <label className="col-md-4 control-label">Full Name</label>
                 <div className="col-md-4 inputGroupContainer">
                   <div className="input-group">
-                    <span className="input-group-addon"><i className="glyphicon glyphicon-user" ></i></span>
-                    <input  name="name" placeholder="Name" className="form-control"  type="text" onChange={this.handleUpdateProfile} value={this.state.name}/>
+                    <span className="input-group-addon"><i className="glyphicon glyphicon-user" aria-hidden="true" ></i></span>
+                    <input  name="fullname" placeholder="Full Name" className="form-control"  type="text" onChange={this.handleUpdateProfile} value={this.state.name}/>
                   </div>
                 </div>
               </div>

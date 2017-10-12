@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ProfileEnter from './ProfileEnter.jsx';
 
 export default class ProfilePage extends Component {
   constructor(props) {
@@ -6,7 +7,10 @@ export default class ProfilePage extends Component {
   }
 
   render() {
-    return (<div>MyComponent</div>);
+    return (
+      <div>
+        <ProfileEnter/>
+      </div>);
   }
 }
 ProfilePage.propTypes = {
