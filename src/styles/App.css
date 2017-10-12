@@ -77,8 +77,6 @@
   width: 20px;
 }
 
-/*.glyphicon-user {
-  width: 40px;
-  position: absolute;
-  left: 0%;
-}*/
+.btn-success {
+  margin-right: 35px;
+}
