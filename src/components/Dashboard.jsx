@@ -110,7 +110,6 @@ export default class Dashboard extends Component {
         <BigCalendar
           culture='en-GB'
           events={this.state.tasks}
-          toolbar= 'true'
           views={['month', 'week', 'day', 'agenda']}/>
       </div>
     );
