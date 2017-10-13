@@ -17,21 +17,21 @@ export default class Dashboard extends Component {
     this.state = {
       tasks: [
         {
-          'title': 'Career shit, meeting',
+          'title': "Collins night club",
           'allDay': true,
           'start': new Date(2017, 9, 13),
           'end': new Date(2017, 9, 13)
         },
         {
-          'title': 'Coding, and games',
-          'start': new Date(2017, 9, 14),
-          'end': new Date(2017, 9, 14)
+          'title': "Lyman's rockin jazz daddio swingers club",
+          'start': new Date(2017, 9, 14, 21, 30 ),
+          'end': new Date(2017, 9, 14, 1, 0 )
         },
 
         {
-          'title': 'Code Freeze',
-          'start': new Date(2017, 9, 20, 0, 0, 0),
-          'end': new Date(2017, 9, 20, 0, 0, 0)
+          'title': 'Spruill concert hall',
+          'start': new Date(2017, 9, 20, 19, 0, ),
+          'end': new Date(2017, 9, 20, 21, 30, 0)
         },
 
         {
