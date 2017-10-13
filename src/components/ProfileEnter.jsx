@@ -92,7 +92,7 @@ export default class ProfileEnter extends Component {
                       <div className="col-md-4 inputGroupContainer">
                         <div className="input-group">
                           <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
-                          <input className="city" placeholder="City" className="form-control"  type="text" onChange={this.handleUpdateProfile} value={this.state.city}/>
+                          <input name="city" placeholder="City" className="form-control"  type="text" onChange={this.handleUpdateProfile} value={this.state.city}/>
                           </div>
                         </div>
                       </div>
@@ -101,7 +101,7 @@ export default class ProfileEnter extends Component {
                         <div className="col-md-4 inputGroupContainer">
                           <div className="input-group">
                             <span className="input-group-addon"><i className="glyphicon glyphicon-list"></i></span>
-                            <input className="State" placeholder="State"className="form-control" type="text" onChange={this.handleUpdateProfile} value={this.state.state}/>
+                            <input name="State" placeholder="State"className="form-control" type="text" onChange={this.handleUpdateProfile} value={this.state.state}/>
                           </div>
                         </div>
                       </div>
@@ -109,17 +109,17 @@ export default class ProfileEnter extends Component {
                         <label className="col-md-4 control-label" htmlFor="zipcode">Zip Code</label>
                         <div className="col-md-4 inputGroupContainer">
                           <div className="input-group">
-                            <span className="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                            <input nameName="zip" placeholder="Zip Code" className="form-control"  type="text" onChange={this.handleUpdateProfile} value={this.state.zipcode}/>
+                            <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
+                            <input name="zip" placeholder="Zip Code" className="form-control"  type="text" onChange={this.handleUpdateProfile} value={this.state.zipcode}/>
                           </div>
                         </div>
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <label className="col-md-4 control-label" htmlFor="website">Website or domain name</label>
                         <div className="col-md-4 inputGroupContainer">
                           <div className="input-group">
                             <span className="input-group-addon"><i className="glyphicon glyphicon-globe"></i></span>
-                            <input nameName="website" placeholder="Website or domain name" className="form-control" type="text" onChange={this.handleUpdateProfile} value={this.state.website}/>
+                            <input name="website" placeholder="Website or domain name" className="form-control" type="text" onChange={this.handleUpdateProfile} value={this.state.website}/>
                           </div>
                         </div>
                       </div>
@@ -133,7 +133,7 @@ export default class ProfileEnter extends Component {
                          </div>
                        </div>
                        <div>
-                         <button type="button" class="btn btn-primary">Submit</button>
+                         <button type="button" className="btn btn-primary">Submit</button>
                        </div>
             </fieldset>
           </form>

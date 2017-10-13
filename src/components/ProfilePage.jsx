@@ -52,7 +52,7 @@ export default class ProfilePage extends Component {
     return (
       <div>
         <div className="d-flex justify-content-between">
-          <div><button className="button create-new-event-button"><Link to="/dashboard">Back</Link></button></div>
+          <div><button className="button create-new-event-button"><Link to="/dashboard">Dashboard</Link></button></div>
           <h1>Profile</h1>
           <div><button className="button create-new-event-button"><Link   to="/event-form">Create New Event</Link></button></div>
         </div>
