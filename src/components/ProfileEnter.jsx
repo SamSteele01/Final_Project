@@ -151,7 +151,7 @@ export default class ProfileEnter extends Component {
                          </div>
                        </div>
                        <div>
-                         <button type="button" class="btn btn-primary">Submit</button>
+                         <button type="button" class="btn btn-primary profile-button">Submit</button>
                        </div>
             </fieldset>
           </form>

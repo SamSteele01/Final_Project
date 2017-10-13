@@ -110,3 +110,11 @@
   right: 205px;
   bottom: 550px;
 }
+
+.profile-button {
+  display: flex;
+  position: relative;
+  left: 800px;
+  bottom: 500px;
+  background-color: black;
+}
