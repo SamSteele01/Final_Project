@@ -1,7 +1,7 @@
 /* global gapi */
 import React, {PropTypes} from 'react';
-import Logo from '../styles/two_tickets_white1600.png'
-
+import { Link } from 'react-router-dom';
+import Logo from '../styles/two_tickets_white1600.png';
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -9,9 +9,12 @@ export default class Header extends React.Component {
     this.signOut = this.signOut.bind(this);
 
     this.state = {
-      loggedIn: true
+      loggedIn: true,
+      // display: null
     }
   }
+
+
 
     signOut() {
       let auth2 = gapi.auth2.getAuthInstance();
@@ -28,9 +31,19 @@ export default class Header extends React.Component {
           <img src={Logo} width="50" height="50" className="d-inline-block " alt=""/>
           EZ Tour
         </a>
+        {this.props.display &&
+          <div>
+            <h2>{this.props.display}</h2>
+          {this.props.display==='Dashboard' &&
+            <div className="create-new-event-button">
+              <div><button className="button create-new-event-button"><Link to="/event-form">Create New Event</Link></button></div>
+            </div>
+          }
+          </div>
+        }
         {this.state.loggedIn &&
           <div className="sign-out-button">
-            <a onClick={this.signOut}>Sign out</a>
+            <a className="button" onClick={this.signOut}>Sign out</a>
           </div>
         }
       </nav>

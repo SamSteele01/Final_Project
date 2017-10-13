@@ -17,7 +17,11 @@ class App extends Component {
     super(props);
 
     this.state = {
-      token: null
+      token: null,
+      dashboard: 'Dashboard',
+      profilePage: 'Profile',
+      newEvent: 'New Event',
+      event: 'Event'
     }
   }
 
@@ -29,19 +33,19 @@ class App extends Component {
 
 
   render() {
-  return (
-    <BrowserRouter>
-      <BaseLayout
-        // username={this.state.username} password={this.state.password} isLoggedIn={this.state.isLoggedIn} removeToken={this.removeToken.bind(this)} token={this.state.token}
-        >
-        <Switch>
-          <Route path='/dashboard' component={Dashboard} />
-          <Route path='/event-form' component={EventForm} />
-          <Route path='/profile-page' component={ProfilePage} />
-          <Route path='/' component={LoginPage} />
-        </Switch>
-      </BaseLayout>
-    </BrowserRouter>
+    return (
+      <BrowserRouter>
+        <BaseLayout
+          // username={this.state.username} password={this.state.password} isLoggedIn={this.state.isLoggedIn} removeToken={this.removeToken.bind(this)} token={this.state.token}
+          >
+          <Switch>
+            <Route path='/dashboard' render={(props) => (<Dashboard display={this.state.dashboard}/>)} />
+            <Route path='/event-form' render={(props) => (<EventForm display={this.state.newEvent}/>)} />
+            <Route path='/profile-page' render={(props) => (<ProfilePage display={this.state.profilePage}/>)} />
+            <Route path='/' component={LoginPage} />
+          </Switch>
+        </BaseLayout>
+      </BrowserRouter>
     );
   }
 }

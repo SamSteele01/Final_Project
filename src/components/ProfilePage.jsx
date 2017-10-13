@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import request from 'superagent';
 import cookie from 'react-cookies';
 import ProfileEnter from './ProfileEnter.jsx';
@@ -50,6 +51,11 @@ export default class ProfilePage extends Component {
   render() {
     return (
       <div>
+        <div className="d-flex justify-content-between">
+          <div><button className="button create-new-event-button"><Link to="/dashboard">Dashboard</Link></button></div>
+          <h1>Profile</h1>
+          <div><button className="button create-new-event-button"><Link   to="/event-form">Create New Event</Link></button></div>
+        </div>
         <ProfileEnter/>
       </div>);
 
