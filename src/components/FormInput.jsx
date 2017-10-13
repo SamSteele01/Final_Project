@@ -7,6 +7,7 @@ export default class FormInput extends Component {
 
     this.state = {
       date: "",
+      venue: "",
       city: "",
       state: "",
       dos_contact: "",
@@ -53,14 +54,26 @@ export default class FormInput extends Component {
         <div className="form-group">
           <label htmlFor="date">Date of Event</label>
           <input className="form-control" onChange={this.updateFromField('date')}
-            type="text" id="date" placeholder="Date of Event:" value={this.state.event}/>
+            type="text" id="date" placeholder="Date of Event:" value={this.state.date}/>
+        </div>
+        <div className="form-group">
+          <label htmlFor="venue">Venue Information</label>
+          <input className="form-control" onChange={this.updateFromField('venue')}
+            type="text" id="venue" placeholder="Name & Address of Venue:" value={this.state.venue}/>
         </div>
         <div className="form-group">
           <label htmlFor="dos_contact">Day of Event Contact</label>
           <input className="form-control"
             onChange={this.updateFromField('dos_contact')}
-            type="text" id="dos_contact" placeholder="Venue Contact:"
+            type="text" id="dos_contact" placeholder="Venue Contact Name:"
             value={this.state.dos_contact}/>
+        </div>
+        <div className="form-group">
+          <label htmlFor="dos_contact">Day of Event Contact Email</label>
+          <input className="form-control"
+            onChange={this.updateFromField('dos_contact_email')}
+            type="text" id="dos_contact_email" placeholder="Venue Contact Email:"
+            value={this.state.dos_contact_email}/>
         </div>
         <div className="form-group">
           <label htmlFor="parking">Parking Instructions</label>
@@ -127,11 +140,10 @@ export default class FormInput extends Component {
         </div>
         <div className="form-group">
           <label htmlFor="misc">Miscellaneous</label>
-          <input className="form-control"
+          <textarea className="form-control"
             onChange={this.updateFromField('misc')}
-            type="text" id="misc" placeholder="Other Information needed for Day of Event:" value={this.state.misc}/>
+            type="text" id="misc" placeholder="Other Information needed for Day of Event & or questions for performers" value={this.state.misc}/>
         </div>
-
 
         <div className="form-group">
           <button onClick={event => this.submit(event)} type="submit" className="btn btn-success">Save & Submit</button>
