@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ImageUploader from 'react-images-upload';
 
 export default class ProfileEnter extends Component {
   constructor(props) {
@@ -12,10 +13,12 @@ export default class ProfileEnter extends Component {
       state: '',
       zipcode: '',
       website: '',
-      info: ''
+      info: '',
+      pictures: [],
     };
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
     this.handleUpdateProfile = this.handleUpdateProfile.bind(this);
+    this.onDrop = this.onDrop.bind(this);
   }
 
   handleUpdateProfile (e) {
@@ -43,6 +46,13 @@ export default class ProfileEnter extends Component {
     //     console.log(err, "boo!");
     //   });
   }
+
+  onDrop(picture) {
+        this.setState({
+            pictures: this.state.pictures.concat(picture),
+        });
+  }
+
   render() {
     return (
       <div>
@@ -123,17 +133,25 @@ export default class ProfileEnter extends Component {
                           </div>
                         </div>
                       </div>
-                      <div className="form-group">
-                        <label className="col-md-4 control-label" htmlFor="info">Tell Us About Your Organization</label>
+                      <div className="image-upload">
+                        <ImageUploader
+                          withIcon={true}
+                          buttonText='Choose image'
+                          onChange={this.onDrop}
+                          imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                          maxFileSize={5242880}
+                        />
+                      </div>
+                      <div className="form-group organization-info">
+                        <span><label className="col-md-4 control-label info" htmlFor="info">Tell Us About Your Organization</label></span>
                         <div className="col-md-4 inputGroupContainer">
                           <div className="input-group">
-                            <span className="input-group-addon"><i className="glyphicon glyphicon-pencil"></i></span>
         	                   <textarea className="form-control" name="comment" placeholder="Organization Description" rows="10" cols="50" onChange={this.handleUpdateProfile} value={this.state.info}></textarea>
                            </div>
                          </div>
                        </div>
                        <div>
-                         <button type="button" class="btn btn-primary">Submit</button>
+                         <button type="button" class="btn btn-primary profile-button">Submit</button>
                        </div>
             </fieldset>
           </form>

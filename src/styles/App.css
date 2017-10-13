@@ -87,3 +87,34 @@
 .btn-success {
   margin-right: 35px;
 }
+
+.image-upload {
+  display: flex;
+  justify-content: flex-end;
+  width: 345px;
+  position: relative;
+  left: 650px;
+  bottom: 665px;
+}
+
+.info {
+  position: absolute;
+  left: 835px;
+  top: -40px;
+}
+
+.organization-info {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  right: 205px;
+  bottom: 550px;
+}
+
+.profile-button {
+  display: flex;
+  position: relative;
+  left: 800px;
+  bottom: 500px;
+  background-color: black;
+}
