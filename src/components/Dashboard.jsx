@@ -16,7 +16,12 @@ export default class Dashboard extends Component {
     super(props);
 
     this.state = {
-      tasks: [
+      userId: null, //from login. May just be this.props.userId
+      bandsArray: null, //array of band
+      bandsIds: null, //array of numbers, to be mapped over. Need to keep track of which events b
+
+      eventsArray: [], //array of objects, from fetch.
+      calendarEvents: [
         {
           'title': "Collins night club",
           'allDay': true,
@@ -26,7 +31,8 @@ export default class Dashboard extends Component {
         {
           'title': "Lyman's rockin jazz daddio swingers club",
           'start': new Date(2017, 9, 14, 21, 30 ),
-          'end': new Date(2017, 9, 14, 1, 0 )
+          'end': new Date(2017, 9, 14, 1, 0 ),
+          desc: 'Pre-meeting meeting, to prepare for the meeting'
         },
 
         {
@@ -99,14 +105,30 @@ export default class Dashboard extends Component {
     }
   }
 
-  fetchAllEvents(){
+  fetchAllBands(userId){
     request
-      .get('https://ez-tour_herokuapp_com_users_1_bands_1_events')
+      .get(`https://ez-tour.herokuapp.com/users/${userId}/bands`)
       .set('Authorization', `Token token=${this.props.token}`)
       .end((err, res) => {
-        let mockData = res.body.questions;
-        this.setState({questionDataArray: mockData});
+        let data = res.body.band;
+        this.setState({bandsArray: data});
       });
+  }
+
+  fetchAllEvents(userId, bandsId){
+    request
+      .get(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
+      .set('Authorization', `Token token=${this.props.token}`)
+      .end((err, res) => {
+        let data = res.body.events; //array
+        let holderArray = this.state.eventsArray;
+        holderArray.concat(data);
+        this.setState({eventsArray: holderArray});
+      });
+  }
+
+  createCalendarEvents(){
+
   }
 
   render() {
@@ -118,8 +140,8 @@ export default class Dashboard extends Component {
           <div><button className="button create-new-event-button"><Link to="/profile-page">Edit Profile</Link></button></div>
         </div>
         <BigCalendar
-          culture='en-GB'
-          events={this.state.tasks}
+          culture='en'
+          events={this.state.calendarEvents}
           views={['month', 'week', 'day', 'agenda']}/>
       </div>
     );

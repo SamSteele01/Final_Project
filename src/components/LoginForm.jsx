@@ -66,7 +66,7 @@ export default class LoginForm extends Component {
     event.preventDefault();
     request
       .post('https://ez-tour.herokuapp.com/users')
-      .send({user: {full_name: this.state.fullname, telephone: this.state.telephone, email: this.state.email, password: this.state.password}})
+      .send({user: {full_name: this.state.full_name, telephone: this.state.telephone, email: this.state.email, password: this.state.password}})
       .end((err, res) =>{
         if(err) {
           console.log(err);
@@ -217,3 +217,17 @@ export default class LoginForm extends Component {
 
 LoginForm.propTypes = {
 };
+
+// const mapStateToProps = function(state) {
+//     return {}
+// }
+//
+// const mapDispatchToProps = function(dispatch) {
+//     return {
+//         createTodo: function(text) {
+//             return dispatch(createTodo(text));
+//         }
+//     }
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
