@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
+import request from 'superagent';
 // import momentLocalizer from 'react-widgets';
 
 BigCalendar.momentLocalizer(moment);
@@ -98,6 +99,15 @@ export default class Dashboard extends Component {
     }
   }
 
+  fetchAllEvents(){
+    request
+      .get('https://ez-tour_herokuapp_com_users_1_bands_1_events')
+      .set('Authorization', `Token token=${this.props.token}`)
+      .end((err, res) => {
+        let mockData = res.body.questions;
+        this.setState({questionDataArray: mockData});
+      });
+  }
 
   render() {
     return (

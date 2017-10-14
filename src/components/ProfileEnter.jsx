@@ -148,18 +148,18 @@ export default class ProfileEnter extends Component {
                       <div className="input-group">
                         <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
                         <input name="address" placeholder="Address" className="form-control" type="text" onChange={this.handleUpdateProfile} value={this.state.address}/>
-                        </div>
                       </div>
                     </div>
-                    <div className="form-group">
-                      <label className="col-md-4 control-label" htmlFor="city">City</label>
-                      <div className="col-md-4 inputGroupContainer">
-                        <div className="input-group">
-                          <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
-                          <input className="city" placeholder="City" className="form-control"  type="text" onChange={this.handleUpdateProfile} value={this.state.city}/>
-                          </div>
-                        </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="col-md-4 control-label" htmlFor="city">City</label>
+                    <div className="col-md-4 inputGroupContainer">
+                      <div className="input-group">
+                        <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
+                        <input className="city" placeholder="City" className="form-control"  type="text" onChange={this.handleUpdateProfile} value={this.state.city}/>
                       </div>
+                    </div>
+                  </div>
                       <div className="form-group">
                         <label className="col-md-4 control-label" htmlFor="state">State</label>
                         <div className="col-md-4 inputGroupContainer">
@@ -208,7 +208,7 @@ export default class ProfileEnter extends Component {
                          <button type="button" class="btn btn-primary profile-button">Submit</button>
                        </div>
                     </div>
-                  </div>   
+                  </div>
             </fieldset>
           </form>
         </div>
