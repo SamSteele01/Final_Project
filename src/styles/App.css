@@ -92,6 +92,7 @@
   margin-right: 35px;
 }
 
+/*styling for ProfileEnter.jsx*/
 .image-upload {
   display: flex;
   justify-content: flex-end;
@@ -121,4 +122,15 @@
   left: 800px;
   bottom: 500px;
   background-color: black;
+}
+
+/*styling for AssetToolbar.jsx*/
+.asset-toolbar {
+  width: 20rem;
+  border: 2px solid lightgray;
+}
+
+.band-profile {
+  width: 40rem;
+  border: 2px solid lightgray;
 }

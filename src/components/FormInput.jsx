@@ -23,6 +23,8 @@ export default class FormInput extends Component {
       laundry: "",
       wifi: "",
       misc: "",
+      w9_url: "",
+	    set_layout_url: ""
     }
   }
 
@@ -144,7 +146,6 @@ export default class FormInput extends Component {
             onChange={this.updateFromField('misc')}
             type="text" id="misc" placeholder="Other Information needed for Day of Event & or questions for performers" value={this.state.misc}/>
         </div>
-
         <div className="form-group">
           <button onClick={event => this.submit(event)} type="submit" className="btn btn-success">Save & Submit</button>
         {/* </div>
