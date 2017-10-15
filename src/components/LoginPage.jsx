@@ -1,3 +1,4 @@
+// component
 import React, {Component} from 'react';
 import LoginForm from './LoginForm.jsx';
 

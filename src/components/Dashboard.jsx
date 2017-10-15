@@ -16,11 +16,11 @@ export default class Dashboard extends Component {
     super(props);
 
     this.state = {
+      error: null,
       userId: null, //from login. May just be this.props.userId
-      bandsArray: null, //array of band
-      bandsIds: null, //array of numbers, to be mapped over. Need to keep track of which events b
-
-      eventsArray: [], //array of objects, from fetch.
+      bandsArray: null, //array of band objects
+      bandsIds: null, //array of numbers, to be mapped over.
+      eventsArray: [], //array of objects, from fetch. Has band and user Ids
       calendarEvents: [
         {
           'title': "Collins night club",
@@ -105,7 +105,8 @@ export default class Dashboard extends Component {
     }
   }
 
-  fetchAllBands(userId){
+  fetchAllBandsForUser(){
+    let userId = this.props.userId; // may not need as a param
     request
       .get(`https://ez-tour.herokuapp.com/users/${userId}/bands`)
       .set('Authorization', `Token token=${this.props.token}`)
@@ -115,7 +116,8 @@ export default class Dashboard extends Component {
       });
   }
 
-  fetchAllEvents(userId, bandsId){
+  fetchAllEventsForBand(bandsId){
+    let userId = this.props.userId; // may not need as a param
     request
       .get(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
       .set('Authorization', `Token token=${this.props.token}`)
@@ -125,6 +127,11 @@ export default class Dashboard extends Component {
         holderArray.concat(data);
         this.setState({eventsArray: holderArray});
       });
+  }
+
+  componentWillMount(){
+    // this.fetchAllBandsForUser();
+    // this.props.setBandList(this.state.bandsArray);
   }
 
   createCalendarEvents(){

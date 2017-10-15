@@ -1,4 +1,6 @@
+// container
 import React, {Component} from 'react';
+import request from 'superagent';
 
 export default class FormInput extends Component {
   constructor(props) {
@@ -12,7 +14,7 @@ export default class FormInput extends Component {
       state: "",
       dos_contact: "",
       parking: "",
-      load_in: "",
+      load_in_time: "",
       load_in_location: "",
       door_time: "",
       set_time: "",
@@ -22,29 +24,51 @@ export default class FormInput extends Component {
       showers: "",
       laundry: "",
       wifi: "",
-      misc: "",
+      misc: ""
     }
   }
 
+  // Needs to have this.props.new = true/false  
   updateFromField(stateKey) {
     return (event) => {
       this.setState({[stateKey]: event.target.value});
     }
   }
 
- // handleUpdateForm = (e) => {
- //   event.preventDefault();
- //   request
- //    .post('https://ez-tour.herokuapp.com/users/events')
- //    .send({})
- //    .end((err, res) =>{
- //      if(err) {
- //        this.setState({error: res.body.error});
- //      }else{
- //        //save the form
- //      }
- //    })
- // }
+ handleUpdateForm = (event) => {
+ //needs to post to the DB and call an action for redux
+  event.preventDefault();
+  let userId = this.props.userId;
+  let bandsId = this.props.bandsId;
+   request
+    .post(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
+    .send({date: this.state.date,
+    venue: this.state.venue,
+    city: this.state.city,
+    state: this.state.state,
+    dos_contact: this.state.dos_contact,
+    parking: this.state.parking,
+    load_in_time: this.state.load_in_time,
+    load_in_location: this.state.load_in_location,
+    door_time: this.state.door_time,
+    set_time: this.state.set_time,
+    backline: this.state.backline,
+    hospitality: this.state.hospitality,
+    green_room: this.state.green_room,
+    showers: this.state.showers,
+    laundry: this.state.laundry,
+    wifi: this.state.wifi,
+    misc: this.state.misc})
+    .set('Authorization', `Token token=${this.props.token}`)
+    .end((err, res) =>{
+      if(err) {
+        this.setState({error: res.body.error});
+      }else{
+        //save the form
+        this.props.
+      }
+    })
+ }
 
 
   render() {
@@ -82,10 +106,10 @@ export default class FormInput extends Component {
             id="parking" placeholder="Parking Instructions:" value={this.state.parking}/>
         </div>
         <div className="form-group">
-          <label htmlFor="load_in">Load In</label>
+          <label htmlFor="load_in_time">Load In</label>
           <input className="form-control"
-            onChange={this.updateFromField('load_in')}
-            type="text" id="load_in" placeholder="Load In:" value={this.state.load_in}/>
+            onChange={this.updateFromField('load_in_time')}
+            type="text" id="load_in_time" placeholder="Load In:" value={this.state.load_in_time}/>
         </div>
         <div className="form-group">
           <label htmlFor="load_in_location">Load In Location</label>

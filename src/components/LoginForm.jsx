@@ -1,3 +1,4 @@
+// container
 /* global gapi */
 import React, {Component} from 'react';
 // import Global from 'react-global';
@@ -74,15 +75,16 @@ export default class LoginForm extends Component {
           this.setState({error: res.body.error});
         }else{
           console.log(res);
+          let fullName = this.state.full_name;
+          alert(`Thank you for registering ${fullName}!`);
           this.setState({register: false});
-          // alert('Thank you for registering!');
         }
       })
   }
 
   login(event){
-    let setToken = this.setToken;
     event.preventDefault();
+    let setToken = this.setToken;
     request
       .post('https://ez-tour.herokuapp.com/users/login')
       .send({email: this.state.email, password: this.state.password})
@@ -93,9 +95,12 @@ export default class LoginForm extends Component {
           this.setState({error: res.body.error});
         }else{
           console.log(res);
+          let token = res.body.token;
+          let user_id = res.body.user_id;
           setToken(res.body.token);
-          this.setState({userId: false, token: false});
+          this.setState({userId: user_id, token: token});
           // setToken('578gh423rebz7zjeno99'); //for testing purposes
+          this.props.setUserSession({userId: user_id, token: token}); //not sure about passing an object to redux
         }
       })
   }
@@ -213,7 +218,7 @@ export default class LoginForm extends Component {
     );
   }
 }
-// sign in with google button goes away after switching to register and back
+// sign in with google button goes away after switching to register and back. May need to conditional render LoginForm or RegisterForm in LoginPage (pass state up to)
 
 LoginForm.propTypes = {
 };
