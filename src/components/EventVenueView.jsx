@@ -10,6 +10,7 @@ export default class EventVenueView extends Component {
   render() {
     return (
       <div>
+        <ProfileMini/>
         <AssetContainer/>
         <FormInput/>
       </div>
