@@ -52,6 +52,38 @@
   font-family: 'Germania One';
 }*/
 
+/*styling for welcome page*/
+.welcome-text {
+  font-family: 'Germania One';
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+}
+
+.welcome-text-2 {
+  font-family: 'Germania One';
+  display: flex;
+  justify-content: center;
+  position: relative;
+  left: 70px;
+}
+
+.welcome-button {
+  font-family: 'Germania One';
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 70px;
+  right: 350px;
+  text-decoration-line: none;
+  border: black;
+}
+
+.welcome-button:hover {
+  background-color: lightgray;
+}
+
 .navbar{
   /*display: flex;*/
   flex-direction: row;
