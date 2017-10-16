@@ -52,6 +52,38 @@
   font-family: 'Germania One';
 }*/
 
+/*styling for welcome page*/
+.welcome-text {
+  font-family: 'Germania One';
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+}
+
+.welcome-text-2 {
+  font-family: 'Germania One';
+  display: flex;
+  justify-content: center;
+  position: relative;
+  left: 70px;
+}
+
+.welcome-button {
+  font-family: 'Germania One';
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 70px;
+  right: 350px;
+  text-decoration-line: none;
+  border: black;
+}
+
+.welcome-button:hover {
+  background-color: lightgray;
+}
+
 .navbar{
   /*display: flex;*/
   flex-direction: row;
@@ -87,4 +119,47 @@
 
 .btn-success {
   margin-right: 35px;
+}
+
+/*styling for ProfileEnter.jsx*/
+.image-upload {
+  display: flex;
+  justify-content: flex-end;
+  width: 345px;
+  position: relative;
+  left: 650px;
+  bottom: 665px;
+}
+
+.info {
+  position: absolute;
+  left: 835px;
+  top: -40px;
+}
+
+.organization-info {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  right: 205px;
+  bottom: 550px;
+}
+
+.profile-button {
+  display: flex;
+  position: relative;
+  left: 800px;
+  bottom: 500px;
+  background-color: black;
+}
+
+/*styling for AssetToolbar.jsx*/
+.asset-toolbar {
+  width: 20rem;
+  border: 2px solid lightgray;
+}
+
+.band-profile {
+  width: 40rem;
+  border: 2px solid lightgray;
 }

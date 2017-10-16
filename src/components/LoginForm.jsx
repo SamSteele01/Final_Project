@@ -162,7 +162,7 @@ export default class LoginForm extends Component {
                 <div className="alert">
                   {this.state.error}
                 </div>
-              }
+            }
             </div>
             {this.state.register ?
               <div>

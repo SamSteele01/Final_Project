@@ -21,10 +21,12 @@ export default class EventForm extends Component {
   // }
 
 
+
 // h1 should be new event if coming from button, should be event if coming from calendar,
   render() {
     return (
       <div>
+      {/* <ProfileMini/> */}
         <div className="d-flex justify-content-between">
           <div><button className="button create-new-event-button"><Link to="/dashboard">Dashboard</Link></button></div>
           <h1>New Event</h1>
