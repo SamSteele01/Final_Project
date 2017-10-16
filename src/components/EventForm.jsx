@@ -2,6 +2,8 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import FormInput from './FormInput.jsx';
+import EventBandView from './EventBandView.jsx';
+import EventVenueView from './EventVenueView.jsx';
 
 export default class EventForm extends Component {
   constructor(props) {

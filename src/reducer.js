@@ -8,7 +8,7 @@ const initialState = {
     filter: 'all'
 }
 
-// need setUserSession({userId: user_id, token: token}),
+// need setUserSession({userId: user_id, token: token}), this.props.setEventInfo();
 const reducer = function(state = initialState, action) {
     switch (action.type) {
         case CREATE_TODO:

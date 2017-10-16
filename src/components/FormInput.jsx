@@ -28,7 +28,7 @@ export default class FormInput extends Component {
     }
   }
 
-  // Needs to have this.props.new = true/false  
+  // Needs to have this.props.new = true/false
   updateFromField(stateKey) {
     return (event) => {
       this.setState({[stateKey]: event.target.value});
@@ -65,7 +65,7 @@ export default class FormInput extends Component {
         this.setState({error: res.body.error});
       }else{
         //save the form
-        this.props.
+        this.props.setEventInfo();
       }
     })
  }
