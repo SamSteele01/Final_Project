@@ -11,6 +11,7 @@ import LoginPage from './LoginPage.jsx';
 import ProfilePage from './ProfilePage.jsx';
 import BaseLayout from './BaseLayout.jsx';
 import ProfileEnter from './ProfileEnter.jsx';
+import WelcomePage from './WelcomePage.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -42,7 +43,8 @@ class App extends Component {
             <Route path='/dashboard' render={(props) => (<Dashboard display={this.state.dashboard}/>)} />
             <Route path='/event-form' render={(props) => (<EventForm display={this.state.newEvent}/>)} />
             <Route path='/profile-page' render={(props) => (<ProfilePage display={this.state.profilePage}/>)} />
-            <Route path='/' component={LoginPage} />
+            <Route path='/login-page' render={(props) => (<LoginPage display={this.state.loginPage}/>)} />
+            <Route path='/' component={WelcomePage} />
           </Switch>
         </BaseLayout>
       </BrowserRouter>
