@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
+import request from 'superagent';
 // import momentLocalizer from 'react-widgets';
 
 BigCalendar.momentLocalizer(moment);
@@ -15,7 +16,12 @@ export default class Dashboard extends Component {
     super(props);
 
     this.state = {
-      tasks: [
+      error: null,
+      userId: null, //from login. May just be this.props.userId
+      bandsArray: null, //array of band objects
+      bandsIds: null, //array of numbers, to be mapped over.
+      eventsArray: [], //array of objects, from fetch. Has band and user Ids
+      calendarEvents: [
         {
           'title': "Collins night club",
           'allDay': true,
@@ -25,7 +31,8 @@ export default class Dashboard extends Component {
         {
           'title': "Lyman's rockin jazz daddio swingers club",
           'start': new Date(2017, 9, 14, 21, 30 ),
-          'end': new Date(2017, 9, 14, 1, 0 )
+          'end': new Date(2017, 9, 14, 1, 0 ),
+          desc: 'Pre-meeting meeting, to prepare for the meeting'
         },
 
         {
@@ -98,6 +105,38 @@ export default class Dashboard extends Component {
     }
   }
 
+  fetchAllBandsForUser(){
+    let userId = this.props.userId; // may not need as a param
+    request
+      .get(`https://ez-tour.herokuapp.com/users/${userId}/bands`)
+      .set('Authorization', `Token token=${this.props.token}`)
+      .end((err, res) => {
+        let data = res.body.band;
+        this.setState({bandsArray: data});
+      });
+  }
+
+  fetchAllEventsForBand(bandsId){
+    let userId = this.props.userId; // may not need as a param
+    request
+      .get(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
+      .set('Authorization', `Token token=${this.props.token}`)
+      .end((err, res) => {
+        let data = res.body.events; //array
+        let holderArray = this.state.eventsArray;
+        holderArray.concat(data);
+        this.setState({eventsArray: holderArray});
+      });
+  }
+
+  componentWillMount(){
+    // this.fetchAllBandsForUser();
+    // this.props.setBandList(this.state.bandsArray);
+  }
+
+  createCalendarEvents(){
+
+  }
 
   render() {
     return (
@@ -108,8 +147,8 @@ export default class Dashboard extends Component {
           <div><button className="button create-new-event-button"><Link to="/profile-page">Edit Profile</Link></button></div>
         </div>
         <BigCalendar
-          culture='en-GB'
-          events={this.state.tasks}
+          culture='en'
+          events={this.state.calendarEvents}
           views={['month', 'week', 'day', 'agenda']}/>
       </div>
     );

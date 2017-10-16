@@ -31,7 +31,7 @@ class App extends Component {
   //   this.setState({token: cookie.load('token')}); //get token from cookie, if it exists
   // }
 
-
+// may need to intercept token from Url here. Or use hidden headers in the email link
 
   render() {
     return (
