@@ -1,7 +1,7 @@
 // container
 /* global gapi */
 import React, {Component} from 'react';
-// import Global from 'react-global';
+// import {withRouter} from "react-router-dom";
 import request from 'superagent';
 import cookie from 'react-cookies';
 
@@ -84,7 +84,7 @@ export default class LoginForm extends Component {
 
   login(event){
     event.preventDefault();
-    let setToken = this.setToken;
+    let setCookie = this.setCookie;
     request
       .post('https://ez-tour.herokuapp.com/users/login')
       .send({email: this.state.email, password: this.state.password})
@@ -94,22 +94,26 @@ export default class LoginForm extends Component {
           console.log(res);
           this.setState({error: res.body.error});
         }else{
-          console.log(res);
+          // console.log(res);
+          // console.log(res.body.token);
           let token = res.body.token;
           let user_id = res.body.user_id;
-          setToken(res.body.token);
-          this.setState({userId: user_id, token: token});
+          setCookie(token, user_id);
+          // this.setState({userId: user_id, token: token});
+          // console.log(this.state.token);
           // setToken('578gh423rebz7zjeno99'); //for testing purposes
-          this.props.setUserSession({userId: user_id, token: token}); //not sure about passing an object to redux
+          // this.props.setUserSession({userId: user_id, token: token}); //passing to redux
+          //  this.props.history.push("/dashboard");
+          window.location.href = "/dashboard";
         }
       })
   }
 
-  setToken(token) {
-    this.setState({token: token});
+  setCookie(token, user_id) {
+    // this.setState({token: token});
     cookie.save('token', token); //saves token in cookie
-    console.log(token);
-    console.log(this.state.token);
+    cookie.save('userId', user_id); //saves user Id in cookie
+    // console.log(token);
   }
 
   handleError(){}
@@ -123,15 +127,15 @@ export default class LoginForm extends Component {
               // onClick={this.toggleLoginRegisterForm('login')}
               id="login"
               >
-               { this.state.register ?
-                 <a className="nav-link "
-                   onClick={event => this.toggleLoginRegisterForm(event)}
-                   id="login"
-                   >Login</a> :
-                 <a className="nav-link active"
-                   onClick={event => this.toggleLoginRegisterForm(event)}
-                   id="login"
-                   >Login</a>
+             { this.state.register ?
+               <a className="nav-link "
+                 onClick={event => this.toggleLoginRegisterForm(event)}
+                 id="login"
+                 >Login</a> :
+               <a className="nav-link active"
+                 onClick={event => this.toggleLoginRegisterForm(event)}
+                 id="login"
+                 >Login</a>
               }
             </li>
             <li className="nav-item"
@@ -162,7 +166,7 @@ export default class LoginForm extends Component {
                 <div className="alert">
                   {this.state.error}
                 </div>
-            }
+              }
             </div>
             {this.state.register ?
               <div>

@@ -58,6 +58,7 @@ export default class ProfileEnter extends Component {
     return (
       <div>
         <div className="profile_enter_container">
+
           <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleAddToProfile}>
             <fieldset>
               <legend>Create a User Profile</legend>
@@ -133,6 +134,7 @@ export default class ProfileEnter extends Component {
                     </div>
                   </div>
                 </div>
+                
                 <div className="image-upload">
                   <ImageUploader
                     withIcon={true}
