@@ -3,11 +3,8 @@ import FormInput from './FormInput.jsx';
 import AssetToolbar from './AssetToolbar.jsx';
 
 export default class EventBandView extends Component {
-  constructor(props) {
-    super(props);
-  }
 
-// displays the asset tool bar on the side of the page. 
+// displays the asset tool bar on the side of the page.
 
   render() {
     return (

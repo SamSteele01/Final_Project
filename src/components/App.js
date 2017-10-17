@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 
 import '../styles/App.css';
 
@@ -10,7 +10,6 @@ import EventForm from './EventForm.jsx';
 import LoginPage from './LoginPage.jsx';
 import ProfilePage from './ProfilePage.jsx';
 import BaseLayout from './BaseLayout.jsx';
-import ProfileEnter from './ProfileEnter.jsx';
 import WelcomePage from './WelcomePage.jsx';
 
 class App extends Component {
@@ -36,12 +35,11 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <BaseLayout
-          // username={this.state.username} password={this.state.password} isLoggedIn={this.state.isLoggedIn} removeToken={this.removeToken.bind(this)} token={this.state.token}
-          >
+        <BaseLayout>
           <Switch>
             <Route path='/dashboard' render={(props) => (<Dashboard display={this.state.dashboard}/>)} />
             <Route path='/event-form' render={(props) => (<EventForm display={this.state.newEvent}/>)} />
+            {/* need to pass userId (from cookie) and bandsId (from Dashboard) as well as specifing display= user/band */}
             <Route path='/profile-page' render={(props) => (<ProfilePage display={this.state.profilePage}/>)} />
             <Route path='/login-page' render={(props) => (<LoginPage display={this.state.loginPage}/>)} />
             <Route path='/' component={WelcomePage} />

@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 import ImageUploader from 'react-images-upload';
+import request from 'superagent';
+import cookie from 'react-cookies';
 
-export default class ProfileEnter extends Component {
+export default class BandProfileEnter extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      token: null,
+      userId: null,
       name: '',
       email: '',
       phone: '',
@@ -14,11 +18,16 @@ export default class ProfileEnter extends Component {
       zipcode: '',
       website: '',
       info: '',
-      avatar: [],
+      avatars: [],
     };
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
     this.onDrop = this.onDrop.bind(this);
+  }
+
+  componentWillMount(){
+    this.setState({token: cookie.load('token')}); //get token from cookie, if it exists
+    this.setState({userId: cookie.load('userId')}); //get token from cookie, if it exists
   }
 
   updateFromField(stateKey) {
@@ -27,30 +36,24 @@ export default class ProfileEnter extends Component {
     }
   }
 
-  handleAddToProfile = (e) => {
-    e.preventDefault();
-    let profileItem = JSON.stringify(this.state);
-    this.setState({ name: e.target.value, email: e.target.value, phone: e.target.value, address: e.target.value, city: e.target.value, state: e.target.value, zipcode: e.target.value, website: e.target.value, info: e.target.value});
-    // fetch("https://ez-tour.herokuapp.com/users",
-    //         {
-    //           method: "POST",
-    //           body: profileItem,
-    //           headers: {
-    //                     'Accept': 'application/json',
-    //                     'Content-Type': 'application/json'
-    //           }
-    //         }
-    //   ).then(response => {
-    //     console.log(response, "yay");
-    //     this.setState({name: '', email: '', phone: '', address:'', city:'', state:'', zipcode:'', website:'', info:''});
-    //   }).catch(err => {
-    //     console.log(err, "boo!");
-    //   });
+// may be posting to a user or a bands DB. Need to have a dynamic/conditional route
+  handleAddToProfile(){
+    let userId = this.state.userId;
+    let bandsId = this.props.bandsId;  // may not need as a param
+    request
+      .post(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
+      .send({
+
+      })
+      .set('Authorization', `Token token=${this.state.token}`)
+      .end((err, res) => {
+
+      });
   }
 
   onDrop(avatar) {
         this.setState({
-            avatars: this.state.avatars,
+            avatars: this.state.avatars
         });
   }
 
@@ -58,6 +61,7 @@ export default class ProfileEnter extends Component {
     return (
       <div>
         <div className="profile_enter_container">
+
           <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleAddToProfile}>
             <fieldset>
               <legend>Create a User Profile</legend>

@@ -31,6 +31,10 @@ export default class FormInput extends Component {
   }
 
   // Needs to have this.props.new = true/false
+  fxnToCheckIfEventIsNew(){
+    
+  }
+
   updateFromField(stateKey) {
     return (event) => {
       this.setState({[stateKey]: event.target.value});
