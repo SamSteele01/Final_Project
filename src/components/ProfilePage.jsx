@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import request from 'superagent';
 import cookie from 'react-cookies';
-import ProfileEnter from './ProfileEnter.jsx';
-// import ProfileView from './ProfileView.jsx';
+import BandProfileEnter from './BandProfileEnter.jsx';
+import UserProfileEnter from './UserProfileEnter.jsx';
 
 export default class ProfilePage extends Component {
   constructor(props) {
@@ -57,7 +57,8 @@ export default class ProfilePage extends Component {
           <h1>Profile</h1>
           <div><button className="button create-new-event-button"><Link   to="/event-form">Create New Event</Link></button></div>
         </div>
-        <ProfileEnter/>
+        {/* <BandProfileEnter/> */}
+        <UserProfileEnter/>
       </div>);
 
   }

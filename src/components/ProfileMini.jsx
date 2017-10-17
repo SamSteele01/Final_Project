@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import ProfileEnter from './ProfileEnter.jsx';
+import BandProfileEnter from './BandProfileEnter.jsx';
+import UserProfileEnter from './UserProfileEnter.jsx';
 
 export default class ProfileMini extends Component {
 

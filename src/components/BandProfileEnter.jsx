@@ -3,7 +3,7 @@ import ImageUploader from 'react-images-upload';
 import request from 'superagent';
 import cookie from 'react-cookies';
 
-export default class ProfileEnter extends Component {
+export default class BandProfileEnter extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +18,7 @@ export default class ProfileEnter extends Component {
       zipcode: '',
       website: '',
       info: '',
-      avatar: [],
+      avatars: [],
     };
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
@@ -53,7 +53,7 @@ export default class ProfileEnter extends Component {
 
   onDrop(avatar) {
         this.setState({
-            avatars: this.state.avatars,
+            avatars: this.state.avatars
         });
   }
 
