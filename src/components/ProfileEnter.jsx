@@ -14,7 +14,7 @@ export default class ProfileEnter extends Component {
       zipcode: '',
       website: '',
       info: '',
-      pictures: [],
+      avatar: [],
     };
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
@@ -48,9 +48,9 @@ export default class ProfileEnter extends Component {
     //   });
   }
 
-  onDrop(picture) {
+  onDrop(avatar) {
         this.setState({
-            pictures: this.state.pictures.concat(picture),
+            avatars: this.state.avatars,
         });
   }
 
@@ -133,29 +133,30 @@ export default class ProfileEnter extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="image-upload">
-                  <ImageUploader
-                    withIcon={true}
-                    buttonText='Choose image'
-                    onChange={this.onDrop}
-                    imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                    maxFileSize={5242880}
-                  />
-                </div>
-                <div className="form-group organization-info">
-                  <span><label className="col-md-4 control-label info" htmlFor="info">Tell Us About Your Organization</label></span>
-                  <div className="col-md-4 inputGroupContainer">
-                    <div className="input-group">
-        	            <textarea className="form-control" name="comment" placeholder="Organization Description" rows="10" cols="50" onChange={this.handleUpdateProfile} value={this.state.info}></textarea>
-                    </div>
+                  <div className="image-upload">
+                    <ImageUploader
+                      withIcon={true}
+                      buttonText='Choose image'
+                      onChange={this.onDrop}
+                      imgExtension={['.jpg', '.gif', '.png',  '.gif']}
+                      maxFileSize={5242880}
+                    />
                   </div>
-                </div>
+                  <div className="form-group    organization-info">
+                    <span><label className="col-md-4  control-label info" htmlFor="info">Tell Us  About Your Organization</label></span>
+                    <div className="col-md-4  inputGroupContainer">
+                      <div className="input-group">
+        	               <textarea className="form-control"  name="comment" placeholder="Organization  Description" rows="10" cols="50"  onChange={this.handleUpdateProfile}   value={this.state.info}></textarea>
+                       </div>
+                     </div>
+                   </div>
                 <div>
-                  <button type="button" class="btn btn-primary profile-button">Submit</button>
+                  <button type="button" className="btn btn-primary profile-button">Submit</button>
                 </div>
             </fieldset>
           </form>
         </div>
       </div>
+
     )}
 }
