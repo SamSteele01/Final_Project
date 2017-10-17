@@ -10,15 +10,22 @@ export default class BandProfileEnter extends Component {
       token: null,
       userId: null,
       name: '',
-      email: '',
-      phone: '',
-      address: '',
-      city: '',
-      state: '',
-      zipcode: '',
-      website: '',
-      info: '',
+      vehicle: '',
+      num_members: '',
+      num_crew: '',
+      // email: '',
+      // phone: '',
+      // address: '',
+      // city: '',
+      // state: '',
+      // zipcode: '',
+      // website: '',
+      // info: '',
       avatars: [],
+      w9: '',
+      stage_plot: '',
+      input_list: '',
+      promo_asset: ''
     };
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
@@ -64,37 +71,50 @@ export default class BandProfileEnter extends Component {
 
           <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleAddToProfile}>
             <fieldset>
-              <legend>Create a Band Profile</legend>
+              <legend>Create a User Profile</legend>
                 <div className="form-group">
-                  <label className="col-md-4 control-label">Full Name</label>
+                  <label className="col-md-4 control-label">Name of Performer(s)</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
-
                       {/* <span className="input-group-addon"><i className="glyphicon glyphicon-user" aria-hidden="true" ></i></span> */}
                       <input  name="name" placeholder="Performer(s)" className="form-control"  type="text" onChange={this.updateFromField('name')}value={this.state.name}/>
-
                     </div>
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="email">E-Mail</label>
+                  <label className="col-md-4 control-label" htmlFor="vehicle">Vehicle(s)</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
-                      <span className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></span>
-                      <input name="email" placeholder="E-Mail Address" className="form-control"  type="text" onChange={this.updateFromField('email')}value={this.state.email}/>
+                      {/* <span className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></span> */}
+                      <input name="vehicle" placeholder="Vehicle(s)" className="form-control"  type="text" onChange={this.updateFromField('vehicle')}value={this.state.vehicle}/>
                     </div>
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="phone">Phone #</label>
+                  <label className="col-md-4 control-label" htmlFor="num_members">Number of Members</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
-                      <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span>
-                      <input name="phone" placeholder="(xxx) xxx-xxxx" className="form-control" type="text" onChange={this.updateFromField('phone')} value={this.state.phone}/>
+                      {/* <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span> */}
+                      <input name="num_members" placeholder="No. of Members" className="form-control" type="text" onChange={this.updateFromField('num_members')} value={this.state.num_members}/>
                     </div>
                   </div>
                 </div>
                 <div className="form-group">
+                  <label className="col-md-4 control-label" htmlFor="num_crew">Number of Crew Members</label>
+                  <div className="col-md-4 inputGroupContainer">
+                    <div className="input-group">
+                      {/* <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span> */}
+                      <input name="num_crew" placeholder="No. of Crew Members" className="form-control" type="text" onChange={this.updateFromField('num_crew')} value={this.state.num_crew}/>
+                    </div>
+                  </div>
+                </div>
+                <ul class="list-group list-group-flush band-profile-list">
+                  <li class="list-group-item band-profile-list"><a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" class="card-link">w9</a></li>
+                  <li class="list-group-item band-profile-list"><a href="" class="card-link">Stage Plot</a></li>
+                  <li class="list-group-item band-profile-list"><a href="" class="card-link">Input List</a></li>
+                  <li class="list-group-item band-profile-list"><a href="" class="card-link">Promos</a></li>
+                </ul>
+                {/* <div className="form-group">
                   <label className="col-md-4 control-label" htmlFor="address">Address</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
@@ -138,8 +158,8 @@ export default class BandProfileEnter extends Component {
                       <input name="website" placeholder="Website or domain name" className="form-control" type="text" onChange={this.updateFromField('website')}value={this.state.website}/>
                     </div>
                   </div>
-                </div>
-                  <div className="image-upload">
+                </div> */}
+                  {/* <div className="image-upload">
                     <ImageUploader
                       withIcon={true}
                       buttonText='Choose image'
@@ -147,15 +167,15 @@ export default class BandProfileEnter extends Component {
                       imgExtension={['.jpg', '.gif', '.png',  '.gif']}
                       maxFileSize={5242880}
                     />
-                  </div>
-                  <div className="form-group    organization-info">
+                  </div> */}
+                  {/* <div className="form-group    organization-info">
                     <span><label className="col-md-4  control-label info" htmlFor="info">Tell Us  About Your Organization</label></span>
                     <div className="col-md-4  inputGroupContainer">
                       <div className="input-group">
         	               <textarea className="form-control"  name="comment" placeholder="Organization  Description" rows="10" cols="50"  onChange={this.handleUpdateProfile}   value={this.state.info}></textarea>
                        </div>
                      </div>
-                   </div>
+                   </div> */}
                 <div>
                   <button type="button" className="btn btn-primary profile-button">Submit</button>
                 </div>
