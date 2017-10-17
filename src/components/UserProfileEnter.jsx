@@ -9,16 +9,17 @@ export default class UserProfileEnter extends Component {
     this.state = {
       token: null,
       userId: null,
-      name: '',
+      full_name: '',
+      telephone: '',
       email: '',
-      phone: '',
-      address: '',
-      city: '',
-      state: '',
-      zipcode: '',
-      website: '',
-      info: '',
-      avatars: [],
+      password: '',
+      // address: '',
+      // city: '',
+      // state: '',
+      // zipcode: '',
+      // website: '',
+      // info: '',
+      avatar: ''
     };
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
@@ -70,7 +71,7 @@ export default class UserProfileEnter extends Component {
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       <span className="input-group-addon"><i className="glyphicon glyphicon-user" aria-hidden="true" ></i></span>
-                      <input  name="fullname" placeholder="Full Name" className="form-control"  type="text" onChange={this.updateFromField('name')}value={this.state.name}/>
+                      <input  name="full_name" placeholder="Full Name" className="form-control"  type="text" onChange={this.updateFromField('full_name')}value={this.state.full_name}/>
                     </div>
                   </div>
                 </div>
@@ -92,7 +93,7 @@ export default class UserProfileEnter extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="form-group">
+                {/* <div className="form-group">
                   <label className="col-md-4 control-label" htmlFor="address">Address</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
@@ -136,7 +137,7 @@ export default class UserProfileEnter extends Component {
                       <input name="website" placeholder="Website or domain name" className="form-control" type="text" onChange={this.updateFromField('website')}value={this.state.website}/>
                     </div>
                   </div>
-                </div>
+                </div> */}
                   <div className="image-upload">
                     <ImageUploader
                       withIcon={true}
@@ -146,14 +147,14 @@ export default class UserProfileEnter extends Component {
                       maxFileSize={5242880}
                     />
                   </div>
-                  <div className="form-group    organization-info">
+                  {/* <div className="form-group    organization-info">
                     <span><label className="col-md-4  control-label info" htmlFor="info">Tell Us  About Your Organization</label></span>
                     <div className="col-md-4  inputGroupContainer">
                       <div className="input-group">
         	               <textarea className="form-control"  name="comment" placeholder="Organization  Description" rows="10" cols="50"  onChange={this.handleUpdateProfile}   value={this.state.info}></textarea>
                        </div>
                      </div>
-                   </div>
+                   </div> */}
                 <div>
                   <button type="button" className="btn btn-primary profile-button">Submit</button>
                 </div>
