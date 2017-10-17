@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import request from 'superagent';
 import cookie from 'react-cookies';
 import ProfileEnter from './ProfileEnter.jsx';
-import ProfileView from './ProfileView.jsx';
+// import ProfileView from './ProfileView.jsx';
 
 export default class ProfilePage extends Component {
   constructor(props) {
@@ -21,6 +21,7 @@ export default class ProfilePage extends Component {
     this.setState({token: cookie.load('token')}); //get token from cookie, if it exists
   }
 
+// need to check if this is a profile for a user or a band. Should pass as props.source
   fxnToCheckIfThisIsTheProfileOfTheUser(){
     // if(token matches user ID){
       this.setState({displayEditButton: true});
@@ -31,7 +32,7 @@ export default class ProfilePage extends Component {
     // need to get userId for profile to be displayed
     let id = this.props.userId;
     request
-      .get('https://ez-tour.herokuapp.com/users/${id}')
+      .get(`https://ez-tour.herokuapp.com/users/${id}`)
       // .send({email: this.state.email, password: this.state.password})
       .set('Authorization', `Token token=${this.props.token}`)
       .end((err, res) =>{

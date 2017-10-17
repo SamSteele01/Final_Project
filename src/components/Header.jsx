@@ -1,9 +1,9 @@
 /* global gapi */
-import React, {PropTypes} from 'react';
+import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../styles/two_tickets_white1600.png';
 
-export default class Header extends React.Component {
+export default class Header extends Component {
   constructor(props) {
     super(props);
     this.signOut = this.signOut.bind(this);
@@ -57,5 +57,5 @@ export default class Header extends React.Component {
 //     console.log('User signed out.');
 //   });
 // }
-Header.propTypes = {
-};
+// Header.propTypes = {
+// };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 
 import '../styles/App.css';
 
@@ -10,7 +10,6 @@ import EventForm from './EventForm.jsx';
 import LoginPage from './LoginPage.jsx';
 import ProfilePage from './ProfilePage.jsx';
 import BaseLayout from './BaseLayout.jsx';
-import ProfileEnter from './ProfileEnter.jsx';
 import WelcomePage from './WelcomePage.jsx';
 
 class App extends Component {

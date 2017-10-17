@@ -129,7 +129,8 @@ export default class Dashboard extends Component {
 
   componentDidUpdate(){
     if(this.state.eventsArray.length>0 && this.state.doneMapping && !this.state.doneMakingCalendarEvents){
-      this.createCalendarEvents(this.state.eventsArray);
+      // this.createCalendarEvents(this.state.eventsArray);
+      console.log(this.state.calendarEvents);
       this.setState({doneMakingCalendarEvents: true});
       // this.props.setBandList(this.state.bandsArray); redux action
     }

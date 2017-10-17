@@ -1,7 +1,6 @@
 // container
 /* global gapi */
 import React, {Component} from 'react';
-// import {withRouter} from "react-router-dom";
 import request from 'superagent';
 import cookie from 'react-cookies';
 
