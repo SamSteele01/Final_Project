@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ProfileEnter from './ProfileEnter.jsx';
 
 export default class ProfileMini extends Component {
   constructor(props) {
@@ -8,11 +9,11 @@ export default class ProfileMini extends Component {
   render() {
     return (
       <div className="mini-profile">
-        <div class="card band-profile" >
-          <img class="card-img-top" src="" alt="Band and/or Manager Image"/>
-            <div class="card-block">
-              <h4 class="card-title">Profile</h4>
-              <p class="card-text">Imported information from profile</p>
+        <div className="card band-profile" >
+          <img className="card-img-top" src="{avatar:{this.state.avatars}" alt="Band and/or Manager Image"/>
+            <div className="card-block">
+              <h4 className="card-title">Profile</h4>
+              <p className="card-text">Imported information from profile</p>
             </div>
         </div>
       </div>);
