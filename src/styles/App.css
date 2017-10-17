@@ -151,8 +151,8 @@
   .profile-button {
     display: flex;
     position: relative;
-    left: 800px;
-    bottom: 500px;
+    left: 600px;
+    bottom: 100px;
     background-color: black;
   }
 }
