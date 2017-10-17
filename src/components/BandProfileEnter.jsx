@@ -69,8 +69,10 @@ export default class BandProfileEnter extends Component {
                   <label className="col-md-4 control-label">Full Name</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
-                      <span className="input-group-addon"><i className="glyphicon glyphicon-user" aria-hidden="true" ></i></span>
-                      <input  name="fullname" placeholder="Full Name" className="form-control"  type="text" onChange={this.updateFromField('name')}value={this.state.name}/>
+
+                      {/* <span className="input-group-addon"><i className="glyphicon glyphicon-user" aria-hidden="true" ></i></span> */}
+                      <input  name="name" placeholder="Performer(s)" className="form-control"  type="text" onChange={this.updateFromField('name')}value={this.state.name}/>
+
                     </div>
                   </div>
                 </div>
