@@ -266,3 +266,16 @@
   width: 40rem;
   border: 2px solid lightgray;
 }
+
+/*band-profile list styling*/
+.band-profile-list {
+  background-color: lightgrey;
+}
+
+.profile-button {
+  display: flex;
+  position: relative;
+  left: 600px;
+  bottom: 0px;
+  background-color: black;
+}
