@@ -23,9 +23,10 @@ export default class ProfilePage extends Component {
 
 // need to check if this is a profile for a user or a band. Should pass as props.source
   fxnToCheckIfThisIsTheProfileOfTheUser(){
-    // if(token matches user ID){
-      this.setState({displayEditButton: true});
-    // }
+    if(this.props.userProfile){
+      // this.setState({displayEditButton: true});
+
+    }
   }
 
   getProfileInfo(event){
@@ -57,8 +58,10 @@ export default class ProfilePage extends Component {
           <h1>Profile</h1>
           <div><button className="button create-new-event-button"><Link   to="/event-form">Create New Event</Link></button></div>
         </div>
-        <BandProfileEnter/>
-        {/* <UserProfileEnter/> */}
+        {this.props.location.state.userProfile ?
+          <UserProfileEnter/> :
+          <BandProfileEnter/>
+        }
       </div>);
 
   }
