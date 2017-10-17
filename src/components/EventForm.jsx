@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import EventBandView from './EventBandView.jsx';
 import EventVenueView from './EventVenueView.jsx';
+import ProfileMini from './ProfileMini.jsx';
 
 export default class EventForm extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ export default class EventForm extends Component {
   render() {
     return (
       <div>
-      {/* <ProfileMini/> */}
+      <ProfileMini/>
         <div className="d-flex justify-content-between">
           <div><button className="button create-new-event-button"><Link to="/dashboard">Dashboard</Link></button></div>
           <h1>New Event</h1>

@@ -84,6 +84,8 @@
   background-color: lightgray;
 }
 
+/*end styling for welcome page*/
+
 .navbar{
   /*display: flex;*/
   flex-direction: row;
@@ -122,35 +124,136 @@
 }
 
 /*styling for ProfileEnter.jsx*/
-.image-upload {
-  display: flex;
-  justify-content: flex-end;
-  width: 345px;
-  position: relative;
-  left: 650px;
-  bottom: 665px;
+@media (min-width: 1101px) {
+  .image-upload {
+    display: flex;
+    justify-content: flex-end;
+    width: 345px;
+    position: relative;
+    left: 650px;
+    bottom: 665px;
+  }
+
+  .info {
+    position: absolute;
+    left: 835px;
+    top: -40px;
+  }
+
+  .organization-info {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    right: 205px;
+    bottom: 550px;
+  }
+
+  .profile-button {
+    display: flex;
+    position: relative;
+    left: 800px;
+    bottom: 500px;
+    background-color: black;
+  }
+}
+@media (max-width: 1100px) {
+  .image-upload {
+    display: flex;
+    justify-content: flex-end;
+    width: 345px;
+    position: relative;
+    left: 450px;
+    bottom: 665px;
+  }
+
+  .info {
+    position: absolute;
+    left: 735px;
+    top: -40px;
+  }
+
+  .organization-info {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    right: 280px;
+    bottom: 550px;
+  }
+
+  .profile-button {
+    display: flex;
+    position: relative;
+    left: 560px;
+    bottom: 500px;
+    background-color: black;
+  }
 }
 
-.info {
-  position: absolute;
-  left: 835px;
-  top: -40px;
-}
+/*@media (max-width: 768px) {
+  .image-upload {
+    display: flex;
+    justify-content: flex-end;
+    width: 345px;
+    position: relative;
+    left: 380px;
+    bottom: 665px;
+  }
 
-.organization-info {
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-  right: 205px;
-  bottom: 550px;
-}
+  .info {
+    position: absolute;
+    left: 1040px;
+    top: -60px;
+  }
 
-.profile-button {
-  display: flex;
-  position: relative;
-  left: 800px;
-  bottom: 500px;
-  background-color: black;
+  .organization-info {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    right: 725px;
+    bottom: 590px;
+    width: 1470px;
+  }
+
+  .profile-button {
+    display: flex;
+    position: relative;
+    left: 260px;
+    bottom: 4px;
+    background-color: black;
+  }
+}*/
+
+@media (max-width: 767px) {
+  .image-upload {
+    display: flex;
+    justify-content: flex-end;
+    width: 345px;
+    position: relative;
+    left: 25px;
+    bottom: 15px;
+  }
+
+  .info {
+    position: absolute;
+    left: 8px;
+    top: -25px;
+  }
+
+  .organization-info {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    right: -5px;
+    top: 8px;
+  }
+
+  .profile-button {
+    display: flex;
+    position: relative;
+    left: 260px;
+    bottom: 4px;
+    background-color: black;
+  }
 }
 
 /*styling for AssetToolbar.jsx*/
