@@ -5,7 +5,7 @@ import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import request from 'superagent';
 import cookie from 'react-cookies';
-// import momentLocalizer from 'react-widgets';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 BigCalendar.momentLocalizer(moment);
 let formats = {
@@ -15,10 +15,12 @@ let formats = {
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
+    this.toggle = this.toggle.bind(this);
 
     this.state = {
       token: null,
       error: null,
+      dropdownOpen: false,
       userId: null, //from login. May just be this.props.userId
       bandsArray: null, //array of band objects
       doneMapping: false,
@@ -142,13 +144,34 @@ export default class Dashboard extends Component {
     }
   }
 
+  toggle() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  }
+
   render() {
+    // map to create DropdownItems = user and bands - need Ids and Links
     return (
       <div className="dashboard">
         <div className="d-flex justify-content-between">
           <div><button className="button create-new-event-button"><Link to="/event-form">Create New Event</Link></button></div>
           <h1>Dashboard</h1>
-          <div><button className="button create-new-event-button"><Link to="/profile-page">Edit Profile</Link></button></div>
+          {/* <div><button className="button create-new-event-button"><Link to="/profile-page">Edit Profile</Link></button></div> */}
+          <div>
+            <Dropdown className="button create-new-event-button" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+               <DropdownToggle caret className="button create-new-event-button">
+                 Edit Profile
+               </DropdownToggle>
+               <DropdownMenu>
+                 {/* <DropdownItem header>Header</DropdownItem> */}
+                 {/* <DropdownItem disabled>Action</DropdownItem> */}
+                 <DropdownItem><Link to={{ pathname: "/profile-page", state: { userProfile: true} }}>User Profile</Link></DropdownItem>
+                 <DropdownItem divider />
+                 <DropdownItem><Link to={{ pathname: "/profile-page", state: { userProfile: false} }}>Band Profile</Link></DropdownItem>
+               </DropdownMenu>
+            </Dropdown>
+          </div>
         </div>
         {this.state.doneMakingCalendarEvents &&
           <BigCalendar

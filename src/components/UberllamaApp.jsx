@@ -1,4 +1,4 @@
-//= require jquery
+//= require jquery - superagent
 //= require lodash
 //= require react
 //= require_tree ./stores
