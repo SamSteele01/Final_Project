@@ -105,11 +105,12 @@ export default class Dashboard extends Component {
 
   createCalendarEvents = (arrayOfEvents) => {
     console.log(arrayOfEvents);
+    let calendarEventArray = this.state.calendarEvents;
     let calEvents = arrayOfEvents.map((event) =>{
       console.log(event);
-      return( this.createSingleEvent(event) )
+      return( calendarEventArray.push(this.createSingleEvent(event)))
     })
-    // console.log(this.state.calendarEvents);
+    this.setState({calendarEvents: calendarEventArray})
   }
 
   createSingleEvent = (theDeets) => {
@@ -119,9 +120,7 @@ export default class Dashboard extends Component {
       'end': new Date(theDeets.date)
     };
     console.log(eventObject);
-    let calendarEvents = this.state.calendarEvents;
-    let holderArray = calendarEvents.push(eventObject);
-    this.setState({calendarEvents: holderArray})
+    return eventObject
   }
 
   formatDateAndTime(date, time){
@@ -133,7 +132,7 @@ export default class Dashboard extends Component {
     if(this.state.eventsArray.length>0 && this.state.doneMapping && !this.state.doneMakingCalendarEvents){
       console.log(this.state.eventsArray);
       // debugger
-      // this.createCalendarEvents(this.state.eventsArray);
+      this.createCalendarEvents(this.state.eventsArray);
       console.log(this.state.calendarEvents);
       this.setState({doneMakingCalendarEvents: true});
       // this.props.setBandList(this.state.bandsArray); redux action
