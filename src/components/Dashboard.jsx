@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, withRouter} from 'react-router-dom';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
@@ -16,6 +16,7 @@ export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
+    this.navigateToEvent = this.navigateToEvent.bind(this);
 
     this.state = {
       token: null,
@@ -117,7 +118,9 @@ export default class Dashboard extends Component {
     let eventObject = {
       'title': theDeets.venue,
       'start': new Date(theDeets.date),
-      'end': new Date(theDeets.date)
+      'end': new Date(theDeets.date),
+      'bandId': theDeets.band_id,
+      'eventId': theDeets.id
     };
     console.log(eventObject);
     return eventObject
@@ -149,6 +152,20 @@ export default class Dashboard extends Component {
     });
   }
 
+  navigateToEvent(bandId, eventId){
+    console.log("Event "+eventId+" has been clicked.");
+    // set bandId, eventId in Redux
+    this.props.history.push('/event-form');
+    <Redirect to={{
+        pathname: '/event-form',
+        state: {
+          new: false,
+          bandId: bandId,
+          eventId: eventId
+         }
+      }}/>
+  }
+
   render() {
     // map to create DropdownItems = user and bands - need Ids and Links
     return (
@@ -174,7 +191,9 @@ export default class Dashboard extends Component {
         </div>
         {this.state.doneMakingCalendarEvents &&
           <BigCalendar
+            selectable
             culture='en'
+            onSelectEvent={event => this.navigateToEvent(event.bandId, event.eventId)}
             events={this.state.calendarEvents}
             views={['month', 'week', 'day', 'agenda']}/>
         }
