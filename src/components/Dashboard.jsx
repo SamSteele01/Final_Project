@@ -107,7 +107,7 @@ export default class Dashboard extends Component {
       console.log(event);
       return( this.createSingleEvent(event) )
     })
-    console.log(this.state.calendarEvents);
+    // console.log(this.state.calendarEvents);
   }
 
   createSingleEvent = (theDeets) => {
@@ -129,6 +129,8 @@ export default class Dashboard extends Component {
 
   componentDidUpdate(){
     if(this.state.eventsArray.length>0 && this.state.doneMapping && !this.state.doneMakingCalendarEvents){
+      console.log(this.state.eventsArray);
+      // debugger
       // this.createCalendarEvents(this.state.eventsArray);
       console.log(this.state.calendarEvents);
       this.setState({doneMakingCalendarEvents: true});
