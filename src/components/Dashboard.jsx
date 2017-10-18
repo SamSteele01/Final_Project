@@ -68,43 +68,44 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount(){
-    this.fetchAllBandsForUser(this.state.userId);
+    this.fetchAllEventsForUser(this.state.userId);
   }
 
-  fetchAllBandsForUser(userId){
+  fetchAllEventsForUser(userId){
     request
-      .get(`https://ez-tour.herokuapp.com/users/${userId}/bands`)
+      .get(`https://ez-tour.herokuapp.com/users/${userId}/my_events`)
       .set('Authorization', `Token token=${this.state.token}`)
       .end((err, res) => {
-        let data = res.body.band;
-        this.setState({bandsArray: data});
+        let data = res.body.events;
+        this.setState({eventsArray: data});
       });
   }
 
-mapOverBandsArrayAndFetchEvents = (arrayOfBands, callback) => {
-    let events = arrayOfBands.map((band) =>{
-      // console.log(band.id);
-      return( this.fetchAllEventsForBand(band.id))
-    })
-    // callback("doneMapping");
-    console.log(this.state.eventsArray);
-  }
-
-  fetchAllEventsForBand(bandsId){
-    let userId = this.state.userId; // may not need as a param
-    request
-      .get(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
-      .set('Authorization', `Token token=${this.state.token}`)
-      .end((err, res) => {
-        let data = res.body.events; //array
-        // console.log(data);
-        let eventsArray = this.state.eventsArray;
-        let holderArray = eventsArray.concat(data);
-        this.setState({eventsArray: holderArray});
-      });
-  }
-
-  createCalendarEvents = (arrayOfEvents, callback) => {
+// mapOverBandsArrayAndFetchEvents = (arrayOfBands, callback) => {
+//     let events = arrayOfBands.map((band) =>{
+//       // console.log(band.id);
+//       return( this.fetchAllEventsForBand(band.id))
+//     })
+//     // callback("doneMapping");
+//     console.log(this.state.eventsArray);
+//   }
+//
+//   fetchAllEventsForBand(bandsId){
+//
+//     let userId = this.state.userId; // may not need as a param
+//     request
+//       .get(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
+//       .set('Authorization', `Token token=${this.state.token}`)
+//       .end((err, res) => {
+//         let data = res.body.events; //array
+//         // console.log(data);
+//         let eventsArray = this.state.eventsArray;
+//         let holderArray = eventsArray.concat(data);
+//         this.setState({eventsArray: holderArray});
+//       });
+//   }
+//
+  createCalendarEvents = (arrayOfEvents) => {
     console.log(arrayOfEvents);
     let calendarEventArray = this.state.calendarEvents;
     let calEvents = arrayOfEvents.map((event) =>{
@@ -112,7 +113,6 @@ mapOverBandsArrayAndFetchEvents = (arrayOfBands, callback) => {
       return( calendarEventArray.push(this.createSingleEvent(event)))
     })
     this.setState({calendarEvents: calendarEventArray})
-    // callback("doneMakingCalendarEvents");
   }
 
   createSingleEvent = (theDeets) => {
@@ -127,21 +127,21 @@ mapOverBandsArrayAndFetchEvents = (arrayOfBands, callback) => {
     return eventObject
   }
 
-  setDoneToTrue(stateVar){
-    this.setState({[stateVar]: true});
-  }
+  // setDoneToTrue(stateVar){
+  //   this.setState({[stateVar]: true});
+  // }
 
   componentDidUpdate(){
     if(this.state.eventsArray.length>0 && this.state.doneMapping && !this.state.doneMakingCalendarEvents){
       console.log(this.state.eventsArray);
       // debugger
-      this.createCalendarEvents(this.state.eventsArray, this.setDoneToTrue());
+      this.createCalendarEvents(this.state.eventsArray);
       console.log(this.state.calendarEvents);
       this.setState({doneMakingCalendarEvents: true});
       // this.props.setBandList(this.state.bandsArray); redux action
     }
-    if(this.state.bandsArray && !this.state.doneMapping){
-      this.mapOverBandsArrayAndFetchEvents(this.state.bandsArray, this.setDoneToTrue());
+    if(this.state.eventsArray && !this.state.doneMapping){
+      // this.mapOverBandsArrayAndFetchEvents(this.state.bandsArray, this.setDoneToTrue());
       this.setState({doneMapping: true});
     }
   }
