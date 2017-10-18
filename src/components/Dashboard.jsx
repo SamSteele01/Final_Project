@@ -28,36 +28,36 @@ export default class Dashboard extends Component {
       doneMakingCalendarEvents: false,
       eventsArray: [], //array of objects, from fetch. Has band and user Ids
       calendarEvents: [
-        {
-          'title': "Collins night club",
-          'allDay': true,
-          'start': new Date(2017, 9, 13),
-          'end': new Date(2017, 9, 13)
-        },
-        {
-          'title': "Lyman's rockin jazz daddio swingers club",
-          'start': new Date(2017, 9, 14, 21, 30 ),
-          'end': new Date(2017, 9, 14, 1, 0 ),
-          desc: 'Pre-meeting meeting, to prepare for the meeting'
-        },
-
-        {
-          'title': 'Spruill concert hall',
-          'start': new Date(2017, 9, 20, 19, 0, ),
-          'end': new Date(2017, 9, 20, 21, 30, 0)
-        },
-
-        {
-          'title': 'All Things Open',
-          'start': new Date(2017, 9, 23, 0, 0, 0),
-          'end': new Date(2017, 9, 25, 0, 0, 0)
-        },
-        {
-          'title': 'Demo Day',
-          'start': new Date(2017, 9, 25),
-          'end': new Date(2017, 9, 25),
-          desc: 'Big conference for important people'
-        }
+      // {
+      //   'title': "Collins night club",
+      //   'allDay': true,
+      //   'start': new Date(2017, 9, 13),
+      //   'end': new Date(2017, 9, 13)
+      // },
+      // {
+      //   'title': "Lyman's rockin jazz daddio swingers club",
+      //   'start': new Date(2017, 9, 14, 21, 30 ),
+      //   'end': new Date(2017, 9, 14, 1, 0 ),
+      //   desc: 'Pre-meeting meeting, to prepare for the meeting'
+      // },
+      //
+      // {
+      //   'title': 'Spruill concert hall',
+      //   'start': new Date(2017, 9, 20, 19, 0, ),
+      //   'end': new Date(2017, 9, 20, 21, 30, 0)
+      // },
+      //
+      // {
+      //   'title': 'All Things Open',
+      //   'start': new Date(2017, 9, 23, 0, 0, 0),
+      //   'end': new Date(2017, 9, 25, 0, 0, 0)
+      // },
+      // {
+      //   'title': 'Demo Day',
+      //   'start': new Date(2017, 9, 25),
+      //   'end': new Date(2017, 9, 25),
+      //   desc: 'Big conference for important people'
+      // }
       ]
     }
   }
@@ -68,11 +68,10 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount(){
-    this.fetchAllBandsForUser();
+    this.fetchAllBandsForUser(this.state.userId);
   }
 
-  fetchAllBandsForUser(){
-    let userId = this.state.userId; // may not need as a param
+  fetchAllBandsForUser(userId){
     request
       .get(`https://ez-tour.herokuapp.com/users/${userId}/bands`)
       .set('Authorization', `Token token=${this.state.token}`)
@@ -82,11 +81,12 @@ export default class Dashboard extends Component {
       });
   }
 
-  mapOverBandsArrayAndFetchEvents = (arrayOfBands) => {
+mapOverBandsArrayAndFetchEvents = (arrayOfBands, callback) => {
     let events = arrayOfBands.map((band) =>{
       // console.log(band.id);
       return( this.fetchAllEventsForBand(band.id))
     })
+    // callback("doneMapping");
     console.log(this.state.eventsArray);
   }
 
@@ -104,7 +104,7 @@ export default class Dashboard extends Component {
       });
   }
 
-  createCalendarEvents = (arrayOfEvents) => {
+  createCalendarEvents = (arrayOfEvents, callback) => {
     console.log(arrayOfEvents);
     let calendarEventArray = this.state.calendarEvents;
     let calEvents = arrayOfEvents.map((event) =>{
@@ -112,6 +112,7 @@ export default class Dashboard extends Component {
       return( calendarEventArray.push(this.createSingleEvent(event)))
     })
     this.setState({calendarEvents: calendarEventArray})
+    // callback("doneMakingCalendarEvents");
   }
 
   createSingleEvent = (theDeets) => {
@@ -126,22 +127,21 @@ export default class Dashboard extends Component {
     return eventObject
   }
 
-  formatDateAndTime(date, time){
-
-    return (2017, 9, 20, 21, 30, 0)
+  setDoneToTrue(stateVar){
+    this.setState({[stateVar]: true});
   }
 
   componentDidUpdate(){
     if(this.state.eventsArray.length>0 && this.state.doneMapping && !this.state.doneMakingCalendarEvents){
       console.log(this.state.eventsArray);
       // debugger
-      this.createCalendarEvents(this.state.eventsArray);
+      this.createCalendarEvents(this.state.eventsArray, this.setDoneToTrue());
       console.log(this.state.calendarEvents);
       this.setState({doneMakingCalendarEvents: true});
       // this.props.setBandList(this.state.bandsArray); redux action
     }
     if(this.state.bandsArray && !this.state.doneMapping){
-      this.mapOverBandsArrayAndFetchEvents(this.state.bandsArray);
+      this.mapOverBandsArrayAndFetchEvents(this.state.bandsArray, this.setDoneToTrue());
       this.setState({doneMapping: true});
     }
   }
@@ -155,15 +155,15 @@ export default class Dashboard extends Component {
   navigateToEvent(bandId, eventId){
     console.log("Event "+eventId+" has been clicked.");
     // set bandId, eventId in Redux
-    this.props.history.push('/event-form');
-    <Redirect to={{
-        pathname: '/event-form',
-        state: {
-          new: false,
-          bandId: bandId,
-          eventId: eventId
-         }
-      }}/>
+    window.location.href = '/event-form';
+    // <Redirect to={{
+    //     pathname: '/event-form',
+    //     state: {
+    //       new: false,
+    //       bandId: bandId,
+    //       eventId: eventId
+    //      }
+      // }}/>
   }
 
   render() {
@@ -173,7 +173,7 @@ export default class Dashboard extends Component {
         <div className="d-flex justify-content-between">
           <div><button className="button create-new-event-button"><Link to="/event-form">Create New Event</Link></button></div>
           <h1>Dashboard</h1>
-          {/* <div><button className="button create-new-event-button"><Link to="/profile-page">Edit Profile</Link></button></div> */}
+          <div><button className="button create-new-event-button"><Link to="/profile-page">Edit Profile</Link></button></div>
           <div>
             <Dropdown className="button create-new-event-button" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                <DropdownToggle caret className="button create-new-event-button">

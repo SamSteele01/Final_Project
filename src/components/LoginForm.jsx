@@ -66,7 +66,7 @@ export default class LoginForm extends Component {
     event.preventDefault();
     request
       .post('https://ez-tour.herokuapp.com/users')
-      .send({user: {full_name: this.state.full_name, telephone: this.state.telephone, email: this.state.email, password: this.state.password}})
+      .send({full_name: this.state.full_name, telephone: this.state.telephone, email: this.state.email, password: this.state.password})
       .end((err, res) =>{
         if(err) {
           console.log(err);

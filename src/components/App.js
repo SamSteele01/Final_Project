@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
-
 import '../styles/App.css';
-
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-
 import Dashboard from './Dashboard.jsx';
 import EventForm from './EventForm.jsx';
 import LoginPage from './LoginPage.jsx';
