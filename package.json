@@ -5,6 +5,7 @@
   "dependencies": {
     "auth0-js": "^8.10.1",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "react": "^16.0.0",
     "react-big-calendar": "^0.16.1",

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ImageUploader from 'react-images-upload';
+import ImageUploader from './ImageUploader.jsx';
 import request from 'superagent';
 import cookie from 'react-cookies';
 
@@ -29,7 +29,7 @@ export default class BandProfileEnter extends Component {
     };
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
-    this.onDrop = this.onDrop.bind(this);
+    // this.onDrop = this.onDrop.bind(this);
     // this.handleUpdateBandProfile = this.handleUpdateBandProfile.bind(this);
   }
 
@@ -59,11 +59,11 @@ export default class BandProfileEnter extends Component {
       });
   }
 
-  onDrop(picture) {
-        this.setState({
-            pictures: this.state.pictures.concat(picture),
-        });
-  }
+  // onDrop(picture) {
+  //       this.setState({
+  //           pictures: this.state.pictures.concat(picture),
+  //       });
+  // }
 
   render() {
     return (
@@ -109,11 +109,26 @@ export default class BandProfileEnter extends Component {
                     </div>
                   </div>
                 </div>
+                <div>
+                  <button type="button" className="btn btn-primary ">Submit</button>
+                </div>
                 <ul class="list-group list-group-flush band-profile-list">
-                  <li class="list-group-item band-profile-list"><a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" class="card-link">w9</a></li>
-                  <li class="list-group-item band-profile-list"><a href="" class="card-link">Stage Plot</a></li>
-                  <li class="list-group-item band-profile-list"><a href="" class="card-link">Input List</a></li>
-                  <li class="list-group-item band-profile-list"><a href="" class="card-link">Promos</a></li>
+                  <li class="list-group-item band-profile-list">
+                    <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" class="card-link">Link to a new w9</a>
+                    <ImageUploader targetKey={"w9"} label={"Upload your w9"}/>
+                  </li>
+                  <li class="list-group-item band-profile-list">
+                    {/* <a href="" class="card-link">Stage Plot</a> */}
+                    <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot"}/>
+                  </li>
+                  <li class="list-group-item band-profile-list">
+                    {/* <a href="" class="card-link">Input List</a> */}
+                    <ImageUploader targetKey={"input_list"} label={"Upload your Input List"}/>
+                  </li>
+                  <li class="list-group-item band-profile-list">
+                    {/* <a href="" class="card-link">Promos</a> */}
+                    <ImageUploader targetKey={"promo_asset"} label={"Upload your Promo Asset/Image"}/>
+                  </li>
                 </ul>
                 {/* <div className="form-group">
                   <label className="col-md-4 control-label" htmlFor="address">Address</label>
@@ -160,7 +175,7 @@ export default class BandProfileEnter extends Component {
                     </div>
                   </div>
                 </div> */}
-                  <div className="image-upload">
+                  {/* <div className="image-upload">
                     <ImageUploader
                       withIcon={true}
                       buttonText='Choose image'
@@ -168,7 +183,7 @@ export default class BandProfileEnter extends Component {
                       imgExtension={['.jpg', '.gif', '.png',  '.gif']}
                       maxFileSize={5242880}
                     />
-                  </div>
+                  </div> */}
                   {/* <div className="form-group    organization-info">
                     <span><label className="col-md-4  control-label info" htmlFor="info">Tell Us  About Your Organization</label></span>
                     <div className="col-md-4  inputGroupContainer">
@@ -177,9 +192,6 @@ export default class BandProfileEnter extends Component {
                        </div>
                      </div>
                    </div> */}
-                <div>
-                  <button type="button" className="btn btn-primary profile-button">Submit</button>
-                </div>
             </fieldset>
           </form>
         </div>
