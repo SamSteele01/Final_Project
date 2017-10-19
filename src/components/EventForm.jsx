@@ -5,6 +5,7 @@ import EventBandView from './EventBandView.jsx';
 import EventVenueView from './EventVenueView.jsx';
 import ProfileMini from './ProfileMini.jsx';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import cookie from 'react-cookies';
 
 export default class EventForm extends Component {
   constructor(props) {
