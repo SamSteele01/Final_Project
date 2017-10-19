@@ -183,9 +183,9 @@ export default class Dashboard extends Component {
 
   displayDropdowns(){
     if(this.state.bandsArray){
-      let bandNameDropdownItem = this.state.bandsArray.map((band) => {
+      let bandNameDropdownItem = this.state.bandsArray.map((band, index) => {
         return(
-          <DropdownItem><Link to={{ pathname: "/profile-page", state: { userProfile: false} }}>{band.name}</Link></DropdownItem>
+          < DropdownItem key={index}><Link to={{ pathname: "/profile-page", state: { userProfile: false} }}>{band.name}</Link></DropdownItem>
           // need to pass bandId and userProfile to redux
         )
       })
@@ -213,7 +213,7 @@ export default class Dashboard extends Component {
                <DropdownToggle caret className="button create-new-event-button">
                  Edit Profile
                </DropdownToggle>
-               <DropdownMenu>
+               <DropdownMenu right>
                  {/* <DropdownItem header>Header</DropdownItem> */}
                  {/* <DropdownItem disabled>Action</DropdownItem> */}
                  <DropdownItem><Link to={{ pathname: "/profile-page", state: { userProfile: true} }}>{this.state.fullName}</Link></DropdownItem>
