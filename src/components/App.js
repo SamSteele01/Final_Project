@@ -13,11 +13,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      token: null,
-      dashboard: 'Dashboard',
-      profilePage: 'Profile',
-      newEvent: 'New Event',
-      event: 'Event'
+      token: null
     }
   }
 
