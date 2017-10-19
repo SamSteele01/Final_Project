@@ -65,21 +65,6 @@ export default class BandProfileEnter extends Component {
         });
   }
 
-  handleUpdateBandProfile(){
-    let userId = this.state.userId;
-    let bandsId = this.props.bandsId;  // may not need as a param
-    request
-      .patch(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
-      .send({
-
-      })
-      .set('Authorization', `Token token=${this.state.token}`)
-      .end((err, res) => {
-
-      });
-  }
-
-
   render() {
     return (
       <div>
