@@ -204,11 +204,11 @@ export default class UserProfileEnter extends Component {
                 </div>
                 <ul class="list-group list-group-flush band-profile-list">
                   <li class="list-group-item band-profile-list">
-                    <ImageUploader targetKey={"avatar"} />
                   </li>
                 </ul>
             </fieldset>
           </form>
+          <ImageUploader targetKey={"avatar"} />
           {/* <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleImageUpload}>
             <div className="form-group">
               <label className="col-md-4 control-label" htmlFor="website">Website or domain name</label>

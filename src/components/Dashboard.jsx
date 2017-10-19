@@ -6,13 +6,15 @@ import moment from 'moment';
 import request from 'superagent';
 import cookie from 'react-cookies';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import {connect} from 'react-redux';
+import {setBand, setEvent} from "../actions";
 
 BigCalendar.momentLocalizer(moment);
 let formats = {
   dateFormat: 'dd'
 }
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
@@ -67,12 +69,13 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount(){
-    if(!this.state.token){
+    if(this.state.token===null){
       window.location.href = "/";
-    }
+    }else{
     this.fetchAllEventsForUser(this.state.userId);
     this.fetchFullnameForUser(this.state.userId);
     this.fetchAllBandsForUser(this.state.userId);
+    }
   }
 
   fetchAllEventsForUser(userId){
@@ -177,7 +180,8 @@ export default class Dashboard extends Component {
 
   navigateToEvent(bandId, eventId){
     console.log("Event "+eventId+" has been clicked.");
-    // set bandId, eventId in Redux
+    this.props.setBand(bandId);
+    this.props.setEvent(eventId);
     window.location.href = '/event-form';
   }
 
@@ -185,7 +189,7 @@ export default class Dashboard extends Component {
     if(this.state.bandsArray){
       let bandNameDropdownItem = this.state.bandsArray.map((band, index) => {
         return(
-          < DropdownItem key={index}><Link to={{ pathname: "/profile-page", state: { userProfile: false} }}>{band.name}</Link></DropdownItem>
+          <DropdownItem key={index}><Link to="/profile-page" onClick={event => this.props.setBand(band.id)}>{band.name}</Link></DropdownItem>
           // need to pass bandId and userProfile to redux
         )
       })
@@ -235,6 +239,19 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+const mapStateToProps = function(state) {
+    return {setBand: state.setBand, setEvent: state.setEvent}
+}
+
+const mapDispatchToProps = (dispatch) => (
+    {
+        setBand: (filter) =>  dispatch(setBand(filter)),
+        setEvent: (filter) =>  dispatch(setEvent(filter))
+    }
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
 
 
 Dashboard.propTypes = {

@@ -12,7 +12,7 @@ export default class ProfilePage extends Component {
     this.state = {
       token: null,
       userId: null,
-      displayEditButton: false,
+      displayBandView: false,
       enterForm: false,
       profileInfo: null
     }
@@ -23,8 +23,11 @@ export default class ProfilePage extends Component {
   }
 
   componentDidMount() {
-    if(!this.state.token){
+    if(this.state.token===null){
       window.location.href = "/";
+    }
+    if(this.props.bandsId){
+      this.setState({displayBandView: true});
     }
   }
 
@@ -65,10 +68,10 @@ export default class ProfilePage extends Component {
           <h1>Profile</h1>
           <div><button className="button create-new-event-button"><Link to="/event-form">Create New Event</Link></button></div>
         </div>
-        {/* {this.props.location.state.userProfile ? */}
-          {/* <UserProfileEnter/> */}
-          <BandProfileEnter/>
-        // }
+        {this.state.displayBandView ?
+          <BandProfileEnter/> :
+          <UserProfileEnter/>
+        }
       </div>);
 
   }

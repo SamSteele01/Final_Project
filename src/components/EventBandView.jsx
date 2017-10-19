@@ -1,15 +1,22 @@
 import React, {Component} from 'react';
 import FormInput from './FormInput.jsx';
-import AssetContainer from './AssetContainer.jsx';
+import AssetToolbar from './AssetToolbar.jsx';
 
 export default class EventBandView extends Component {
+  constructor(props) {
+    super(props);
 
-// displays the asset tool bar on the side of the page.
+    this.state ={
+
+    }
+  }
+
+
 
   render() {
     return (
       <div>
-        <AssetContainer/>
+        <AssetToolbar/>
         <FormInput/>
       </div>
     );
