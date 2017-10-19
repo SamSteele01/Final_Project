@@ -11,7 +11,7 @@ export default class AssetToolbar extends Component {
               <p class="card-text"></p>
             </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" class="card-link">w9</a></li>
+                <li class="list-group-item"><a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" download>w9</a></li>
                 <li class="list-group-item"><a href="" class="card-link">Set Layout</a></li>
                 <li class="list-group-item"><a href="" class="card-link">What other Assets should we include?</a></li>
               </ul>

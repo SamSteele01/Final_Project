@@ -159,6 +159,7 @@ export default class Dashboard extends Component {
           <h1>Dashboard</h1>
           {/* <div><button className="button create-new-event-button"><Link to="/profile-page">Edit Profile</Link></button></div> */}
           <div>
+            <div><button className="button create-new-event-button"><Link to="/event-form">Create New Band</Link></button></div>
             <Dropdown className="button create-new-event-button" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                <DropdownToggle caret className="button create-new-event-button">
                  Edit Profile

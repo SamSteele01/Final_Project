@@ -32,7 +32,7 @@ export default class FormInput extends Component {
 
   // Needs to have this.props.new = true/false
   fxnToCheckIfEventIsNew(){
-    
+
   }
 
   updateFromField(stateKey) {

@@ -89,7 +89,7 @@ export default class UserProfileEnter extends Component {
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span>
-                      <input name="phone" placeholder="(xxx) xxx-xxxx" className="form-control" type="text" onChange={this.updateFromField('phone')} value={this.state.phone}/>
+                      <input name="phone" placeholder="(xxx) xxx-xxxx" className="form-control" type="tel" maxlength="12" onChange={this.updateFromField('phone')} value={this.state.phone}/>
                     </div>
                   </div>
                 </div>
@@ -138,7 +138,7 @@ export default class UserProfileEnter extends Component {
                     </div>
                   </div>
                 </div> */}
-                  <div className="image-upload">
+                  {/* <div className="image-upload">
                     <ImageUploader
                       withIcon={true}
                       buttonText='Choose image'
@@ -146,7 +146,7 @@ export default class UserProfileEnter extends Component {
                       imgExtension={['.jpg', '.gif', '.png',  '.gif']}
                       maxFileSize={5242880}
                     />
-                  </div>
+                  </div> */}
                   {/* <div className="form-group    organization-info">
                     <span><label className="col-md-4  control-label info" htmlFor="info">Tell Us  About Your Organization</label></span>
                     <div className="col-md-4  inputGroupContainer">
