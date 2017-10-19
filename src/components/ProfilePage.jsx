@@ -11,6 +11,7 @@ export default class ProfilePage extends Component {
 
     this.state = {
       token: null,
+      userId: null,
       displayEditButton: false,
       enterForm: false,
       profileInfo: null
@@ -18,7 +19,13 @@ export default class ProfilePage extends Component {
   }
 
   componentWillMount() {
-    this.setState({token: cookie.load('token')}); //get token from cookie, if it exists
+    this.setState({token: cookie.load('token'), userId:cookie.load('userId')});
+  }
+
+  componentDidMount() {
+    if(!this.state.token){
+      window.location.href = "/";
+    }
   }
 
 // need to check if this is a profile for a user or a band. Should pass as props.source
