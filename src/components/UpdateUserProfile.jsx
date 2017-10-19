@@ -59,7 +59,7 @@ export default class UpdateUserProfile extends Component {
 
           <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleAddToProfile}>
             <fieldset>
-              <legend>Create a User Profile</legend>
+              <legend>Update User Profile</legend>
                 <div className="form-group">
                   <label className="col-md-4 control-label">Full Name</label>
                   <div className="col-md-4 inputGroupContainer">
