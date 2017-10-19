@@ -76,7 +76,7 @@
   position: relative;
   top: 70px;
   right: 350px;
-  text-decoration-line: none;
+  text-decoration: none;
   border: black;
 }
 
@@ -110,7 +110,6 @@
   height: 80vh;
 }
 
-
 .profile_enter_container {
   background-color: lightgrey;
 }
@@ -131,7 +130,7 @@
     width: 345px;
     position: relative;
     left: 650px;
-    bottom: 665px;
+    bottom: 265px;
   }
 
   .info {
@@ -258,13 +257,20 @@
 
 /*styling for AssetToolbar.jsx*/
 .asset-toolbar {
-  width: 20rem;
+  width: 50rem;
   border: 2px solid lightgray;
 }
 
 .band-profile {
-  width: 40rem;
+  width: 50rem;
   border: 2px solid lightgray;
+  display: flex;
+  right: 30px;
+}
+
+.checkbox-inline {
+  margin: 10px;
+  margin-top: 0;
 }
 
 /*band-profile list styling*/

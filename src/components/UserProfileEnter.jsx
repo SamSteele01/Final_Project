@@ -138,7 +138,7 @@ export default class UserProfileEnter extends Component {
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span>
-                      <input name="phone" placeholder="(xxx) xxx-xxxx" className="form-control" type="text" onChange={this.updateFromField('phone')} value={this.state.phone}/>
+                      <input name="phone" placeholder="(xxx) xxx-xxxx" className="form-control" type="tel" maxlength="12" onChange={this.updateFromField('phone')} value={this.state.phone}/>
                     </div>
                   </div>
                 </div>

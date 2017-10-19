@@ -3,7 +3,7 @@ import ImageUploader from 'react-images-upload';
 import request from 'superagent';
 import cookie from 'react-cookies';
 
-export default class BandProfileEnter extends Component {
+export default class UpdateBandProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,27 +13,19 @@ export default class BandProfileEnter extends Component {
       vehicle: '',
       num_members: '',
       num_crew: '',
-      // email: '',
-      // phone: '',
-      // address: '',
-      // city: '',
-      // state: '',
-      // zipcode: '',
-      // website: '',
-      // info: '',
-      pictures: [],
+      avatars: [],
       w9: '',
       stage_plot: '',
       input_list: '',
       promo_asset: ''
     };
-    this.handleAddToProfile = this.handleAddToProfile.bind(this);
+    this.handleUpdateBandProfile = this.handleUpdateBandProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
     this.onDrop = this.onDrop.bind(this);
-    this.handleUpdateBandProfile = this.handleUpdateBandProfile.bind(this);
+
   }
 
-  componentWillMount(){
+  componentDidMount(){
     this.setState({token: cookie.load('token')}); //get token from cookie, if it exists
     this.setState({userId: cookie.load('userId')}); //get token from cookie, if it exists
   }
@@ -45,25 +37,26 @@ export default class BandProfileEnter extends Component {
   }
 
 // may be posting to a user or a bands DB. Need to have a dynamic/conditional route
-  handleAddToProfile(){
-    let userId = this.state.userId;
-    let bandsId = this.props.bandsId;  // may not need as a param
-    request
-      .post(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
-      .send({
+handleUpdateBandProfile(){
+  let userId = this.state.userId;
+  let bandsId = this.props.bandsId;  // may not need as a param
+  request
+    .patch(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
+    .send({
 
-      })
-      .set('Authorization', `Token token=${this.state.token}`)
-      .end((err, res) => {
+    })
+    .set('Authorization', `Token token=${this.state.token}`)
+    .end((err, res) => {
 
-      });
-  }
+    });
+}
 
-  onDrop(picture) {
+  onDrop(avatar) {
         this.setState({
-            pictures: this.state.pictures.concat(picture),
+            avatars: this.state.avatars
         });
   }
+
 
   render() {
     return (
@@ -72,7 +65,7 @@ export default class BandProfileEnter extends Component {
 
           <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleAddToProfile}>
             <fieldset>
-              <legend>Create a User Profile</legend>
+              <legend>Update Band Profile</legend>
                 <div className="form-group">
                   <label className="col-md-4 control-label">Name of Performer(s)</label>
                   <div className="col-md-4 inputGroupContainer">
@@ -160,7 +153,7 @@ export default class BandProfileEnter extends Component {
                     </div>
                   </div>
                 </div> */}
-                  <div className="image-upload">
+                  {/* <div className="image-upload">
                     <ImageUploader
                       withIcon={true}
                       buttonText='Choose image'
@@ -168,7 +161,7 @@ export default class BandProfileEnter extends Component {
                       imgExtension={['.jpg', '.gif', '.png',  '.gif']}
                       maxFileSize={5242880}
                     />
-                  </div>
+                  </div> */}
                   {/* <div className="form-group    organization-info">
                     <span><label className="col-md-4  control-label info" htmlFor="info">Tell Us  About Your Organization</label></span>
                     <div className="col-md-4  inputGroupContainer">
