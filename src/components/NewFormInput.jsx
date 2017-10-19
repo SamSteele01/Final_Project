@@ -1,8 +1,7 @@
-// container
 import React, {Component} from 'react';
 import request from 'superagent';
 
-export default class FormInput extends Component {
+export default class NewFormInput extends Component {
   constructor(props) {
     super(props);
     // this.handleUpdateForm = this.handleUpdateForm.bind(this);
@@ -49,7 +48,7 @@ export default class FormInput extends Component {
   let userId = this.props.userId;
   let bandsId = this.props.bandsId;
    request
-    .patch(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
+    .post(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
     .send({date: this.state.date,
     venue: this.state.venue,
     city: this.state.city,
@@ -186,5 +185,5 @@ export default class FormInput extends Component {
       </div>);
   }
 }
-FormInput.propTypes = {
+NewFormInput.propTypes = {
 };
