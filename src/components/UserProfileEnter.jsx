@@ -202,8 +202,8 @@ export default class UserProfileEnter extends Component {
                     </div>
                   </div>
                 </div>
-                <ul class="list-group list-group-flush band-profile-list">
-                  <li class="list-group-item band-profile-list">
+                <ul className="list-group list-group-flush band-profile-list">
+                  <li className="list-group-item band-profile-list">
                     <ImageUploader targetKey={"avatar"} />
                   </li>
                 </ul>

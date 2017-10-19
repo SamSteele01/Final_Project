@@ -79,7 +79,7 @@ export default class Dashboard extends Component {
       .set('Authorization', `Token token=${this.state.token}`)
       .end((err, res) => {
         let data = res.body.events;
-        this.setState({eventsArray: data});
+        // this.setState({eventsArray: data});
       });
   }
 
