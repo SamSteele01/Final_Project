@@ -1,1 +1,1 @@
-{ "root": "build/" }
+echo '{ "root": "build/" }'
