@@ -12,16 +12,19 @@ export default class EventForm extends Component {
     this.toggle = this.toggle.bind(this);
 
     this.state = {
-      displayBandView: false,
+      newEvent: false,
+      displayBandView: true,
       dropdownOpen: false
     }
   }
 
 // need to catch token from url if coming from an email. This will cause VenueView to render.
 
-  // fxnToGrabTokenFromUrl(){
-  //
-  // }
+  componentWillMount(){
+    if(this.props.location.state.newEvent){
+      this.setState({newEvent: true});
+    }
+  }
 
   toggle() {
     this.setState({
@@ -36,7 +39,10 @@ export default class EventForm extends Component {
       {/* <ProfileMini/> */}
         <div className="d-flex justify-content-between">
           <div><button className="button create-new-event-button"><Link to="/dashboard">Dashboard</Link></button></div>
-          <h1>New Event</h1>
+          {this.state.newEvent ?
+            <h1>New Event</h1> :
+            <h1>Scheduled Event</h1>
+          }
           <div>
             <Dropdown className="button create-new-event-button" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                <DropdownToggle caret className="button create-new-event-button">

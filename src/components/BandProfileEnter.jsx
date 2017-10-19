@@ -21,7 +21,7 @@ export default class BandProfileEnter extends Component {
       // zipcode: '',
       // website: '',
       // info: '',
-      avatars: [],
+      pictures: [],
       w9: '',
       stage_plot: '',
       input_list: '',
@@ -59,9 +59,9 @@ export default class BandProfileEnter extends Component {
       });
   }
 
-  onDrop(avatar) {
+  onDrop(picture) {
         this.setState({
-            avatars: this.state.avatars
+            pictures: this.state.pictures.concat(picture),
         });
   }
 
@@ -160,7 +160,7 @@ export default class BandProfileEnter extends Component {
                     </div>
                   </div>
                 </div> */}
-                  {/* <div className="image-upload">
+                  <div className="image-upload">
                     <ImageUploader
                       withIcon={true}
                       buttonText='Choose image'
@@ -168,7 +168,7 @@ export default class BandProfileEnter extends Component {
                       imgExtension={['.jpg', '.gif', '.png',  '.gif']}
                       maxFileSize={5242880}
                     />
-                  </div> */}
+                  </div>
                   {/* <div className="form-group    organization-info">
                     <span><label className="col-md-4  control-label info" htmlFor="info">Tell Us  About Your Organization</label></span>
                     <div className="col-md-4  inputGroupContainer">

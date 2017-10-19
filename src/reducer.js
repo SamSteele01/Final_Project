@@ -1,30 +1,48 @@
 // reducer.js
 import update from 'immutability-helper';
-import {CREATE_TODO, TOGGLE_TODO, FILTER_TODOS} from "./actions";
+import {SET_USER, SET_BAND, UNSET_BAND, SET_EVENT, UNSET_EVENT, SET_DONE_MAPPING, SET_DONE_MAKING_CALENDAR, SET_CALENDAR_EVENTS, SET_NEW, UNSET_NEW} from "./actions";
 
 const initialState = {
-    nextId: 1,
-    todos: [],
-    filter: 'all'
+    token: null,
+    userId: null,
+    bandsId: null,
+    eventId: null,
+    doneMapping: false,
+    doneMakingCalendarEvents: false,
+    calendarEvents: [],
+    displayNew: false
 }
 
 // need setUserSession({userId: user_id, token: token}), this.props.setEventInfo();
 const reducer = function(state = initialState, action) {
     switch (action.type) {
-        case CREATE_TODO:
+        case SET_USER:
             return update(state, {
-                todos: {
-                    $push: [
-                        {
-                            text: action.payload,
-                            id: state.nextId,
-                            done: false
-                        }
-                    ]
-                },
-                nextId: {
-                    $apply: (id) => id + 1
-                }
+              userId: action.payload
+            })
+        case SET_BAND:
+            return update(state, {
+              bandsId: action.payload
+            })
+        case UNSET_BAND:
+            return update(state, {
+              bandsId: null
+            })
+        case SET_EVENT:
+            return update(state, {
+              eventId: action.payload
+            })
+        case UNSET_EVENT:
+            return update(state, {
+              eventId: null
+            })
+        case SET_DONE_MAPPING:
+            return update(state, {
+              doneMapping: true
+            })
+        case SET_DONE_MAKING_CALENDAR:
+            return update(state, {
+              doneMakingCalendarEvents: true
             })
         case TOGGLE_TODO:
             const idx = state.todos.findIndex((todo) =>

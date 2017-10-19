@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ImageUploader from 'react-images-upload';
+import {bindAll} from 'lodash';
 import request from 'superagent';
 import cookie from 'react-cookies';
 
@@ -19,11 +19,13 @@ export default class UserProfileEnter extends Component {
       // zipcode: '',
       // website: '',
       // info: '',
-      avatar: ''
+      avatar: null,
+      data_uri: null,
+      processing: false
     };
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
-    this.onDrop = this.onDrop.bind(this);
+    bindAll(this, 'handleFile', 'handleSubmit');
   }
 
   componentWillMount(){
@@ -40,25 +42,72 @@ export default class UserProfileEnter extends Component {
 // may be posting to a user or a bands DB. Need to have a dynamic/conditional route
   handleAddToProfile(){
     let userId = this.state.userId;
-    let bandsId = this.props.bandsId;  // may not need as a param
     request
-      .post(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
-      .send({
-
-      })
+      .patch(`https://ez-tour.herokuapp.com/users/${userId}`)
+      .send({full_name: this.state.full_name, telephone: this.state.telephone, email: this.state.email, password: this.state.password})
       .set('Authorization', `Token token=${this.state.token}`)
       .end((err, res) => {
-
       });
   }
 
-  onDrop(avatar) {
-        this.setState({
-            avatars: this.state.avatars
-        });
+  handleSubmit(e) {
+    e.preventDefault();
+    // const _this = this;
+    this.setState({
+      processing: true
+    });
+    let userId = this.state.userId;
+    request
+      .patch(`https://ez-tour.herokuapp.com/users/${userId}`)
+      .send({avatar: this.state.data_uri
+        // filename: this.state.filename,
+        // filetype: this.state.filetype
+      })
+      .set('Authorization', `Token token=${this.state.token}`)
+      .end((err, res) => {
+        if(err){
+          console.log(err);
+        }
+        if(res){
+          console.log(res);
+          this.setState({
+          processing: false,
+          uploaded_uri: this.state.data_uri
+          });
+        }
+      });
+  }
+
+
+  handleFile(e) {
+    const reader = new FileReader();
+    const file = e.target.files[0];
+    reader.onload = (upload) => {
+      this.setState({
+        data_uri: upload.target.result,
+        filename: file.name,
+        filetype: file.type
+      });
+    };
+    reader.readAsDataURL(file);
   }
 
   render() {
+    let processing;
+    let uploaded;
+    if (this.state.uploaded_uri) {
+      uploaded = (
+        <div>
+          <h4>Image uploaded!</h4>
+          <img className='image-preview' src={this.state.uploaded_uri} />
+          <pre className='image-link-box'>{this.state.uploaded_uri}</pre>
+        </div>
+      );
+    }
+    if (this.state.processing) {
+      processing = "Processing image, hang tight";
+    }
+
     return (
       <div>
         <div className="profile_enter_container">
@@ -128,15 +177,6 @@ export default class UserProfileEnter extends Component {
                       <input name="zip" placeholder="Zip Code" className="form-control"  type="text" onChange={this.updateFromField('zipcode')}value={this.state.zipcode}/>
                     </div>
                   </div>
-                </div>
-                <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="website">Website or domain name</label>
-                  <div className="col-md-4 inputGroupContainer">
-                    <div className="input-group">
-                      <span className="input-group-addon"><i className="glyphicon glyphicon-globe"></i></span>
-                      <input name="website" placeholder="Website or domain name" className="form-control" type="text" onChange={this.updateFromField('website')}value={this.state.website}/>
-                    </div>
-                  </div>
                 </div> */}
                   {/* <div className="image-upload">
                     <ImageUploader
@@ -160,6 +200,37 @@ export default class UserProfileEnter extends Component {
                 </div>
             </fieldset>
           </form>
+          {/* <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleImageUpload}>
+            <div className="form-group">
+              <label className="col-md-4 control-label" htmlFor="website">Website or domain name</label>
+              <div className="col-md-4 inputGroupContainer">
+                <div className="input-group">
+                  <span className="input-group-addon"><i className="glyphicon glyphicon-globe"></i></span>
+                  <input name="avatar"
+                    id="upload" ref="upload" accept="image/*"
+                    // placeholder="Upload avatar"
+                    className="form-control"
+                    encType="multipart/form-data"
+                    type="file"
+                    onClick={(event)=> {event.target.value = null}}
+                    onChange={(event)=> {this.readFile(event)}}
+                    // value={this.state.avatar}
+                  />
+                </div>
+              </div>
+            </div>
+          </form> */}
+          <div className='row'>
+            <div className='col-sm-12'>
+              <label>Upload an image</label>
+              <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+                <input type="file" onChange={this.handleFile} />
+                <input disabled={this.state.processing} className='btn btn-primary' type="submit" value="Upload" />
+                {processing}
+              </form>
+              {uploaded}
+            </div>
+          </div>
         </div>
       </div>
 
