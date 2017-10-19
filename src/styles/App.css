@@ -249,7 +249,7 @@
   .profile-button {
     display: flex;
     position: relative;
-    left: 160px; /* not actually controlling the buttons position...???? */
+    left: 160px; /* not actually controlling the buttons position...????   */
     bottom: 4px;
     background-color: black;
   }

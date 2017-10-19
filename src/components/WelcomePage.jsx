@@ -11,8 +11,8 @@ export default class WelcomePage extends Component {
         </div>
         <div className="welcome-text-2">
           <h2>Where Managing your Events just got simpler.</h2>
-            <div class="btn-group btn-group-lg">
-              <Link to='/login-page'><button type="button" class="btn btn-primary welcome-button a">VIP Access</button></Link>
+            <div className="btn-group btn-group-lg">
+              <Link to='/login-page'><button type="button" className="btn btn-primary welcome-button a">VIP Access</button></Link>
             </div>
         </div>
       </div>);

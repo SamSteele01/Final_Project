@@ -9,7 +9,7 @@ export default class EventBandView extends Component {
   render() {
     return (
       <div>
-        <AssetContainer/>
+        <AssetToolbar/>
         <FormInput/>
       </div>
     );

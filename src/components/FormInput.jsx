@@ -49,7 +49,7 @@ export default class FormInput extends Component {
   let userId = this.props.userId;
   let bandsId = this.props.bandsId;
    request
-    .post(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
+    .patch(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
     .send({date: this.state.date,
     venue: this.state.venue,
     city: this.state.city,
