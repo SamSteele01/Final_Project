@@ -11,7 +11,7 @@ export default class AssetToolbar extends Component {
               <p class="card-text"></p>
             </div>
             <form>
-              <label class="checkbox-inline"><input type="checkbox" value=""/>  w9</label>
+              <label class="checkbox-inline"><input type="checkbox" value="<a href=https://www.irs.gov/pub/irs-pdf/fw9.pdf" download/>  w9</label>
               <label class="checkbox-inline"><input type="checkbox" value=""/>  Stage Plot</label>
               <label class="checkbox-inline"><input type="checkbox" value=""/>  Input List</label>
               <label class="checkbox-inline"><input type="checkbox" value=""/>  Hospitality Rider</label>
