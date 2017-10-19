@@ -34,7 +34,7 @@ class App extends Component {
         <BaseLayout>
           <Switch>
             <Route path='/dashboard' render={(props) => (<Dashboard display={this.state.dashboard}/>)} />
-            <Route path='/event-form' render={(props) => (<EventForm display={this.state.newEvent}/>)} />
+            <Route path='/event-form' component={EventForm} />
             {/* need to pass userId (from cookie) and bandsId (from Dashboard) as well as specifing display= user/band */}
             <Route path='/profile-page' component={ProfilePage} />
             <Route path='/login-page' render={(props) => (<LoginPage display={this.state.loginPage}/>)} />

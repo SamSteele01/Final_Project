@@ -3,9 +3,16 @@
 // need to set userId, bandId, eventId, calendarEvents, doneMapping, doneMakingCalendarEvents
 // unset band and event Ids
 // could stash "new" in eventId, or have a seperate variable
-export const CREATE_TODO = 'CREATE_TODO';
-export const TOGGLE_TODO = 'TOGGLE_TODO';
-export const FILTER_TODOS = 'FILTER_TODOS';
+
+export const SET_USER = 'SET_USER';
+export const SET_BAND = 'SET_BAND';
+export const UNSET_BAND = 'UNSET_BAND';
+export const SET_EVENT = 'SET_EVENT';
+export const UNSET_EVENT = 'UNSET_EVENT';
+export const SET_DONE_MAPPING = 'SET_DONE_MAPPING';
+export const SET_DONE_MAKING_CALENDAR = 'SET_DONE_MAKING_CALENDAR';
+export const SET_CALENDAR_EVENTS = 'SET_CALENDAR_EVENTS';
+export const SET_NEW = 'SET_NEW';
 
 const makeActionCreator = function (actionType) {
   return function (payload) {
@@ -16,6 +23,12 @@ const makeActionCreator = function (actionType) {
   }
 }
 
-export const createTodo = makeActionCreator(CREATE_TODO);
-export const toggleTodo = makeActionCreator(TOGGLE_TODO);
-export const filterTodos = makeActionCreator(FILTER_TODOS);
+export const setUser = makeActionCreator(SET_USER);
+export const setBand = makeActionCreator(SET_BAND);
+export const unsetBand = makeActionCreator(UNSET_BAND);
+export const setEvent = makeActionCreator(SET_EVENT);
+export const unsetEvent = makeActionCreator(UNSET_EVENT);
+export const setDoneMapping = makeActionCreator(SET_DONE_MAPPING);
+export const setDoneMakingCalendar = makeActionCreator(SET_DONE_MAKING_CALENDAR);
+export const setCalendarEvents = makeActionCreator(SET_CALENDAR_EVENTS);
+export const setNew = makeActionCreator(SET_NEW);

@@ -138,10 +138,9 @@ export default class Dashboard extends Component {
       this.createCalendarEvents(this.state.eventsArray);
       console.log(this.state.calendarEvents);
       this.setState({doneMakingCalendarEvents: true});
-      // this.props.setBandList(this.state.bandsArray); redux action
+      // this.props.setBandList(this.state.calendarEvents); redux action
     }
     if(this.state.eventsArray && !this.state.doneMapping){
-      // this.mapOverBandsArrayAndFetchEvents(this.state.bandsArray, this.setDoneToTrue());
       this.setState({doneMapping: true});
     }
   }
@@ -156,14 +155,6 @@ export default class Dashboard extends Component {
     console.log("Event "+eventId+" has been clicked.");
     // set bandId, eventId in Redux
     window.location.href = '/event-form';
-    // <Redirect to={{
-    //     pathname: '/event-form',
-    //     state: {
-    //       new: false,
-    //       bandId: bandId,
-    //       eventId: eventId
-    //      }
-      // }}/>
   }
 
   render() {
@@ -171,7 +162,7 @@ export default class Dashboard extends Component {
     return (
       <div className="dashboard">
         <div className="d-flex justify-content-between">
-          <div><button className="button create-new-event-button"><Link to="/event-form">Create New Event</Link></button></div>
+          <div><button className="button create-new-event-button"><Link to={{ pathname: "/event-form", state: {newEvent: true}}}>Create New Event</Link></button></div>
           <h1>Dashboard</h1>
           <div><button className="button create-new-event-button"><Link to="/profile-page">Edit Profile</Link></button></div>
           <div>
