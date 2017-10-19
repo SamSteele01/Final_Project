@@ -58,10 +58,10 @@ export default class ProfilePage extends Component {
           <h1>Profile</h1>
           <div><button className="button create-new-event-button"><Link to="/event-form">Create New Event</Link></button></div>
         </div>
-        {this.props.location.state.userProfile ?
-          <UserProfileEnter/> :
+        {/* {this.props.location.state.userProfile ? */}
+          {/* <UserProfileEnter/> */}
           <BandProfileEnter/>
-        }
+        // }
       </div>);
 
   }

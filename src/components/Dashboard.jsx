@@ -63,11 +63,13 @@ export default class Dashboard extends Component {
   }
 
   componentWillMount(){
-    this.setState({token: cookie.load('token')}); //get token from cookie, if it exists
-    this.setState({userId: cookie.load('userId')}); //get token from cookie, if it exists
+    this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
   }
 
   componentDidMount(){
+    if(!this.state.token){
+      window.location.href = "/";
+    }
     this.fetchAllEventsForUser(this.state.userId);
   }
 

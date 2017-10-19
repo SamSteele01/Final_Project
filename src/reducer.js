@@ -44,24 +44,24 @@ const reducer = function(state = initialState, action) {
             return update(state, {
               doneMakingCalendarEvents: true
             })
-        case TOGGLE_TODO:
-            const idx = state.todos.findIndex((todo) =>
-              todo.id === action.payload);
-            return update(state, {
-                todos: {
-                    [idx]: {
-                        done: {
-                            $apply: (done) => !done
-                        }
-                    }
-                }
-            })
-        case FILTER_TODOS:
-            return update(state, {
-                filter: {
-                    $set: action.payload
-                }
-            })
+        // case TOGGLE_TODO:
+        //     const idx = state.todos.findIndex((todo) =>
+        //       todo.id === action.payload);
+        //     return update(state, {
+        //         todos: {
+        //             [idx]: {
+        //                 done: {
+        //                     $apply: (done) => !done
+        //                 }
+        //             }
+        //         }
+        //     })
+        // case FILTER_TODOS:
+        //     return update(state, {
+        //         filter: {
+        //             $set: action.payload
+        //         }
+        //     })
         default:
             return state;
     }

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {bindAll} from 'lodash';
+// import {bindAll} from 'lodash';
 import request from 'superagent';
 import cookie from 'react-cookies';
+import ImageUploader from './ImageUploader.jsx';
 
 export default class UserProfileEnter extends Component {
   constructor(props) {
@@ -19,13 +20,12 @@ export default class UserProfileEnter extends Component {
       // zipcode: '',
       // website: '',
       // info: '',
-      avatar: null,
-      data_uri: null,
-      processing: false
+      // data_uri: null,
+      // processing: false
     };
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
-    bindAll(this, 'handleFile', 'handleSubmit');
+    // bindAll(this, 'handleFile', 'handleSubmit');
   }
 
   componentWillMount(){
@@ -50,63 +50,63 @@ export default class UserProfileEnter extends Component {
       });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    // const _this = this;
-    this.setState({
-      processing: true
-    });
-    let userId = this.state.userId;
-    request
-      .patch(`https://ez-tour.herokuapp.com/users/${userId}`)
-      .send({avatar: this.state.data_uri
-        // filename: this.state.filename,
-        // filetype: this.state.filetype
-      })
-      .set('Authorization', `Token token=${this.state.token}`)
-      .end((err, res) => {
-        if(err){
-          console.log(err);
-        }
-        if(res){
-          console.log(res);
-          this.setState({
-          processing: false,
-          uploaded_uri: this.state.data_uri
-          });
-        }
-      });
-  }
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  //   // const _this = this;
+  //   this.setState({
+  //     processing: true
+  //   });
+  //   let userId = this.state.userId;
+  //   request
+  //     .patch(`https://ez-tour.herokuapp.com/users/${userId}`)
+  //     .send({avatar: this.state.data_uri
+  //       // filename: this.state.filename,
+  //       // filetype: this.state.filetype
+  //     })
+  //     .set('Authorization', `Token token=${this.state.token}`)
+  //     .end((err, res) => {
+  //       if(err){
+  //         console.log(err);
+  //       }
+  //       if(res){
+  //         console.log(res);
+  //         this.setState({
+  //         processing: false,
+  //         uploaded_uri: this.state.data_uri
+  //         });
+  //       }
+  //     });
+  // }
 
 
-  handleFile(e) {
-    const reader = new FileReader();
-    const file = e.target.files[0];
-    reader.onload = (upload) => {
-      this.setState({
-        data_uri: upload.target.result,
-        filename: file.name,
-        filetype: file.type
-      });
-    };
-    reader.readAsDataURL(file);
-  }
+  // handleFile(e) {
+  //   const reader = new FileReader();
+  //   const file = e.target.files[0];
+  //   reader.onload = (upload) => {
+  //     this.setState({
+  //       data_uri: upload.target.result,
+  //       filename: file.name,
+  //       filetype: file.type
+  //     });
+  //   };
+  //   reader.readAsDataURL(file);
+  // }
 
   render() {
-    let processing;
-    let uploaded;
-    if (this.state.uploaded_uri) {
-      uploaded = (
-        <div>
-          <h4>Image uploaded!</h4>
-          <img className='image-preview' src={this.state.uploaded_uri} />
-          <pre className='image-link-box'>{this.state.uploaded_uri}</pre>
-        </div>
-      );
-    }
-    if (this.state.processing) {
-      processing = "Processing image, hang tight";
-    }
+    // let processing;
+    // let uploaded;
+    // if (this.state.uploaded_uri) {
+    //   uploaded = (
+    //     <div>
+    //       <h4>Image uploaded!</h4>
+    //       <img className='image-preview' src={this.state.uploaded_uri} />
+    //       <pre className='image-link-box'>{this.state.uploaded_uri}</pre>
+    //     </div>
+    //   );
+    // }
+    // if (this.state.processing) {
+    //   processing = "Processing image, hang tight";
+    // }
 
     return (
       <div>
@@ -195,9 +195,18 @@ export default class UserProfileEnter extends Component {
                        </div>
                      </div>
                    </div> */}
-                <div>
-                  <button type="button" className="btn btn-primary profile-button">Submit</button>
+                <div className="form-group">
+                  <div className="col-md-4 inputGroupContainer">
+                    <div className="input-group">
+                      <button type="button" className="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
                 </div>
+                <ul class="list-group list-group-flush band-profile-list">
+                  <li class="list-group-item band-profile-list">
+                    <ImageUploader targetKey={"avatar"} />
+                  </li>
+                </ul>
             </fieldset>
           </form>
           {/* <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleImageUpload}>
@@ -220,7 +229,7 @@ export default class UserProfileEnter extends Component {
               </div>
             </div>
           </form> */}
-          <div className='row'>
+          {/* <div className='row'>
             <div className='col-sm-12'>
               <label>Upload an image</label>
               <form onSubmit={this.handleSubmit} encType="multipart/form-data">
@@ -230,7 +239,7 @@ export default class UserProfileEnter extends Component {
               </form>
               {uploaded}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
