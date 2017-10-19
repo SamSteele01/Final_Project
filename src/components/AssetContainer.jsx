@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import AssetToolbar from './AssetToolbar.jsx';
 
 export default class AssetContainer extends React.Component {
 
@@ -8,7 +9,8 @@ export default class AssetContainer extends React.Component {
   render() {
     return (
       <div>
-        <h2>Asset Container!!</h2>
+        {/* <h2>Asset Container!!</h2> */}
+        <AssetToolbar/>
       </div>
     );
   }

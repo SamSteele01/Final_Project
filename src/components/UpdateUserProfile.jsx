@@ -3,7 +3,7 @@ import ImageUploader from 'react-images-upload';
 import request from 'superagent';
 import cookie from 'react-cookies';
 
-export default class UserProfileEnter extends Component {
+export default class UpdateUserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,12 +13,6 @@ export default class UserProfileEnter extends Component {
       telephone: '',
       email: '',
       password: '',
-      // address: '',
-      // city: '',
-      // state: '',
-      // zipcode: '',
-      // website: '',
-      // info: '',
       avatar: ''
     };
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
@@ -26,7 +20,7 @@ export default class UserProfileEnter extends Component {
     this.onDrop = this.onDrop.bind(this);
   }
 
-  componentWillMount(){
+  componentDidMount(){
     this.setState({token: cookie.load('token')}); //get token from cookie, if it exists
     this.setState({userId: cookie.load('userId')}); //get token from cookie, if it exists
   }
@@ -42,7 +36,7 @@ export default class UserProfileEnter extends Component {
     let userId = this.state.userId;
     let bandsId = this.props.bandsId;  // may not need as a param
     request
-      .post(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
+      .patch(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
       .send({
 
       })
@@ -65,7 +59,7 @@ export default class UserProfileEnter extends Component {
 
           <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleAddToProfile}>
             <fieldset>
-              <legend>Create a User Profile</legend>
+              <legend>Update User Profile</legend>
                 <div className="form-group">
                   <label className="col-md-4 control-label">Full Name</label>
                   <div className="col-md-4 inputGroupContainer">

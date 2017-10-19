@@ -30,6 +30,7 @@ export default class BandProfileEnter extends Component {
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
     this.onDrop = this.onDrop.bind(this);
+    this.handleUpdateBandProfile = this.handleUpdateBandProfile.bind(this);
   }
 
   componentWillMount(){

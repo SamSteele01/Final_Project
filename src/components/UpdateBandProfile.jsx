@@ -3,30 +3,29 @@ import ImageUploader from 'react-images-upload';
 import request from 'superagent';
 import cookie from 'react-cookies';
 
-export default class UserProfileEnter extends Component {
+export default class UpdateBandProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       token: null,
       userId: null,
-      full_name: '',
-      telephone: '',
-      email: '',
-      password: '',
-      // address: '',
-      // city: '',
-      // state: '',
-      // zipcode: '',
-      // website: '',
-      // info: '',
-      avatar: ''
+      name: '',
+      vehicle: '',
+      num_members: '',
+      num_crew: '',
+      avatars: [],
+      w9: '',
+      stage_plot: '',
+      input_list: '',
+      promo_asset: ''
     };
-    this.handleAddToProfile = this.handleAddToProfile.bind(this);
+    this.handleUpdateBandProfile = this.handleUpdateBandProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
     this.onDrop = this.onDrop.bind(this);
+
   }
 
-  componentWillMount(){
+  componentDidMount(){
     this.setState({token: cookie.load('token')}); //get token from cookie, if it exists
     this.setState({userId: cookie.load('userId')}); //get token from cookie, if it exists
   }
@@ -38,25 +37,26 @@ export default class UserProfileEnter extends Component {
   }
 
 // may be posting to a user or a bands DB. Need to have a dynamic/conditional route
-  handleAddToProfile(){
-    let userId = this.state.userId;
-    let bandsId = this.props.bandsId;  // may not need as a param
-    request
-      .post(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
-      .send({
+handleUpdateBandProfile(){
+  let userId = this.state.userId;
+  let bandsId = this.props.bandsId;  // may not need as a param
+  request
+    .patch(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
+    .send({
 
-      })
-      .set('Authorization', `Token token=${this.state.token}`)
-      .end((err, res) => {
+    })
+    .set('Authorization', `Token token=${this.state.token}`)
+    .end((err, res) => {
 
-      });
-  }
+    });
+}
 
   onDrop(avatar) {
         this.setState({
             avatars: this.state.avatars
         });
   }
+
 
   render() {
     return (
@@ -65,34 +65,49 @@ export default class UserProfileEnter extends Component {
 
           <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleAddToProfile}>
             <fieldset>
-              <legend>Create a User Profile</legend>
+              <legend>Update Band Profile</legend>
                 <div className="form-group">
-                  <label className="col-md-4 control-label">Full Name</label>
+                  <label className="col-md-4 control-label">Name of Performer(s)</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
-                      <span className="input-group-addon"><i className="glyphicon glyphicon-user" aria-hidden="true" ></i></span>
-                      <input  name="full_name" placeholder="Full Name" className="form-control"  type="text" onChange={this.updateFromField('full_name')}value={this.state.full_name}/>
+                      {/* <span className="input-group-addon"><i className="glyphicon glyphicon-user" aria-hidden="true" ></i></span> */}
+                      <input  name="name" placeholder="Performer(s)" className="form-control"  type="text" onChange={this.updateFromField('name')}value={this.state.name}/>
                     </div>
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="email">E-Mail</label>
+                  <label className="col-md-4 control-label" htmlFor="vehicle">Vehicle(s)</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
-                      <span className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></span>
-                      <input name="email" placeholder="E-Mail Address" className="form-control"  type="text" onChange={this.updateFromField('email')}value={this.state.email}/>
+                      {/* <span className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></span> */}
+                      <input name="vehicle" placeholder="Vehicle(s)" className="form-control"  type="text" onChange={this.updateFromField('vehicle')}value={this.state.vehicle}/>
                     </div>
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="phone">Phone #</label>
+                  <label className="col-md-4 control-label" htmlFor="num_members">Number of Members</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
-                      <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span>
-                      <input name="phone" placeholder="(xxx) xxx-xxxx" className="form-control" type="tel" maxlength="12" onChange={this.updateFromField('phone')} value={this.state.phone}/>
+                      {/* <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span> */}
+                      <input name="num_members" placeholder="No. of Members" className="form-control" type="text" onChange={this.updateFromField('num_members')} value={this.state.num_members}/>
                     </div>
                   </div>
                 </div>
+                <div className="form-group">
+                  <label className="col-md-4 control-label" htmlFor="num_crew">Number of Crew Members</label>
+                  <div className="col-md-4 inputGroupContainer">
+                    <div className="input-group">
+                      {/* <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span> */}
+                      <input name="num_crew" placeholder="No. of Crew Members" className="form-control" type="text" onChange={this.updateFromField('num_crew')} value={this.state.num_crew}/>
+                    </div>
+                  </div>
+                </div>
+                <ul class="list-group list-group-flush band-profile-list">
+                  <li class="list-group-item band-profile-list"><a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" class="card-link">w9</a></li>
+                  <li class="list-group-item band-profile-list"><a href="" class="card-link">Stage Plot</a></li>
+                  <li class="list-group-item band-profile-list"><a href="" class="card-link">Input List</a></li>
+                  <li class="list-group-item band-profile-list"><a href="" class="card-link">Promos</a></li>
+                </ul>
                 {/* <div className="form-group">
                   <label className="col-md-4 control-label" htmlFor="address">Address</label>
                   <div className="col-md-4 inputGroupContainer">
