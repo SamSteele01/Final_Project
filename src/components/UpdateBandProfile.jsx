@@ -13,24 +13,16 @@ export default class BandProfileEnter extends Component {
       vehicle: '',
       num_members: '',
       num_crew: '',
-      // email: '',
-      // phone: '',
-      // address: '',
-      // city: '',
-      // state: '',
-      // zipcode: '',
-      // website: '',
-      // info: '',
       avatars: [],
       w9: '',
       stage_plot: '',
       input_list: '',
       promo_asset: ''
     };
-    this.handleAddToProfile = this.handleAddToProfile.bind(this);
+    this.handleUpdateBandProfile = this.handleUpdateBandProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
     this.onDrop = this.onDrop.bind(this);
-    this.handleUpdateBandProfile = this.handleUpdateBandProfile.bind(this);
+
   }
 
   componentWillMount(){
@@ -45,38 +37,24 @@ export default class BandProfileEnter extends Component {
   }
 
 // may be posting to a user or a bands DB. Need to have a dynamic/conditional route
-  handleAddToProfile(){
-    let userId = this.state.userId;
-    let bandsId = this.props.bandsId;  // may not need as a param
-    request
-      .post(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
-      .send({
+handleUpdateBandProfile(){
+  let userId = this.state.userId;
+  let bandsId = this.props.bandsId;  // may not need as a param
+  request
+    .patch(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
+    .send({
 
-      })
-      .set('Authorization', `Token token=${this.state.token}`)
-      .end((err, res) => {
+    })
+    .set('Authorization', `Token token=${this.state.token}`)
+    .end((err, res) => {
 
-      });
-  }
+    });
+}
 
   onDrop(avatar) {
         this.setState({
             avatars: this.state.avatars
         });
-  }
-
-  handleUpdateBandProfile(){
-    let userId = this.state.userId;
-    let bandsId = this.props.bandsId;  // may not need as a param
-    request
-      .patch(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
-      .send({
-
-      })
-      .set('Authorization', `Token token=${this.state.token}`)
-      .end((err, res) => {
-
-      });
   }
 
 

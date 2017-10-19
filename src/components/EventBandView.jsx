@@ -9,8 +9,8 @@ export default class EventBandView extends Component {
   render() {
     return (
       <div>
-        <FormInput/>
         <AssetContainer/>
+        <FormInput/>
       </div>
     );
   }
