@@ -188,14 +188,14 @@
   }
 }
 
-/*@media (max-width: 768px) {
+@media (max-width: 1100px) and (min-width: 768px) {
   .image-upload {
     display: flex;
     justify-content: flex-end;
     width: 345px;
     position: relative;
     left: 380px;
-    bottom: 665px;
+    bottom: 500px;
   }
 
   .info {
@@ -220,7 +220,7 @@
     bottom: 4px;
     background-color: black;
   }
-}*/
+}
 
 @media (max-width: 767px) {
   .image-upload {
@@ -229,7 +229,7 @@
     width: 345px;
     position: relative;
     left: 25px;
-    bottom: 15px;
+    bottom: 0px;
   }
 
   .info {
@@ -249,7 +249,7 @@
   .profile-button {
     display: flex;
     position: relative;
-    left: 260px;
+    left: 160px; /* not actually controlling the buttons position...???? */
     bottom: 4px;
     background-color: black;
   }
