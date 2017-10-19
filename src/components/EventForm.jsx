@@ -14,15 +14,24 @@ export default class EventForm extends Component {
     this.state = {
       newEvent: false,
       displayBandView: true,
-      dropdownOpen: false
+      dropdownOpen: false,
+      token: null,
+      userId: null
     }
   }
 
 // need to catch token from url if coming from an email. This will cause VenueView to render.
 
   componentWillMount(){
-    if(this.props.location.state.newEvent){
-      this.setState({newEvent: true});
+    // if(this.props.location.state.newEvent){
+    //   this.setState({newEvent: true});
+    // }
+    this.setState({token: cookie.load('token'), userId: cookie.load('userId')});
+  }
+
+  componentDidMount(){
+    if(!this.state.token){
+      window.location.href = "/";
     }
   }
 
