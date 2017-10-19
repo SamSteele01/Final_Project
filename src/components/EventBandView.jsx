@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import FormInput from './FormInput.jsx';
-import AssetToolbar from './AssetToolbar.jsx';
+import AssetContainer from './AssetContainer.jsx';
 
 export default class EventBandView extends Component {
 
@@ -10,7 +10,7 @@ export default class EventBandView extends Component {
     return (
       <div>
         <FormInput/>
-        <AssetToolbar/>
+        <AssetContainer/>
       </div>
     );
   }

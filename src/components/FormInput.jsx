@@ -25,8 +25,10 @@ export default class FormInput extends Component {
       laundry: "",
       wifi: "",
       misc: "",
-      w9_url: "",
-	    set_layout_url: ""
+      w9: "",
+	    stage_plot: "",
+      input_list: "",
+      hospitality_rider: ""
     }
   }
 

@@ -257,13 +257,20 @@
 
 /*styling for AssetToolbar.jsx*/
 .asset-toolbar {
-  width: 20rem;
+  width: 50rem;
   border: 2px solid lightgray;
 }
 
 .band-profile {
-  width: 40rem;
+  width: 50rem;
   border: 2px solid lightgray;
+  display: flex;
+  right: 30px;
+}
+
+.checkbox-inline {
+  margin: 10px;
+  margin-top: 0;
 }
 
 /*band-profile list styling*/
