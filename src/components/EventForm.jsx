@@ -16,23 +16,29 @@ export default class EventForm extends Component {
       newEvent: false,
       displayBandView: true,
       dropdownOpen: false,
-      bandsId: null,
       token: null,
-      userId: null
+      userId: null,
+      bandsId: null,
+      eventTokenFromHash: null
     }
   }
 
-// need to catch token from url if coming from an email. This will cause VenueView to render.
+// need a function to catch token from url if coming from an email. This will cause VenueView to render.
 
-  componentWillMount(){
-    if(this.props.location.state.newEvent){
-      this.setState({newEvent: true});
-    }
+  fxnToGrabTokenFromUrl(){ //finish writing!
+    // doTheThing()
+    this.setState({eventTokenFromHash: theHash, displayBandView: false});
+  }
+
+  // apply props to conditionally render either EventBandView or EventVenueView
+  componentWillMount(){ //finish writing!
+
+    // fxnToGrabTokenFromUrl();
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')});
   }
 
   componentDidMount(){
-    if(!this.state.token){
+    if(!this.state.token || this.state.eventTokenFromHash){
       window.location.href = "/";
     }
   }
@@ -50,7 +56,7 @@ export default class EventForm extends Component {
       {/* <ProfileMini/> */}
         <div className="d-flex justify-content-between">
           <div><button className="button create-new-event-button"><Link to="/dashboard">Dashboard</Link></button></div>
-          {this.state.newEvent ?
+          {this.props.new ?
             <h1>New Event</h1> :
             <h1>Scheduled Event</h1>
           }
@@ -70,8 +76,8 @@ export default class EventForm extends Component {
           </div>
         </div>
         {this.state.displayBandView ?
-          <EventBandView/> :
-          <EventVenueView/>
+          <EventBandView bandId={this.props.bandId} new={this.props.new} eventToken={this.props.eventToken}/> :
+          <EventVenueView eventToken={this.state.eventTokenFromHash}/>
         }
       </div>
     );
