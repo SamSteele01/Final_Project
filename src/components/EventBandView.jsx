@@ -6,7 +6,6 @@ import request from 'superagent';
 
 
 export default class EventBandView extends Component {
-
 // displays the asset tool bar on the side of the page.
   constructor(props) {
     super(props);

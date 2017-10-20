@@ -6,13 +6,15 @@ import moment from 'moment';
 import request from 'superagent';
 import cookie from 'react-cookies';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import {connect} from 'react-redux';
+import {setBand, setEvent} from "../actions";
 
 BigCalendar.momentLocalizer(moment);
 let formats = {
   dateFormat: 'dd'
 }
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
@@ -67,10 +69,13 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount(){
-    if(!this.state.token){
+    if(this.state.token===null){
       window.location.href = "/";
-    }
+    }else{
     this.fetchAllEventsForUser(this.state.userId);
+    this.fetchFullnameForUser(this.state.userId);
+    this.fetchAllBandsForUser(this.state.userId);
+    }
   }
 
   fetchAllEventsForUser(userId){
@@ -79,7 +84,27 @@ export default class Dashboard extends Component {
       .set('Authorization', `Token token=${this.state.token}`)
       .end((err, res) => {
         let data = res.body.events;
-        // this.setState({eventsArray: data});
+        this.setState({eventsArray: data});
+      });
+  }
+
+  fetchFullnameForUser(userId){
+    request
+      .get(`https://ez-tour.herokuapp.com/users/${userId}`)
+      .set('Authorization', `Token token=${this.state.token}`)
+      .end((err, res) => {
+        let data = res.body.full_name;
+        this.setState({fullName: data});
+      });
+  }
+
+  fetchAllBandsForUser(userId){
+    request
+      .get(`https://ez-tour.herokuapp.com/users/${userId}/bands`)
+      .set('Authorization', `Token token=${this.state.token}`)
+      .end((err, res) => {
+        let data = res.body.band;
+        this.setState({bandsArray: data});
       });
   }
 
@@ -153,48 +178,92 @@ export default class Dashboard extends Component {
     });
   }
 
-  navigateToEvent(bandId, eventId){
-    console.log("Event "+eventId+" has been clicked.");
-    // set bandId, eventId in Redux
+  navigateToEvent(event){
+    console.log("Event "+event.eventId+" has been clicked.");
+    this.props.setBand(event.bandId);
+    this.props.setEvent(event.eventId);
     window.location.href = '/event-form';
+  }
+
+  displayDropdowns(){
+    if(this.state.bandsArray){
+      let bandNameDropdownItem = this.state.bandsArray.map((band, index) => {
+        return(
+          <DropdownItem key={index}><Link to="/profile-page" onClick={event => this.props.setBand(band.id)}>{band.name}</Link></DropdownItem>
+          // need to pass bandId and userProfile to redux
+        )
+      })
+      return(
+        <div>
+          {bandNameDropdownItem}
+        </div>
+      )
+    }else{
+      return null;
+    }
   }
 
   render() {
     // map to create DropdownItems = user and bands - need Ids and Links
+
     return (
       <div className="dashboard">
         <div className="d-flex justify-content-between">
           <div><button className="button create-new-event-button"><Link to={{ pathname: "/event-form", state: {newEvent: true}}}>Create New Event</Link></button></div>
           <h1>Dashboard</h1>
-          <div><button className="button create-new-event-button"><Link to="/profile-page">Edit Profile</Link></button></div>
           <div>
-            <div><button className="button create-new-event-button"><Link to="/event-form">Create New Band</Link></button></div>
+            <div><button className="button create-new-event-button"><Link to="/profile-page">Create New Band</Link></button></div>
             <Dropdown className="button create-new-event-button" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                <DropdownToggle caret className="button create-new-event-button">
                  Edit Profile
                </DropdownToggle>
-               <DropdownMenu>
+               <DropdownMenu right>
                  {/* <DropdownItem header>Header</DropdownItem> */}
                  {/* <DropdownItem disabled>Action</DropdownItem> */}
-                 <DropdownItem><Link to={{ pathname: "/profile-page", state: { userProfile: true} }}>User Profile</Link></DropdownItem>
+                 <DropdownItem><Link to={{ pathname: "/profile-page", state: { userProfile: true} }}>{this.state.fullName}</Link></DropdownItem>
                  <DropdownItem divider />
-                 <DropdownItem><Link to={{ pathname: "/profile-page", state: { userProfile: false} }}>Band Profile</Link></DropdownItem>
+                 {this.displayDropdowns()}
                </DropdownMenu>
             </Dropdown>
           </div>
         </div>
-        {this.state.doneMakingCalendarEvents &&
-          <BigCalendar
-            selectable
-            culture='en'
-            onSelectEvent={event => this.navigateToEvent(event.bandId, event.eventId)}
-            events={this.state.calendarEvents}
-            views={['month', 'week', 'day', 'agenda']}/>
-        }
-      </div>
+      {this.state.doneMakingCalendarEvents &&
+        <BigCalendar
+          selectable
+          culture='en'
+          onSelectEvent={event => this.navigateToEvent(event)}
+          events={this.state.calendarEvents}
+          views={['month', 'week', 'day', 'agenda']}/>
+      }
+    </div>
     );
   }
 }
+
+const mapStateToProps = function(state) {
+    return {setBand: state.setBand}
+}
+
+const mapDispatchToProps = function(dispatch) {
+    return {
+        setBand: function(filter) {
+            dispatch(setBand(filter));
+        }
+    }
+}
+
+// const mapStateToProps = function(state) {
+//     return {setBand: state.setBand}
+// }
+// // setEvent: state.setEvent
+// const mapDispatchToProps = (dispatch) => (
+//     {
+//         setBand: (filter) =>  dispatch(setBand(filter)),
+//         setEvent: (filter) =>  dispatch(setEvent(filter))
+//     }
+// )
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
 
 
 Dashboard.propTypes = {

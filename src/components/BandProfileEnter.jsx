@@ -59,12 +59,6 @@ export default class BandProfileEnter extends Component {
       });
   }
 
-  // onDrop(picture) {
-  //       this.setState({
-  //           pictures: this.state.pictures.concat(picture),
-  //       });
-  // }
-
   render() {
     return (
       <div>
@@ -72,7 +66,7 @@ export default class BandProfileEnter extends Component {
 
           <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleAddToProfile}>
             <fieldset>
-              <legend>Create a User Profile</legend>
+              <legend>Create a Band Profile</legend>
                 <div className="form-group">
                   <label className="col-md-4 control-label">Name of Performer(s)</label>
                   <div className="col-md-4 inputGroupContainer">
@@ -112,9 +106,11 @@ export default class BandProfileEnter extends Component {
                 <div>
                   <button type="button" className="btn btn-primary ">Submit</button>
                 </div>
-                <ul Name="list-group list-group-flush band-profile-list">
-                  <li className="list-group-item band-profile-list">
-                    <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" className="card-link">Link to a new w9</a>
+                <ul class="list-group list-group-flush band-profile-list">
+                  <li class="list-group-item band-profile-list">
+                    <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" class="card-link">Link to a new w9</a>
+                  </li>
+                  <li class="list-group-item band-profile-list">
                     <ImageUploader targetKey={"w9"} label={"Upload your w9"}/>
                   </li>
                   <li className="list-group-item band-profile-list">

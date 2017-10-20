@@ -22,7 +22,7 @@ const reducer = function(state = initialState, action) {
             })
         case SET_BAND:
             return update(state, {
-              bandsId: action.payload
+              bandsId: { $set: action.payload }
             })
         case UNSET_BAND:
             return update(state, {
@@ -30,7 +30,7 @@ const reducer = function(state = initialState, action) {
             })
         case SET_EVENT:
             return update(state, {
-              eventId: action.payload
+              eventId: { $set: action.payload }
             })
         case UNSET_EVENT:
             return update(state, {
