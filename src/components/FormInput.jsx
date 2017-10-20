@@ -180,7 +180,7 @@ export default class FormInput extends Component {
           <button onClick={event => this.submit(event)} type="submit" className="btn btn-success">Save & Submit</button>
         {/* </div>
         <div className="form-group"> */}
-          <button onClick={event => this.submit(event)} type="submit" className="btn btn-success">Email Form</button>
+          <button onClick={event => this.submit(event)} type="submit" className="btn btn-success">Send Form</button>
         </div>
         </form>
       </div>);

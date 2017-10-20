@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import FormInput from './FormInput.jsx';
-import AssetContainer from './AssetContainer.jsx';
+import AssetToolbar from './AssetToolbar.jsx';
+import cookie from 'react-cookies';
+import request from 'superagent';
+
 
 export default class EventBandView extends Component {
 
