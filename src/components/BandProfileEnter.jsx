@@ -106,90 +106,81 @@ export default class BandProfileEnter extends Component {
                 <div>
                   <button type="button" className="btn btn-primary ">Submit</button>
                 </div>
-                <ul class="list-group list-group-flush band-profile-list">
-                  <li class="list-group-item band-profile-list">
-                    <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" class="card-link">Link to a new w9</a>
-                  </li>
-                  <li class="list-group-item band-profile-list">
-                    <ImageUploader targetKey={"w9"} label={"Upload your w9"}/>
-                  </li>
-                  <li className="list-group-item band-profile-list">
-                    {/* <a href="" className="card-link">Stage Plot</a> */}
-                    <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot"}/>
-                  </li>
-                  <li className="list-group-item band-profile-list">
-                    {/* <a href="" className="card-link">Input List</a> */}
-                    <ImageUploader targetKey={"input_list"} label={"Upload your Input List"}/>
-                  </li>
-                  <li className="list-group-item band-profile-list">
-                    {/* <a href="" className="card-link">Promos</a> */}
-                    <ImageUploader targetKey={"promo_asset"} label={"Upload your Promo Asset/Image"}/>
-                  </li>
-                </ul>
-                {/* <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="address">Address</label>
-                  <div className="col-md-4 inputGroupContainer">
-                    <div className="input-group">
-                      <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
-                      <input name="address" placeholder="Address" className="form-control" type="text" onChange={this.updateFromField('address')}value={this.state.address}/>
-                    </div>
-                  </div>
+              </fieldset>
+            </form>
+            <ul class="list-group list-group-flush band-profile-list">
+              <li class="list-group-item band-profile-list">
+                <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" class="card-link">Link to a new w9</a>
+              </li>
+              <li class="list-group-item band-profile-list">
+                <ImageUploader targetKey={"w9"} label={"Upload your w9"}/>
+              </li>
+              <li className="list-group-item band-profile-list">
+                {/* <a href="" className="card-link">Stage Plot</a> */}
+                <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot"}/>
+              </li>
+              <li className="list-group-item band-profile-list">
+                {/* <a href="" className="card-link">Input List</a> */}
+                <ImageUploader targetKey={"input_list"} label={"Upload your Input List"}/>
+              </li>
+              <li className="list-group-item band-profile-list">
+                {/* <a href="" className="card-link">Promos</a> */}
+                <ImageUploader targetKey={"promo_asset"} label={"Upload your Promo Asset/Image"}/>
+              </li>
+            </ul>
+            {/* <div className="form-group">
+              <label className="col-md-4 control-label" htmlFor="address">Address</label>
+              <div className="col-md-4 inputGroupContainer">
+                <div className="input-group">
+                  <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
+                  <input name="address" placeholder="Address" className="form-control" type="text" onChange={this.updateFromField('address')}value={this.state.address}/>
                 </div>
-                <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="city">City</label>
-                  <div className="col-md-4 inputGroupContainer">
-                    <div className="input-group">
-                      <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
-                      <input name="city" placeholder="City" className="form-control"  type="text" onChange={this.updateFromField('city')}value={this.state.city}/>
-                    </div>
-                  </div>
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="col-md-4 control-label" htmlFor="city">City</label>
+              <div className="col-md-4 inputGroupContainer">
+                <div className="input-group">
+                  <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
+                  <input name="city" placeholder="City" className="form-control"  type="text" onChange={this.updateFromField('city')}value={this.state.city}/>
                 </div>
-                <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="state">State</label>
-                  <div className="col-md-4 inputGroupContainer">
-                    <div className="input-group">
-                      <span className="input-group-addon"><i className="glyphicon glyphicon-list"></i></span>
-                      <input name="State" placeholder="State"className="form-control" type="text" onChange={this.updateFromField('state')}value={this.state.state}/>
-                    </div>
-                  </div>
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="col-md-4 control-label" htmlFor="state">State</label>
+              <div className="col-md-4 inputGroupContainer">
+                <div className="input-group">
+                  <span className="input-group-addon"><i className="glyphicon glyphicon-list"></i></span>
+                  <input name="State" placeholder="State"className="form-control" type="text" onChange={this.updateFromField('state')}value={this.state.state}/>
                 </div>
-                <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="zipcode">Zip Code</label>
-                  <div className="col-md-4 inputGroupContainer">
-                    <div className="input-group">
-                      <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
-                      <input name="zip" placeholder="Zip Code" className="form-control"  type="text" onChange={this.updateFromField('zipcode')}value={this.state.zipcode}/>
-                    </div>
-                  </div>
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="col-md-4 control-label" htmlFor="zipcode">Zip Code</label>
+              <div className="col-md-4 inputGroupContainer">
+                <div className="input-group">
+                  <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
+                  <input name="zip" placeholder="Zip Code" className="form-control"  type="text" onChange={this.updateFromField('zipcode')}value={this.state.zipcode}/>
                 </div>
-                <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="website">Website or domain name</label>
-                  <div className="col-md-4 inputGroupContainer">
-                    <div className="input-group">
-                      <span className="input-group-addon"><i className="glyphicon glyphicon-globe"></i></span>
-                      <input name="website" placeholder="Website or domain name" className="form-control" type="text" onChange={this.updateFromField('website')}value={this.state.website}/>
-                    </div>
-                  </div>
-                </div> */}
-                  {/* <div className="image-upload">
-                    <ImageUploader
-                      withIcon={true}
-                      buttonText='Choose image'
-                      onChange={this.onDrop}
-                      imgExtension={['.jpg', '.gif', '.png',  '.gif']}
-                      maxFileSize={5242880}
-                    />
-                  </div> */}
-                  {/* <div className="form-group    organization-info">
-                    <span><label className="col-md-4  control-label info" htmlFor="info">Tell Us  About Your Organization</label></span>
-                    <div className="col-md-4  inputGroupContainer">
-                      <div className="input-group">
-        	               <textarea className="form-control"  name="comment" placeholder="Organization  Description" rows="10" cols="50"  onChange={this.handleUpdateProfile}   value={this.state.info}></textarea>
-                       </div>
-                     </div>
-                   </div> */}
-            </fieldset>
-          </form>
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="col-md-4 control-label" htmlFor="website">Website or domain name</label>
+              <div className="col-md-4 inputGroupContainer">
+                <div className="input-group">
+                  <span className="input-group-addon"><i className="glyphicon glyphicon-globe"></i></span>
+                  <input name="website" placeholder="Website or domain name" className="form-control" type="text" onChange={this.updateFromField('website')}value={this.state.website}/>
+                </div>
+              </div>
+            </div> */}
+              {/* <div className="form-group    organization-info">
+                <span><label className="col-md-4  control-label info" htmlFor="info">Tell Us  About Your Organization</label></span>
+                <div className="col-md-4  inputGroupContainer">
+                  <div className="input-group">
+    	               <textarea className="form-control"  name="comment" placeholder="Organization  Description" rows="10" cols="50"  onChange={this.handleUpdateProfile}   value={this.state.info}></textarea>
+                   </div>
+                 </div>
+               </div> */}
         </div>
       </div>
 

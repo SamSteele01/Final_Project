@@ -13,7 +13,15 @@ class App extends Component {
     super(props);
 
     this.state = {
-      token: null
+      token: null,
+      userId: null,
+      bandsArray: null,
+      bandsId: null,
+      event_token: null,
+      doneMapping: false,
+      doneMakingCalendarEvents: false,
+      calendarEvents: [],
+      displayNew: false
     }
   }
 
@@ -24,16 +32,32 @@ class App extends Component {
 
 // may need to intercept token from Url here. Or use hidden headers in the email link
 
+  navCreateNewEvent(){
+    this.setState({displayNew: true});
+  }
+
+  navCreateNewEvent(){
+    this.setState({});
+  }
+
+  navCreateNewEvent(){
+    this.setState({});
+  }
+
+  navCreateNewEvent(){
+    this.setState({});
+  }
+
   render() {
     return (
       <BrowserRouter>
         <BaseLayout>
           <Switch>
-            <Route path='/dashboard' render={(props) => (<Dashboard display={this.state.dashboard}/>)} />
+            <Route path='/dashboard' render={(props) => (<Dashboard navCreateNewEvent={this.navCreateNewEvent} />)} />
             <Route path='/event-form' component={EventForm} />
             {/* need to pass userId (from cookie) and bandsId (from Dashboard) as well as specifing display= user/band */}
             <Route path='/profile-page' component={ProfilePage} />
-            <Route path='/login-page' render={(props) => (<LoginPage display={this.state.loginPage}/>)} />
+            <Route path='/login-page' component={LoginPage} />
             <Route path='/' component={WelcomePage} />
           </Switch>
         </BaseLayout>

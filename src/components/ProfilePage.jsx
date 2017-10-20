@@ -13,7 +13,7 @@ export default class ProfilePage extends Component {
     this.state = {
       token: null,
       userId: null,
-      displayBandView: false,
+      displayBandView: true,
       enterForm: false,
       profileInfo: null
     }

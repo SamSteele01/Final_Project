@@ -14,7 +14,7 @@ let formats = {
   dateFormat: 'dd'
 }
 
-class Dashboard extends Component {
+export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
@@ -29,43 +29,26 @@ class Dashboard extends Component {
       doneMapping: false,
       doneMakingCalendarEvents: false,
       eventsArray: [], //array of objects, from fetch. Has band and user Ids
-      calendarEvents: [
-      // {
-      //   'title': "Collins night club",
-      //   'allDay': true,
-      //   'start': new Date(2017, 9, 13),
-      //   'end': new Date(2017, 9, 13)
-      // },
-      // {
-      //   'title': "Lyman's rockin jazz daddio swingers club",
-      //   'start': new Date(2017, 9, 14, 21, 30 ),
-      //   'end': new Date(2017, 9, 14, 1, 0 ),
-      //   desc: 'Pre-meeting meeting, to prepare for the meeting'
-      // },
-      //
-      // {
-      //   'title': 'Spruill concert hall',
-      //   'start': new Date(2017, 9, 20, 19, 0, ),
-      //   'end': new Date(2017, 9, 20, 21, 30, 0)
-      // },
-      //
-      // {
-      //   'title': 'All Things Open',
-      //   'start': new Date(2017, 9, 23, 0, 0, 0),
-      //   'end': new Date(2017, 9, 25, 0, 0, 0)
-      // },
-      // {
-      //   'title': 'Demo Day',
-      //   'start': new Date(2017, 9, 25),
-      //   'end': new Date(2017, 9, 25),
-      //   desc: 'Big conference for important people'
-      // }
-      ]
+      calendarEvents: []
     }
   }
 
+  // props = {
+  //   userId: null,
+  //   bandsId: null,
+  //   event_token: null,
+  //   doneMakingCalendarEvents: false,
+  //   calendarEvents: [],
+  //   displayNew: false
+  // }
+
   componentWillMount(){
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
+    if(this.props.doneMakingCalendarEvents){
+      this.setState({doneMapping: true, doneMakingCalendarEvents: true});
+    }else{
+      this.setState({doneMapping: false, doneMakingCalendarEvents: false});
+    }
   }
 
   componentDidMount(){
@@ -79,13 +62,15 @@ class Dashboard extends Component {
   }
 
   fetchAllEventsForUser(userId){
-    request
-      .get(`https://ez-tour.herokuapp.com/users/${userId}/my_events`)
-      .set('Authorization', `Token token=${this.state.token}`)
-      .end((err, res) => {
-        let data = res.body.events;
-        this.setState({eventsArray: data});
-      });
+    if(!this.state.doneMapping){
+      request
+        .get(`https://ez-tour.herokuapp.com/users/${userId}/my_events`)
+        .set('Authorization', `Token token=${this.state.token}`)
+        .end((err, res) => {
+          let data = res.body.events;
+          this.setState({eventsArray: data});
+        });
+    }
   }
 
   fetchFullnameForUser(userId){
@@ -172,7 +157,7 @@ class Dashboard extends Component {
     }
   }
 
-  toggle() {
+  toggleDropdown() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
@@ -209,18 +194,18 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <div className="d-flex justify-content-between">
-          <div><button className="button create-new-event-button"><Link to={{ pathname: "/event-form", state: {newEvent: true}}}>Create New Event</Link></button></div>
+          <div><button className="button create-new-event-button"><Link to="/event-form" onClick={event => this.props.navCreateNewEvent(event)} >Create New Event</Link></button></div>
           <h1>Dashboard</h1>
           <div>
-            <div><button className="button create-new-event-button"><Link to="/profile-page">Create New Band</Link></button></div>
-            <Dropdown className="button create-new-event-button" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+            <div><button className="button create-new-event-button"><Link to="/profile-page" onClick={event => this.props.navCreateNewBand(event)} >Create New Band</Link></button></div>
+            <Dropdown className="button create-new-event-button" isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
                <DropdownToggle caret className="button create-new-event-button">
                  Edit Profile
                </DropdownToggle>
                <DropdownMenu right>
                  {/* <DropdownItem header>Header</DropdownItem> */}
                  {/* <DropdownItem disabled>Action</DropdownItem> */}
-                 <DropdownItem><Link to={{ pathname: "/profile-page", state: { userProfile: true} }}>{this.state.fullName}</Link></DropdownItem>
+                 <DropdownItem><Link to="/profile-page" onClick={event => this.props.setNew(band.id)} >{this.state.fullName}</Link></DropdownItem>
                  <DropdownItem divider />
                  {this.displayDropdowns()}
                </DropdownMenu>
@@ -240,17 +225,17 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = function(state) {
-    return {setBand: state.setBand}
-}
-
-const mapDispatchToProps = function(dispatch) {
-    return {
-        setBand: function(filter) {
-            dispatch(setBand(filter));
-        }
-    }
-}
+// const mapStateToProps = function(state) {
+//     return {setBand: state.setBand}
+// }
+//
+// const mapDispatchToProps = function(dispatch) {
+//     return {
+//         setBand: function(filter) {
+//             dispatch(setBand(filter));
+//         }
+//     }
+// }
 
 // const mapStateToProps = function(state) {
 //     return {setBand: state.setBand}
@@ -262,8 +247,8 @@ const mapDispatchToProps = function(dispatch) {
 //         setEvent: (filter) =>  dispatch(setEvent(filter))
 //     }
 // )
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
 
 
 Dashboard.propTypes = {

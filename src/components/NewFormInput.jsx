@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import request from 'superagent';
+import cookie from 'react-cookies';
+import SendAsEmailWindow from './SendAsEmailWindow.jsx';
 
 export default class NewFormInput extends Component {
   constructor(props) {
@@ -79,9 +81,13 @@ export default class NewFormInput extends Component {
     })
  }
 
- displayEmailWindow(){
+ displayEmailWindow(event){
   //  render a <SendAsEmailWindow/> with a z-index
-  toggle setState({displayEmailWindow: !this.state.displayEmailWindow});
+    if(event){
+        this.setState({displayEmailWindow: event});
+    }else{
+    this.setState({displayEmailWindow: !this.state.displayEmailWindow});
+    }
  }
 
   render() {
@@ -185,11 +191,11 @@ export default class NewFormInput extends Component {
           <button onClick={event => this.handleUpdateForm(event)} type="submit" className="btn btn-success">Save & Submit</button>
         {/* </div>
         <div className="form-group"> */}
-          <button onClick={event => this.displayEmailWindow(event)} type="submit" className="btn btn-success">Email Form</button>
+          <button onClick={this.displayEmailWindow()} type="submit" className="btn btn-success">Email Form</button>
         </div>
         </form>
         {this.state.displayEmailWindow ?
-          <SendAsEmailWindow/> :
+          <SendAsEmailWindow closeWindow={event => this.displayEmailWindow(event)}/> :
           null
         }
       </div>);
