@@ -8,7 +8,7 @@ export default class ProfileMini extends Component {
     return (
       <div className="mini-profile">
         <div className="card band-profile" >
-          <img className="card-img-top" src="{avatar:{this.state.avatars}" alt="Band and/or Manager Image"/>
+          <img className="card-img-top" src="`https://ez-tour.herokuapp.com/users/${userId}`" alt="Band and/or Manager Image"/>
             <div className="card-block">
               <h4 className="card-title">Profile</h4>
               <p className="card-text">Imported information from profile</p>

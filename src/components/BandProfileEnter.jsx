@@ -21,7 +21,7 @@ export default class BandProfileEnter extends Component {
       // zipcode: '',
       // website: '',
       // info: '',
-      pictures: [],
+      avatar: [],
       w9: '',
       stage_plot: '',
       input_list: '',
