@@ -59,12 +59,6 @@ export default class BandProfileEnter extends Component {
       });
   }
 
-  // onDrop(picture) {
-  //       this.setState({
-  //           pictures: this.state.pictures.concat(picture),
-  //       });
-  // }
-
   render() {
     return (
       <div>
@@ -115,6 +109,8 @@ export default class BandProfileEnter extends Component {
                 <ul class="list-group list-group-flush band-profile-list">
                   <li class="list-group-item band-profile-list">
                     <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" class="card-link">Link to a new w9</a>
+                  </li>
+                  <li class="list-group-item band-profile-list">
                     <ImageUploader targetKey={"w9"} label={"Upload your w9"}/>
                   </li>
                   <li class="list-group-item band-profile-list">

@@ -4,6 +4,8 @@ import request from 'superagent';
 import cookie from 'react-cookies';
 import ImageUploader from './ImageUploader.jsx';
 
+
+
 export default class UserProfileEnter extends Component {
   constructor(props) {
     super(props);
@@ -50,68 +52,10 @@ export default class UserProfileEnter extends Component {
       });
   }
 
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   // const _this = this;
-  //   this.setState({
-  //     processing: true
-  //   });
-  //   let userId = this.state.userId;
-  //   request
-  //     .patch(`https://ez-tour.herokuapp.com/users/${userId}`)
-  //     .send({avatar: this.state.data_uri
-  //       // filename: this.state.filename,
-  //       // filetype: this.state.filetype
-  //     })
-  //     .set('Authorization', `Token token=${this.state.token}`)
-  //     .end((err, res) => {
-  //       if(err){
-  //         console.log(err);
-  //       }
-  //       if(res){
-  //         console.log(res);
-  //         this.setState({
-  //         processing: false,
-  //         uploaded_uri: this.state.data_uri
-  //         });
-  //       }
-  //     });
-  // }
-
-
-  // handleFile(e) {
-  //   const reader = new FileReader();
-  //   const file = e.target.files[0];
-  //   reader.onload = (upload) => {
-  //     this.setState({
-  //       data_uri: upload.target.result,
-  //       filename: file.name,
-  //       filetype: file.type
-  //     });
-  //   };
-  //   reader.readAsDataURL(file);
-  // }
-
   render() {
-    // let processing;
-    // let uploaded;
-    // if (this.state.uploaded_uri) {
-    //   uploaded = (
-    //     <div>
-    //       <h4>Image uploaded!</h4>
-    //       <img className='image-preview' src={this.state.uploaded_uri} />
-    //       <pre className='image-link-box'>{this.state.uploaded_uri}</pre>
-    //     </div>
-    //   );
-    // }
-    // if (this.state.processing) {
-    //   processing = "Processing image, hang tight";
-    // }
-
     return (
       <div>
         <div className="profile_enter_container">
-
           <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleAddToProfile}>
             <fieldset>
               <legend>Create a User Profile</legend>
@@ -129,7 +73,7 @@ export default class UserProfileEnter extends Component {
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       <span className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></span>
-                      <input name="email" placeholder="E-Mail Address" className="form-control"  type="text" onChange={this.updateFromField('email')}value={this.state.email}/>
+                      <input name="email" placeholder="E-Mail Address" className="form-control"  type="email" onChange={this.updateFromField('email')} value={this.state.email}/>
                     </div>
                   </div>
                 </div>
@@ -138,7 +82,7 @@ export default class UserProfileEnter extends Component {
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span>
-                      <input name="phone" placeholder="(xxx) xxx-xxxx" className="form-control" type="tel" maxlength="12" onChange={this.updateFromField('phone')} value={this.state.phone}/>
+                      <input name="phone" placeholder="(xxx) xxx-xxxx" className="form-control" type="tel" maxLength="14" onChange={this.updateFromField('phone')} value={this.state.phone}/>
                     </div>
                   </div>
                 </div>
@@ -178,15 +122,6 @@ export default class UserProfileEnter extends Component {
                     </div>
                   </div>
                 </div> */}
-                  {/* <div className="image-upload">
-                    <ImageUploader
-                      withIcon={true}
-                      buttonText='Choose image'
-                      onChange={this.onDrop}
-                      imgExtension={['.jpg', '.gif', '.png',  '.gif']}
-                      maxFileSize={5242880}
-                    />
-                  </div> */}
                   {/* <div className="form-group    organization-info">
                     <span><label className="col-md-4  control-label info" htmlFor="info">Tell Us  About Your Organization</label></span>
                     <div className="col-md-4  inputGroupContainer">
@@ -209,37 +144,6 @@ export default class UserProfileEnter extends Component {
             </fieldset>
           </form>
           <ImageUploader targetKey={"avatar"} />
-          {/* <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleImageUpload}>
-            <div className="form-group">
-              <label className="col-md-4 control-label" htmlFor="website">Website or domain name</label>
-              <div className="col-md-4 inputGroupContainer">
-                <div className="input-group">
-                  <span className="input-group-addon"><i className="glyphicon glyphicon-globe"></i></span>
-                  <input name="avatar"
-                    id="upload" ref="upload" accept="image/*"
-                    // placeholder="Upload avatar"
-                    className="form-control"
-                    encType="multipart/form-data"
-                    type="file"
-                    onClick={(event)=> {event.target.value = null}}
-                    onChange={(event)=> {this.readFile(event)}}
-                    // value={this.state.avatar}
-                  />
-                </div>
-              </div>
-            </div>
-          </form> */}
-          {/* <div className='row'>
-            <div className='col-sm-12'>
-              <label>Upload an image</label>
-              <form onSubmit={this.handleSubmit} encType="multipart/form-data">
-                <input type="file" onChange={this.handleFile} />
-                <input disabled={this.state.processing} className='btn btn-primary' type="submit" value="Upload" />
-                {processing}
-              </form>
-              {uploaded}
-            </div>
-          </div> */}
         </div>
       </div>
 

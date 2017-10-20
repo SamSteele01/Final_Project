@@ -178,10 +178,10 @@ class Dashboard extends Component {
     });
   }
 
-  navigateToEvent(bandId, eventId){
-    console.log("Event "+eventId+" has been clicked.");
-    this.props.setBand(bandId);
-    this.props.setEvent(eventId);
+  navigateToEvent(event){
+    console.log("Event "+event.eventId+" has been clicked.");
+    this.props.setBand(event.bandId);
+    this.props.setEvent(event.eventId);
     window.location.href = '/event-form';
   }
 
@@ -212,7 +212,7 @@ class Dashboard extends Component {
           <div><button className="button create-new-event-button"><Link to={{ pathname: "/event-form", state: {newEvent: true}}}>Create New Event</Link></button></div>
           <h1>Dashboard</h1>
           <div>
-            <div><button className="button create-new-event-button"><Link to="/event-form">Create New Band</Link></button></div>
+            <div><button className="button create-new-event-button"><Link to="/profile-page">Create New Band</Link></button></div>
             <Dropdown className="button create-new-event-button" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                <DropdownToggle caret className="button create-new-event-button">
                  Edit Profile
@@ -231,7 +231,7 @@ class Dashboard extends Component {
         <BigCalendar
           selectable
           culture='en'
-          onSelectEvent={event => this.navigateToEvent(event.bandId, event.eventId)}
+          onSelectEvent={event => this.navigateToEvent(event)}
           events={this.state.calendarEvents}
           views={['month', 'week', 'day', 'agenda']}/>
       }
@@ -241,9 +241,9 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = function(state) {
-    return {setBand: state.setBand, setEvent: state.setEvent}
+    return {setBand: state.setBand}
 }
-
+// setEvent: state.setEvent
 const mapDispatchToProps = (dispatch) => (
     {
         setBand: (filter) =>  dispatch(setBand(filter)),
