@@ -7,6 +7,9 @@ export default class NewFormInput extends Component {
     // this.handleUpdateForm = this.handleUpdateForm.bind(this);
 
     this.state = {
+      token: null,
+      userId: null,
+      displayEmailWindow: false,
       date: "",
       venue: "",
       city: "",
@@ -31,9 +34,8 @@ export default class NewFormInput extends Component {
     }
   }
 
-  // Needs to have this.props.new = true/false
-  fxnToCheckIfEventIsNew(){
-
+  componentWillMount(){
+    this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
   }
 
   updateFromField(stateKey) {
@@ -72,16 +74,20 @@ export default class NewFormInput extends Component {
         this.setState({error: res.body.error});
       }else{
         //save the form
-        this.props.setEventInfo();
+        // this.props.setEventInfo(); //Redux??
       }
     })
  }
 
+ displayEmailWindow(){
+  //  render a <SendAsEmailWindow/> with a z-index
+  toggle setState({displayEmailWindow: !this.state.displayEmailWindow});
+ }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleUpdateForm}>
+        <form>
         <div className="form-group">
           <label htmlFor="date">Date of Event</label>
           <input className="form-control" onChange={this.updateFromField('date')}
@@ -176,12 +182,16 @@ export default class NewFormInput extends Component {
             type="text" id="misc" placeholder="Other Information needed for Day of Event & or questions for performers" value={this.state.misc}/>
         </div>
         <div className="form-group">
-          <button onClick={event => this.submit(event)} type="submit" className="btn btn-success">Save & Submit</button>
+          <button onClick={event => this.handleUpdateForm(event)} type="submit" className="btn btn-success">Save & Submit</button>
         {/* </div>
         <div className="form-group"> */}
-          <button onClick={event => this.submit(event)} type="submit" className="btn btn-success">Email Form</button>
+          <button onClick={event => this.displayEmailWindow(event)} type="submit" className="btn btn-success">Email Form</button>
         </div>
         </form>
+        {this.state.displayEmailWindow ?
+          <SendAsEmailWindow/> :
+          null
+        }
       </div>);
   }
 }

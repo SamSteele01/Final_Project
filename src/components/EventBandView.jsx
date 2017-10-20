@@ -32,20 +32,25 @@ export default class EventBandView extends Component {
       stage_plot: "",
       input_list: "",
       hospitality_rider: "",
+      eventInfo: null, //{} => placeholders
       token: null,
       userId: null
     }
   }
   componentWillMount(){
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
+    if(!this.props.new){
+      this.getFormData();
+    }
   }
 
-  handleUpdateForm = (event) => {
+
+  getFormData(){
   //needs to post to the DB and call an action for redux
    event.preventDefault();
-   let userId = this.props.userId;
+   let userId = this.props.userId; //or from Redux
    let bandsId = this.props.bandsId;
-   let eventId = this.props.eventId; //may need to change
+   let eventId = this.props.eventToken; //may need to change
     request
      .get(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events/${eventId}`)
      .set('Authorization', `Token token=${this.props.token}`)
@@ -63,11 +68,15 @@ export default class EventBandView extends Component {
      })
   }
 
+// this.state.eventInfo is an object to map over
   render() {
     return (
       <div>
-        <AssetToolbar/>
-        <FormInput/>
+        <AssetToolbar bandId={this.props.bandId}/>
+        {this.props.new ?
+          <NewFormInput /> :
+          <FormInput placeholders={this.state.eventInfo}/>
+        }
       </div>
     );
   }
