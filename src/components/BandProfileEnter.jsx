@@ -21,7 +21,7 @@ export default class BandProfileEnter extends Component {
       // zipcode: '',
       // website: '',
       // info: '',
-      pictures: [],
+      avatar: [],
       w9: '',
       stage_plot: '',
       input_list: '',
@@ -113,16 +113,16 @@ export default class BandProfileEnter extends Component {
                   <li class="list-group-item band-profile-list">
                     <ImageUploader targetKey={"w9"} label={"Upload your w9"}/>
                   </li>
-                  <li class="list-group-item band-profile-list">
-                    {/* <a href="" class="card-link">Stage Plot</a> */}
+                  <li className="list-group-item band-profile-list">
+                    {/* <a href="" className="card-link">Stage Plot</a> */}
                     <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot"}/>
                   </li>
-                  <li class="list-group-item band-profile-list">
-                    {/* <a href="" class="card-link">Input List</a> */}
+                  <li className="list-group-item band-profile-list">
+                    {/* <a href="" className="card-link">Input List</a> */}
                     <ImageUploader targetKey={"input_list"} label={"Upload your Input List"}/>
                   </li>
-                  <li class="list-group-item band-profile-list">
-                    {/* <a href="" class="card-link">Promos</a> */}
+                  <li className="list-group-item band-profile-list">
+                    {/* <a href="" className="card-link">Promos</a> */}
                     <ImageUploader targetKey={"promo_asset"} label={"Upload your Promo Asset/Image"}/>
                   </li>
                 </ul>

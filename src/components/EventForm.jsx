@@ -16,6 +16,7 @@ export default class EventForm extends Component {
       newEvent: false,
       displayBandView: true,
       dropdownOpen: false,
+      bandsId: null,
       token: null,
       userId: null
     }

@@ -102,11 +102,11 @@ handleUpdateBandProfile(){
                     </div>
                   </div>
                 </div>
-                <ul class="list-group list-group-flush band-profile-list">
-                  <li class="list-group-item band-profile-list"><a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" class="card-link">w9</a></li>
-                  <li class="list-group-item band-profile-list"><a href="" class="card-link">Stage Plot</a></li>
-                  <li class="list-group-item band-profile-list"><a href="" class="card-link">Input List</a></li>
-                  <li class="list-group-item band-profile-list"><a href="" class="card-link">Promos</a></li>
+                <ul className="list-group list-group-flush band-profile-list">
+                  <li className="list-group-item band-profile-list"><a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" class="card-link">w9</a></li>
+                  <li className="list-group-item band-profile-list"><a href="" class="card-link">Stage Plot</a></li>
+                  <li className="list-group-item band-profile-list"><a href="" class="card-link">Input List</a></li>
+                  <li className="list-group-item band-profile-list"><a href="" class="card-link">Promos</a></li>
                 </ul>
                 {/* <div className="form-group">
                   <label className="col-md-4 control-label" htmlFor="address">Address</label>
