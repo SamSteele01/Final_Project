@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {bindAll} from 'lodash';
 import Dashboard from './Dashboard.jsx';
 import EventForm from './EventForm.jsx';
 import LoginPage from './LoginPage.jsx';
@@ -23,6 +24,7 @@ class App extends Component {
       calendarEvents: [],
       displayNew: false
     }
+    bindAll(this, 'navCreateNewEvent', 'doneMakingCalendarEvents');
   }
 
 // not sure if this is needed
@@ -36,16 +38,24 @@ class App extends Component {
     this.setState({displayNew: true});
   }
 
-  navCreateNewEvent(){
+  navCreateNewBand(){
+    this.setState({displayNew: true});
+  }
+
+  navUpdateUserProfile(){
     this.setState({});
   }
 
-  navCreateNewEvent(){
+  navUpdateBandProfile(){
     this.setState({});
   }
 
-  navCreateNewEvent(){
+  navViewExistingEvent(){
     this.setState({});
+  }
+
+  doneMakingCalendarEvents(){
+    this.setState({doneMakingCalendarEvents: true});
   }
 
   render() {
@@ -53,10 +63,13 @@ class App extends Component {
       <BrowserRouter>
         <BaseLayout>
           <Switch>
-            <Route path='/dashboard' render={(props) => (<Dashboard navCreateNewEvent={this.navCreateNewEvent} />)} />
-            <Route path='/event-form' component={EventForm} />
-            {/* need to pass userId (from cookie) and bandsId (from Dashboard) as well as specifing display= user/band */}
-            <Route path='/profile-page' component={ProfilePage} />
+            <Route path='/dashboard' render={(props) => (<Dashboard navCreateNewEvent={this.navCreateNewEvent} doneMakingCalendarEvents={this.doneMakingCalendarEvents}
+            confirmDone={this.state.doneMakingCalendarEvents}
+            />)} />
+            <Route path='/event-form' component={EventForm}
+            />
+            <Route path='/profile-page' render={(props) => (<ProfilePage displayNew={this.state.displayNew}
+            />)} />
             <Route path='/login-page' component={LoginPage} />
             <Route path='/' component={WelcomePage} />
           </Switch>

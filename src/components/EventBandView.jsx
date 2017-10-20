@@ -48,7 +48,7 @@ export default class EventBandView extends Component {
   getFormData(){
   //needs to post to the DB and call an action for redux
   //  event.preventDefault();
-   let userId = this.props.userId; //or from Redux
+   let userId = this.state.userId; //or from Redux
    let bandsId = this.props.bandsId;
    let eventId = this.props.eventToken; //may need to change
     request
@@ -61,8 +61,8 @@ export default class EventBandView extends Component {
          this.setState({error: res.body.error});
        }else{
          console.log(res);
-         let Data = res.body.event;
-         this.setState({eventInfo: Data});
+         let data = res.body.event;
+         this.setState({eventInfo: data});
          // setToken('578gh423rebz7zjeno99'); //for testing purposes
        }
      })
@@ -72,6 +72,9 @@ export default class EventBandView extends Component {
   render() {
     return (
       <div>
+        {/* {this.props.new &&
+          <Dropdown/>
+        } */}
         <AssetToolbar bandId={this.props.bandId}/>
         {this.props.new ?
           <NewFormInput /> :
@@ -83,4 +86,7 @@ export default class EventBandView extends Component {
 }
 
 EventBandView.propTypes = {
+  bandsId: PropTypes.number,
+  displayNew: PropTypes.bool,
+  eventToken: PropTypes.node
 };

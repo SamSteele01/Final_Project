@@ -32,8 +32,10 @@ export default class EventForm extends Component {
 
   // apply props to conditionally render either EventBandView or EventVenueView
   componentWillMount(){ //finish writing!
-
-    // fxnToGrabTokenFromUrl();
+    if(this.props.displayNew){
+      this.setState({displayBandView: true});
+    }
+    // fxnToGrabTokenFromUrl(); //might wrap in an if
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')});
   }
 
@@ -56,7 +58,7 @@ export default class EventForm extends Component {
       {/* <ProfileMini/> */}
         <div className="d-flex justify-content-between">
           <div><button className="button create-new-event-button"><Link to="/dashboard">Dashboard</Link></button></div>
-          {this.props.new ?
+          {this.props.displayNew ?
             <h1>New Event</h1> :
             <h1>Scheduled Event</h1>
           }
@@ -76,7 +78,7 @@ export default class EventForm extends Component {
           </div>
         </div>
         {this.state.displayBandView ?
-          <EventBandView bandId={this.props.bandId} new={this.props.new} eventToken={this.props.eventToken}/> :
+          <EventBandView bandsId={this.props.bandsId} displayNew={this.props.displayNew} eventToken={this.props.eventToken}/> :
           <EventVenueView eventToken={this.state.eventTokenFromHash}/>
         }
       </div>
@@ -84,4 +86,6 @@ export default class EventForm extends Component {
   }
 }
 EventForm.propTypes = {
+  // displayNew.boolean
+  // bandId.number
 };

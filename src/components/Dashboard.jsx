@@ -17,7 +17,7 @@ let formats = {
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
     this.navigateToEvent = this.navigateToEvent.bind(this);
 
     this.state = {
@@ -121,7 +121,6 @@ export default class Dashboard extends Component {
     console.log(arrayOfEvents);
     let calendarEventArray = this.state.calendarEvents;
     let calEvents = arrayOfEvents.map((event) =>{
-      console.log(event);
       return( calendarEventArray.push(this.createSingleEvent(event)))
     })
     this.setState({calendarEvents: calendarEventArray})
@@ -135,7 +134,6 @@ export default class Dashboard extends Component {
       'bandId': theDeets.band_id,
       'eventId': theDeets.id
     };
-    console.log(eventObject);
     return eventObject
   }
 
@@ -144,8 +142,10 @@ export default class Dashboard extends Component {
   // }
 
   componentDidUpdate(){
+    if(this.state.doneMakingCalendarEvents&&!this.props.confirmDone){
+      this.props.doneMakingCalendarEvents();
+    }
     if(this.state.eventsArray.length>0 && this.state.doneMapping && !this.state.doneMakingCalendarEvents){
-      console.log(this.state.eventsArray);
       // debugger
       this.createCalendarEvents(this.state.eventsArray);
       console.log(this.state.calendarEvents);
@@ -165,8 +165,8 @@ export default class Dashboard extends Component {
 
   navigateToEvent(event){
     console.log("Event "+event.eventId+" has been clicked.");
-    this.props.setBand(event.bandId);
-    this.props.setEvent(event.eventId);
+    // this.props.setBand(event.bandId);
+    this.props.navViewExistingEvent(event.eventId);
     window.location.href = '/event-form';
   }
 
@@ -174,7 +174,7 @@ export default class Dashboard extends Component {
     if(this.state.bandsArray){
       let bandNameDropdownItem = this.state.bandsArray.map((band, index) => {
         return(
-          <DropdownItem key={index}><Link to="/profile-page" onClick={event => this.props.setBand(band.id)}>{band.name}</Link></DropdownItem>
+          <DropdownItem key={index}><Link to="/profile-page" onClick={event => this.props.navUpdateBandProfile(band.id)}>{band.name}</Link></DropdownItem>
           // need to pass bandId and userProfile to redux
         )
       })
@@ -203,9 +203,7 @@ export default class Dashboard extends Component {
                  Edit Profile
                </DropdownToggle>
                <DropdownMenu right>
-                 {/* <DropdownItem header>Header</DropdownItem> */}
-                 {/* <DropdownItem disabled>Action</DropdownItem> */}
-                 <DropdownItem><Link to="/profile-page" onClick={event => this.props.setNew(band.id)} >{this.state.fullName}</Link></DropdownItem>
+                 <DropdownItem><Link to="/profile-page" onClick={event => this.props.navUpdateUserProfile(this.state.userId)} >{this.state.fullName}</Link></DropdownItem>
                  <DropdownItem divider />
                  {this.displayDropdowns()}
                </DropdownMenu>
