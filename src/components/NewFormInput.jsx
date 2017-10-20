@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import request from 'superagent';
-
+import cookie from 'react-cookies';
+import SendAsEmailWindow from './SendAsEmailWindow.jsx';
 export default class NewFormInput extends Component {
   constructor(props) {
     super(props);
@@ -81,7 +82,7 @@ export default class NewFormInput extends Component {
 
  displayEmailWindow(){
   //  render a <SendAsEmailWindow/> with a z-index
-  toggle setState({displayEmailWindow: !this.state.displayEmailWindow});
+  this.setState({displayEmailWindow: !this.state.displayEmailWindow});
  }
 
   render() {

@@ -3,6 +3,7 @@ import FormInput from './FormInput.jsx';
 import AssetToolbar from './AssetToolbar.jsx';
 import cookie from 'react-cookies';
 import request from 'superagent';
+import NewFormInput from './NewFormInput.jsx';
 
 
 export default class EventBandView extends Component {
@@ -47,7 +48,7 @@ export default class EventBandView extends Component {
 
   getFormData(){
   //needs to post to the DB and call an action for redux
-   event.preventDefault();
+  //  event.preventDefault();
    let userId = this.props.userId; //or from Redux
    let bandsId = this.props.bandsId;
    let eventId = this.props.eventToken; //may need to change
