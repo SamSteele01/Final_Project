@@ -243,13 +243,25 @@ class Dashboard extends Component {
 const mapStateToProps = function(state) {
     return {setBand: state.setBand}
 }
-// setEvent: state.setEvent
-const mapDispatchToProps = (dispatch) => (
-    {
-        setBand: (filter) =>  dispatch(setBand(filter)),
-        setEvent: (filter) =>  dispatch(setEvent(filter))
+
+const mapDispatchToProps = function(dispatch) {
+    return {
+        setBand: function(filter) {
+            dispatch(setBand(filter));
+        }
     }
-)
+}
+
+// const mapStateToProps = function(state) {
+//     return {setBand: state.setBand}
+// }
+// // setEvent: state.setEvent
+// const mapDispatchToProps = (dispatch) => (
+//     {
+//         setBand: (filter) =>  dispatch(setBand(filter)),
+//         setEvent: (filter) =>  dispatch(setEvent(filter))
+//     }
+// )
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
 
