@@ -27,7 +27,7 @@ export default class EventForm extends Component {
 
   fxnToGrabTokenFromUrl(){ //finish writing!
     // doTheThing()
-    this.setState({eventTokenFromHash: theHash, displayBandView: false});
+    // this.setState({eventTokenFromHash: theHash, displayBandView: false});
   }
 
   // apply props to conditionally render either EventBandView or EventVenueView
