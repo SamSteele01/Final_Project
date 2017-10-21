@@ -55,7 +55,7 @@ export default class Dashboard extends Component {
     if(this.state.token===null){
       window.location.href = "/";
     }else{
-      if(!this.state.eventsArray){
+      if(!this.state.eventsArray.length>0){
         this.fetchAllEventsForUser(this.state.userId);
       }
     this.fetchFullnameForUser(this.state.userId);
@@ -64,7 +64,7 @@ export default class Dashboard extends Component {
   }
 
   fetchAllEventsForUser(userId){
-    if(!this.state.doneMapping){
+    // if(!this.state.doneMapping){
       request
         .get(`https://ez-tour.herokuapp.com/users/${userId}/my_events`)
         .set('Authorization', `Token token=${this.state.token}`)
@@ -72,7 +72,7 @@ export default class Dashboard extends Component {
           let data = res.body.events;
           this.setState({eventsArray: data});
         });
-    }
+    // }
   }
 
   fetchFullnameForUser(userId){
@@ -153,7 +153,7 @@ export default class Dashboard extends Component {
       this.setState({doneMakingCalendarEvents: true});
       // this.props.setBandList(this.state.calendarEvents); redux action
     }
-    if(this.state.eventsArray && !this.state.doneMapping){
+    if(this.state.eventsArray.length>0 && !this.state.doneMapping){
       this.setState({doneMapping: true});
     }
   }

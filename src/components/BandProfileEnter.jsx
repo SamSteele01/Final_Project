@@ -108,11 +108,11 @@ export default class BandProfileEnter extends Component {
                 </div>
               </fieldset>
             </form>
-            <ul class="list-group list-group-flush band-profile-list">
-              <li class="list-group-item band-profile-list">
-                <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" class="card-link">Link to a new w9</a>
+            <ul className="list-group list-group-flush band-profile-list">
+              <li className="list-group-item band-profile-list">
+                <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" className="card-link">Link to a new w9</a>
               </li>
-              <li class="list-group-item band-profile-list">
+              <li className="list-group-item band-profile-list">
                 <ImageUploader targetKey={"w9"} label={"Upload your w9"}/>
               </li>
               <li className="list-group-item band-profile-list">
