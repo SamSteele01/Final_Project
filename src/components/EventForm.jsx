@@ -59,7 +59,7 @@ export default class EventForm extends Component {
         <div className="d-flex justify-content-between">
           <div><button className="button create-new-event-button"><Link to="/dashboard">Dashboard</Link></button></div>
           {this.props.displayNew ?
-            <h1>New Event</h1> :
+            <h1>New Event for</h1> :
             <h1>Scheduled Event</h1>
           }
           <div>

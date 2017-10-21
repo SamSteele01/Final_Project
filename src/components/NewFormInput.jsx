@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import request from 'superagent';
 import cookie from 'react-cookies';
 import SendAsEmailWindow from './SendAsEmailWindow.jsx';
+<<<<<<< HEAD
 import AssetToolbar from './AssetToolbar.jsx';
 
+=======
+>>>>>>> master
 export default class NewFormInput extends Component {
   constructor(props) {
     super(props);
@@ -92,7 +95,6 @@ export default class NewFormInput extends Component {
   //  render a <SendAsEmailWindow/> with a z-index
     event.preventDefault();
     this.setState({displayEmailWindow: !this.state.displayEmailWindow});
-
  }
 
 // want dropdown "For which band?" with select at top of page. This being selected assigns bandId and renders the submit buttons

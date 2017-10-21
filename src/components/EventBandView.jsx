@@ -4,6 +4,10 @@ import FormInput from './FormInput.jsx';
 import cookie from 'react-cookies';
 import request from 'superagent';
 import NewFormInput from './NewFormInput.jsx';
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 
 export default class EventBandView extends Component {
 // displays the asset tool bar on the side of the page.
