@@ -1,6 +1,8 @@
 // container
 import React, {Component} from 'react';
 import request from 'superagent';
+import cookie from 'react-cookies';
+import AssetToolbar from './AssetToolbar.jsx';
 
 export default class FormInput extends Component {
   constructor(props) {
@@ -183,4 +185,5 @@ export default class FormInput extends Component {
 }
 FormInput.propTypes = {
   // placeholders: propTypes.object,
+  // bandsId: propTypes.number
 };

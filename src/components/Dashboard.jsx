@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, Redirect, withRouter} from 'react-router-dom';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import BigCalendar from 'react-big-calendar';
+import {bindAll} from 'lodash';
 import moment from 'moment';
 import request from 'superagent';
 import cookie from 'react-cookies';
@@ -17,13 +18,12 @@ let formats = {
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.toggleDropdown = this.toggleDropdown.bind(this);
-    this.navigateToEvent = this.navigateToEvent.bind(this);
 
     this.state = {
       token: null,
       error: null,
-      dropdownOpen: false,
+      eventDropdownOpen: false,
+      profileDropdownOpen: false,
       userId: null, //from login. May just be this.props.userId
       bandsArray: null, //array of band objects
       doneMapping: false,
@@ -31,6 +31,7 @@ export default class Dashboard extends Component {
       eventsArray: [], //array of objects, from fetch. Has band and user Ids
       calendarEvents: []
     }
+    bindAll(this, 'navigateToEvent', 'toggleEventDropdown', 'toggleProfileDropdown');
   }
 
   // props = {
@@ -158,9 +159,15 @@ export default class Dashboard extends Component {
     }
   }
 
-  toggleDropdown() {
+  toggleEventDropdown() {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+      eventDropdownOpen: !this.state.eventDropdownOpen
+    });
+  }
+
+  toggleProfileDropdown() {
+    this.setState({
+      profileDropdownOpen: !this.state.profileDropdownOpen
     });
   }
 
@@ -171,12 +178,13 @@ export default class Dashboard extends Component {
     window.location.href = '/event-form';
   }
 
-  displayDropdowns(){
+  displayDropdowns(navTo, fxnName){
     if(this.state.bandsArray){
       let bandNameDropdownItem = this.state.bandsArray.map((band, index) => {
         return(
-          <DropdownItem key={index}><Link to="/profile-page" onClick={event => this.props.navUpdateBandProfile(band.id)}>{band.name}</Link></DropdownItem>
-          // need to pass bandId and userProfile to redux
+          <DropdownItem key={index}>
+            <Link to={navTo} onClick={event => fxnName(band.id)}>{band.name}</Link>
+          </DropdownItem>
         )
       })
       return(
@@ -195,18 +203,28 @@ export default class Dashboard extends Component {
     return (
       <div className="dashboard">
         <div className="d-flex justify-content-between">
-          <div><button className="button create-new-event-button"><Link to="/event-form" onClick={event => this.props.navCreateNewEvent(event)} >Create New Event</Link></button></div>
+          {/* <div><button className="button create-new-event-button"><Link to="/event-form" onClick={event => this.props.navCreateNewEvent(event)} >Create New Event</Link></button></div> */}
+          <Dropdown className="button create-new-event-button" isOpen={this.state.eventDropdownOpen} toggle={this.toggleEventDropdown}>
+             <DropdownToggle caret color="secondary">
+               Create New Event
+             </DropdownToggle>
+             <DropdownMenu>
+               {this.displayDropdowns("/event-form", this.props.navCreateNewEvent)}
+               <DropdownItem>
+               </DropdownItem>
+             </DropdownMenu>
+          </Dropdown>
           <h1>Dashboard</h1>
           <div>
             <div><button className="button create-new-event-button"><Link to="/profile-page" onClick={event => this.props.navCreateNewBand(event)} >Create New Band</Link></button></div>
-            <Dropdown className="button create-new-event-button" isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
-               <DropdownToggle caret className="button create-new-event-button">
+            <Dropdown color="secondary" isOpen={this.state.profileDropdownOpen} toggle={this.toggleProfileDropdown}>
+               <DropdownToggle caret color="secondary">
                  Edit Profile
                </DropdownToggle>
                <DropdownMenu right>
                  <DropdownItem><Link to="/profile-page" onClick={event => this.props.navUpdateUserProfile(this.state.userId)} >{this.state.fullName}</Link></DropdownItem>
                  <DropdownItem divider />
-                 {this.displayDropdowns()}
+                 {this.displayDropdowns("/profile-page", this.props.navUpdateBandProfile)}
                </DropdownMenu>
             </Dropdown>
           </div>
@@ -223,7 +241,6 @@ export default class Dashboard extends Component {
     );
   }
 }
-
 
 // const mapStateToProps = function(state) {
 //     return {setBand: state.setBand}

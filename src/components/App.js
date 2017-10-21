@@ -34,8 +34,9 @@ class App extends Component {
 
 // may need to intercept token from Url here. Or use hidden headers in the email link
 
-  navCreateNewEvent(){
-    this.setState({displayNew: true});
+  navCreateNewEvent(bandsId){
+    console.log("navCreateNewEvent just fired. BandId is:" + bandsId);
+    this.setState({displayNew: true, bandsId: bandsId});
   }
 
   navCreateNewBand(){
@@ -73,7 +74,7 @@ class App extends Component {
             calendarEvents={this.state.calendarEvents}
             />)} />
             <Route path='/event-form' render={(props) => (<EventForm displayNew={this.state.displayNew}
-            bandsId={this.state.bandId}
+            bandsId={this.state.bandsId}
             />)} />
             <Route path='/profile-page' render={(props) => (<ProfilePage displayNew={this.state.displayNew}
             bandsId={this.state.bandsId}

@@ -39,6 +39,11 @@ export default class NewFormInput extends Component {
 
   componentWillMount(){
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
+    console.log("loading NewFormInput");
+  }
+
+  setImageAssets(stateKey){
+
   }
 
   updateFromField(stateKey) {
@@ -85,18 +90,16 @@ export default class NewFormInput extends Component {
 
  displayEmailWindow(event){
   //  render a <SendAsEmailWindow/> with a z-index
-    if(event){
-        this.setState({displayEmailWindow: event});
-    }else{
+    event.preventDefault();
     this.setState({displayEmailWindow: !this.state.displayEmailWindow});
-    }
+
  }
 
 // want dropdown "For which band?" with select at top of page. This being selected assigns bandId and renders the submit buttons
   render() {
     return (
       <div>
-        <AssetToolbar bandsId={this.props.bandsId}/>
+        <AssetToolbar bandsId={this.props.bandsId} passUpUrls={this.setImageAssets}/>
         <form>
         <div className="form-group">
           <label htmlFor="date">Date of Event</label>
@@ -195,7 +198,7 @@ export default class NewFormInput extends Component {
           <button onClick={event => this.handleUpdateForm(event)} type="submit" className="btn btn-success">Save & Submit</button>
         {/* </div>
         <div className="form-group"> */}
-          <button onClick={this.displayEmailWindow()} type="submit" className="btn btn-success">Email Form</button>
+          <button onClick={event => this.displayEmailWindow(event)} type="submit" className="btn btn-success">Email Form</button>
         </div>
         </form>
         {this.state.displayEmailWindow ?
@@ -206,5 +209,5 @@ export default class NewFormInput extends Component {
   }
 }
 NewFormInput.propTypes = {
-  bandsId: propTypes.number,
+  // bandsId: propTypes.number,
 };

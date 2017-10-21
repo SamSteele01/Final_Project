@@ -32,7 +32,7 @@ export default class EventForm extends Component {
 
   // apply props to conditionally render either EventBandView or EventVenueView
   componentWillMount(){ //finish writing!
-    if(this.props.displayNew){
+    if(this.props.displayNew || this.props.bandsId){
       this.setState({displayBandView: true});
     }
     // fxnToGrabTokenFromUrl(); //might wrap in an if
@@ -87,5 +87,5 @@ export default class EventForm extends Component {
 }
 EventForm.propTypes = {
   // displayNew.boolean
-  // bandId.number
+  // bandsId.number
 };
