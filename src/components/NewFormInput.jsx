@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import request from 'superagent';
 import cookie from 'react-cookies';
 import SendAsEmailWindow from './SendAsEmailWindow.jsx';
+import AssetToolbar from './AssetToolbar.jsx';
 
 export default class NewFormInput extends Component {
   constructor(props) {
@@ -29,10 +30,10 @@ export default class NewFormInput extends Component {
       laundry: "",
       wifi: "",
       misc: "",
-      w9: "",
-	    stage_plot: "",
-      input_list: "",
-      hospitality_rider: ""
+      w9: "", //Should be URLs passed up from asset-toolbar
+	    stage_plot: "", //Should be URLs passed up from asset-toolbar
+      input_list: "", //Should be URLs passed up from asset-toolbar
+      hospitality_rider: "" //Should be URLs passed up from asset-toolbar
     }
   }
 
@@ -46,6 +47,7 @@ export default class NewFormInput extends Component {
     }
   }
 
+// maybe post should go in EventBandView. Need to pass up {}
  handleUpdateForm = (event) => {
  //needs to post to the DB and call an action for redux
   event.preventDefault();
@@ -94,6 +96,7 @@ export default class NewFormInput extends Component {
   render() {
     return (
       <div>
+        <AssetToolbar bandsId={this.props.bandsId}/>
         <form>
         <div className="form-group">
           <label htmlFor="date">Date of Event</label>
@@ -203,4 +206,5 @@ export default class NewFormInput extends Component {
   }
 }
 NewFormInput.propTypes = {
+  bandsId: propTypes.number,
 };

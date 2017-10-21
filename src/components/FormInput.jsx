@@ -76,6 +76,7 @@ export default class FormInput extends Component {
   render() {
     return (
       <div>
+        <AssetToolbar bandsId={this.props.bandsId}/>
         <form onSubmit={this.handleUpdateForm}>
         <div className="form-group">
           <label htmlFor="date">Date of Event</label>

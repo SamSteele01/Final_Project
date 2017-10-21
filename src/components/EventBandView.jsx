@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import FormInput from './FormInput.jsx';
-import AssetToolbar from './AssetToolbar.jsx';
+
 import cookie from 'react-cookies';
 import request from 'superagent';
 import NewFormInput from './NewFormInput.jsx';
@@ -37,13 +37,13 @@ export default class EventBandView extends Component {
       userId: null
     }
   }
+
   componentWillMount(){
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
     if(!this.props.displayNew){
       this.getFormData();
     }
   }
-
 
   getFormData(){
   //needs to post to the DB and call an action for redux
@@ -75,10 +75,10 @@ export default class EventBandView extends Component {
         {/* {this.props.new &&
           <Dropdown/>
         } */}
-        <AssetToolbar bandId={this.props.bandId}/>
+
         {this.props.new ?
-          <NewFormInput /> :
-          <FormInput placeholders={this.state.eventInfo}/>
+          <NewFormInput bandsId={this.props.bandsId}/> :
+          <FormInput placeholders={this.state.eventInfo} bandsId={this.props.bandsId}/>
         }
       </div>
     );
