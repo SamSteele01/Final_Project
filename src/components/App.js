@@ -18,7 +18,7 @@ class App extends Component {
       userId: null,
       bandsArray: null,
       bandsId: null,
-      event_token: null,
+      eventToken: null,
       doneMapping: false,
       doneMakingCalendarEvents: false,
       calendarEvents: null,
@@ -51,12 +51,19 @@ class App extends Component {
     this.setState({displayNew: false, bandsId: bandsId});
   }
 
-  navViewExistingEvent(){
-    this.setState({});
+  navViewExistingEvent(bandsId, eventId){
+    console.log(" Nav to existing. BandsId: "+bandsId+" EventId: "+eventId);
+    debugger
+    this.setState({bandsId: bandsId, eventToken: eventId, displayNew: false});
+    // window.location.href = '/event-form';
   }
 
   doneMakingCalendarEvents(calendarEvents){
     this.setState({doneMakingCalendarEvents: true, calendarEvents: calendarEvents});
+  }
+
+  noLongerNew(){
+    this.setState({displayNew: false});
   }
 
   render() {
@@ -75,6 +82,8 @@ class App extends Component {
             />)} />
             <Route path='/event-form' render={(props) => (<EventForm displayNew={this.state.displayNew}
             bandsId={this.state.bandsId}
+            eventToken={this.state.eventToken}
+            noLongerNew={this.noLongerNew}
             />)} />
             <Route path='/profile-page' render={(props) => (<ProfilePage displayNew={this.state.displayNew}
             bandsId={this.state.bandsId}

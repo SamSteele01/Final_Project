@@ -35,7 +35,6 @@ export default class EventForm extends Component {
     if(this.props.displayNew || this.props.bandsId){
       this.setState({displayBandView: true});
     }
-    // fxnToGrabTokenFromUrl(); //might wrap in an if
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')});
   }
 
@@ -43,6 +42,7 @@ export default class EventForm extends Component {
     if(!this.state.token || this.state.eventTokenFromHash){
       window.location.href = "/";
     }
+    console.log(this.props.bandsId+" "+this.props.eventToken+" "+this.props.displayNew);
   }
 
   toggle() {
@@ -78,7 +78,7 @@ export default class EventForm extends Component {
           </div>
         </div>
         {this.state.displayBandView ?
-          <EventBandView bandsId={this.props.bandsId} displayNew={this.props.displayNew} eventToken={this.props.eventToken}/> :
+          <EventBandView bandsId={this.props.bandsId} displayNew={this.props.displayNew} eventToken={this.props.eventToken} noLongerNew={this.props.noLongerNew}/> :
           <EventVenueView eventToken={this.state.eventTokenFromHash}/>
         }
       </div>

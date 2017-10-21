@@ -2,11 +2,8 @@ import React, {Component} from 'react';
 import request from 'superagent';
 import cookie from 'react-cookies';
 import SendAsEmailWindow from './SendAsEmailWindow.jsx';
-<<<<<<< HEAD
 import AssetToolbar from './AssetToolbar.jsx';
 
-=======
->>>>>>> master
 export default class NewFormInput extends Component {
   constructor(props) {
     super(props);
@@ -59,7 +56,7 @@ export default class NewFormInput extends Component {
  handleUpdateForm = (event) => {
  //needs to post to the DB and call an action for redux
   event.preventDefault();
-  let userId = this.props.userId;
+  let userId = this.state.userId;
   let bandsId = this.props.bandsId;
    request
     .post(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
@@ -80,24 +77,25 @@ export default class NewFormInput extends Component {
     laundry: this.state.laundry,
     wifi: this.state.wifi,
     misc: this.state.misc})
-    .set('Authorization', `Token token=${this.props.token}`)
+    .set('Authorization', `Token token=${this.state.token}`)
     .end((err, res) =>{
       if(err) {
-        this.setState({error: res.body.error});
+        console.log(err);
+        // this.setState({error: res.body.error});
       }else{
-        //save the form
-        // this.props.setEventInfo(); //Redux??
+        console.log(res);
+        // reroute to FormInput
+        // this.props.noLongerNew();
       }
     })
  }
 
- displayEmailWindow(event){
-  //  render a <SendAsEmailWindow/> with a z-index
-    event.preventDefault();
-    this.setState({displayEmailWindow: !this.state.displayEmailWindow});
- }
+ // displayEmailWindow(event){
+ //  //  render a <SendAsEmailWindow/> with a z-index
+ //    event.preventDefault();
+ //    this.setState({displayEmailWindow: !this.state.displayEmailWindow});
+ // }
 
-// want dropdown "For which band?" with select at top of page. This being selected assigns bandId and renders the submit buttons
   render() {
     return (
       <div>
@@ -200,13 +198,13 @@ export default class NewFormInput extends Component {
           <button onClick={event => this.handleUpdateForm(event)} type="submit" className="btn btn-success">Save & Submit</button>
         {/* </div>
         <div className="form-group"> */}
-          <button onClick={event => this.displayEmailWindow(event)} type="submit" className="btn btn-success">Email Form</button>
         </div>
-        </form>
+        {/* <button onClick={event => this.displayEmailWindow(event)} type="submit" className="btn btn-success">Email Form</button>
         {this.state.displayEmailWindow ?
           <SendAsEmailWindow closeWindow={event => this.displayEmailWindow(event)}/> :
           null
-        }
+        } */}
+        </form>
       </div>);
   }
 }

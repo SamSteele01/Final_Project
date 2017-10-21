@@ -4,10 +4,6 @@ import FormInput from './FormInput.jsx';
 import cookie from 'react-cookies';
 import request from 'superagent';
 import NewFormInput from './NewFormInput.jsx';
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 
 export default class EventBandView extends Component {
 // displays the asset tool bar on the side of the page.
@@ -45,7 +41,7 @@ export default class EventBandView extends Component {
   componentWillMount(){
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
     console.log(this.props.displayNew);
-    if(!this.props.displayNew){
+    if(!this.props.displayNew&&this.props.bandsId&&this.props.eventToken){
       this.getFormData();
     }
   }
@@ -82,7 +78,7 @@ export default class EventBandView extends Component {
         } */}
 
         {this.props.displayNew ?
-          <NewFormInput bandsId={this.props.bandsId}/> :
+          <NewFormInput bandsId={this.props.bandsId} noLongerNew={this.props.noLongerNew}/> :
           <FormInput placeholders={this.state.eventInfo} bandsId={this.props.bandsId}/>
         }
       </div>

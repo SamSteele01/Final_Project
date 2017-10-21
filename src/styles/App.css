@@ -285,3 +285,10 @@
   bottom: 0px;
   background-color: black;
 }
+
+.send-email-window {
+  height: 300px;
+  width: 80vw;
+  z-index: 2;
+  position: absolute;
+}

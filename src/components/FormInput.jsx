@@ -34,6 +34,11 @@ export default class FormInput extends Component {
     }
   }
 
+  componentWillMount(){
+    this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
+    console.log("Loading FormInput. BandsId is: "+this.props.bandsId);
+  }
+
   updateFromField(stateKey) {
     return (event) => {
       this.setState({[stateKey]: event.target.value});
@@ -43,7 +48,7 @@ export default class FormInput extends Component {
  handleUpdateForm = (event) => {
  //needs to post to the DB and call an action for redux
   event.preventDefault();
-  let userId = this.props.userId;
+  let userId = this.state.userId;
   let bandsId = this.props.bandsId;
    request
     .patch(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
@@ -64,13 +69,12 @@ export default class FormInput extends Component {
     laundry: this.state.laundry,
     wifi: this.state.wifi,
     misc: this.state.misc})
-    .set('Authorization', `Token token=${this.props.token}`)
+    .set('Authorization', `Token token=${this.state.token}`)
     .end((err, res) =>{
       if(err) {
         this.setState({error: res.body.error});
       }else{
-        //save the form
-        this.props.setEventInfo();
+
       }
     })
  }
@@ -79,6 +83,7 @@ export default class FormInput extends Component {
     return (
       <div>
         <AssetToolbar bandsId={this.props.bandsId}/>
+        {this.props.placeholders &&
         <form onSubmit={this.handleUpdateForm}>
         <div className="form-group">
           <label htmlFor="date">Date of Event</label>
@@ -180,6 +185,7 @@ export default class FormInput extends Component {
           <button onClick={event => this.submit(event)} type="submit" className="btn btn-success">Send Form</button>
         </div>
         </form>
+        }
       </div>);
   }
 }

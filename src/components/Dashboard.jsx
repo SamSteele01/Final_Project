@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect, withRouter} from 'react-router-dom';
+import { browserHistory } from 'react-router';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import BigCalendar from 'react-big-calendar';
 import {bindAll} from 'lodash';
@@ -150,6 +151,7 @@ export default class Dashboard extends Component {
     if(this.state.eventsArray.length>0 && this.state.doneMapping && !this.state.doneMakingCalendarEvents){
       // debugger
       this.createCalendarEvents(this.state.eventsArray);
+      console.log(this.state.eventsArray);
       console.log(this.state.calendarEvents);
       this.setState({doneMakingCalendarEvents: true});
       // this.props.setBandList(this.state.calendarEvents); redux action
@@ -174,8 +176,9 @@ export default class Dashboard extends Component {
   navigateToEvent(event){
     console.log("Event "+event.eventId+" has been clicked.");
     // this.props.setBand(event.bandId);
-    this.props.navViewExistingEvent(event.eventId);
-    window.location.href = '/event-form';
+    this.props.navViewExistingEvent(event.bandId, event.eventId);
+    // to='/event-form';
+     withRouter(({ history}) => {() => { history.push('//event-form') }});
   }
 
   displayDropdowns(navTo, fxnName){
