@@ -224,6 +224,7 @@ export default class Dashboard extends Component {
   }
 }
 
+
 // const mapStateToProps = function(state) {
 //     return {setBand: state.setBand}
 // }
