@@ -39,7 +39,7 @@ export default class EventBandView extends Component {
   }
   componentWillMount(){
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
-    if(!this.props.new){
+    if(!this.props.displayNew){
       this.getFormData();
     }
   }
@@ -86,7 +86,7 @@ export default class EventBandView extends Component {
 }
 
 EventBandView.propTypes = {
-  bandsId: PropTypes.number,
-  displayNew: PropTypes.bool,
-  eventToken: PropTypes.node
+  // bandsId: PropTypes.number,
+  // displayNew: PropTypes.bool,
+  // eventToken: PropTypes.node
 };

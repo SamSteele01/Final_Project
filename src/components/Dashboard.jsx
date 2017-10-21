@@ -44,8 +44,8 @@ export default class Dashboard extends Component {
 
   componentWillMount(){
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
-    if(this.props.doneMakingCalendarEvents){
-      this.setState({doneMapping: true, doneMakingCalendarEvents: true});
+    if(this.props.confirmDone&&this.props.calendarEvents){
+      this.setState({doneMapping: true, doneMakingCalendarEvents: true, calendarEvents: this.props.calendarEvents});
     }else{
       this.setState({doneMapping: false, doneMakingCalendarEvents: false});
     }
@@ -55,7 +55,9 @@ export default class Dashboard extends Component {
     if(this.state.token===null){
       window.location.href = "/";
     }else{
-    this.fetchAllEventsForUser(this.state.userId);
+      if(!this.state.eventsArray){
+        this.fetchAllEventsForUser(this.state.userId);
+      }
     this.fetchFullnameForUser(this.state.userId);
     this.fetchAllBandsForUser(this.state.userId);
     }
@@ -118,7 +120,6 @@ export default class Dashboard extends Component {
 //   }
 //
   createCalendarEvents = (arrayOfEvents) => {
-    console.log(arrayOfEvents);
     let calendarEventArray = this.state.calendarEvents;
     let calEvents = arrayOfEvents.map((event) =>{
       return( calendarEventArray.push(this.createSingleEvent(event)))
@@ -143,7 +144,7 @@ export default class Dashboard extends Component {
 
   componentDidUpdate(){
     if(this.state.doneMakingCalendarEvents&&!this.props.confirmDone){
-      this.props.doneMakingCalendarEvents();
+      this.props.doneMakingCalendarEvents(this.state.calendarEvents);
     }
     if(this.state.eventsArray.length>0 && this.state.doneMapping && !this.state.doneMakingCalendarEvents){
       // debugger

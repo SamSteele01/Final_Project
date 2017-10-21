@@ -47,9 +47,8 @@ export default class BandProfileEnter extends Component {
 // may be posting to a user or a bands DB. Need to have a dynamic/conditional route
   handleAddToProfile(){
     let userId = this.state.userId;
-    let bandsId = this.props.bandsId;  // may not need as a param
     request
-      .patch(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}`)
+      .post(`https://ez-tour.herokuapp.com/users/${userId}/bands`)
       .send({
 
       })
@@ -66,7 +65,7 @@ export default class BandProfileEnter extends Component {
 
           <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleAddToProfile}>
             <fieldset>
-              <legend>Update Your Band Profile</legend>
+              <legend>Create a New Band Profile</legend>
                 <div className="form-group">
                   <label className="col-md-4 control-label">Name of Performer(s)</label>
                   <div className="col-md-4 inputGroupContainer">

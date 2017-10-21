@@ -21,10 +21,10 @@ class App extends Component {
       event_token: null,
       doneMapping: false,
       doneMakingCalendarEvents: false,
-      calendarEvents: [],
+      calendarEvents: null,
       displayNew: false
     }
-    bindAll(this, 'navCreateNewEvent', 'doneMakingCalendarEvents');
+    bindAll(this, 'navCreateNewEvent', 'doneMakingCalendarEvents', 'navCreateNewBand', 'navUpdateUserProfile', 'navUpdateBandProfile', 'navViewExistingEvent');
   }
 
 // not sure if this is needed
@@ -39,23 +39,23 @@ class App extends Component {
   }
 
   navCreateNewBand(){
-    this.setState({displayNew: true});
+    this.setState({displayNew: true, bandsId: null});
   }
 
   navUpdateUserProfile(){
-    this.setState({});
+    this.setState({bandsId: null, displayNew: false});
   }
 
-  navUpdateBandProfile(){
-    this.setState({});
+  navUpdateBandProfile(bandsId){
+    this.setState({displayNew: false, bandsId: bandsId});
   }
 
   navViewExistingEvent(){
     this.setState({});
   }
 
-  doneMakingCalendarEvents(){
-    this.setState({doneMakingCalendarEvents: true});
+  doneMakingCalendarEvents(calendarEvents){
+    this.setState({doneMakingCalendarEvents: true, calendarEvents: calendarEvents});
   }
 
   render() {
@@ -63,12 +63,20 @@ class App extends Component {
       <BrowserRouter>
         <BaseLayout>
           <Switch>
-            <Route path='/dashboard' render={(props) => (<Dashboard navCreateNewEvent={this.navCreateNewEvent} doneMakingCalendarEvents={this.doneMakingCalendarEvents}
+            <Route path='/dashboard' render={(props) => (<Dashboard navCreateNewEvent={this.navCreateNewEvent}
+            navCreateNewBand={this.navCreateNewBand}
+            navUpdateUserProfile={this.navUpdateUserProfile}
+            navUpdateBandProfile={this.navUpdateBandProfile}
+            navViewExistingEvent={this.navViewExistingEvent}
+            doneMakingCalendarEvents={this.doneMakingCalendarEvents}
             confirmDone={this.state.doneMakingCalendarEvents}
+            calendarEvents={this.state.calendarEvents}
             />)} />
-            <Route path='/event-form' component={EventForm}
-            />
+            <Route path='/event-form' render={(props) => (<EventForm displayNew={this.state.displayNew}
+            bandsId={this.state.bandId}
+            />)} />
             <Route path='/profile-page' render={(props) => (<ProfilePage displayNew={this.state.displayNew}
+            bandsId={this.state.bandsId}
             />)} />
             <Route path='/login-page' component={LoginPage} />
             <Route path='/' component={WelcomePage} />

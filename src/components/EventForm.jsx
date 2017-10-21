@@ -51,7 +51,7 @@ export default class EventForm extends Component {
     });
   }
 
-// h1 should be new event if coming from button, should be event if coming from calendar,
+// if displayNew then dropdown needs to show list of bands. If only one, then auto select. Pass displayButtons as props.
   render() {
     return (
       <div>

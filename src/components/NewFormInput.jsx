@@ -90,6 +90,7 @@ export default class NewFormInput extends Component {
     }
  }
 
+// want dropdown "For which band?" with select at top of page. This being selected assigns bandId and renders the submit buttons
   render() {
     return (
       <div>

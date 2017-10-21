@@ -58,7 +58,7 @@ export default class UserProfileEnter extends Component {
         <div className="profile_enter_container">
           <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleAddToProfile}>
             <fieldset>
-              <legend>Create a User Profile</legend>
+              <legend>Update Your User Profile</legend>
                 <div className="form-group">
                   <label className="col-md-4 control-label">Full Name</label>
                   <div className="col-md-4 inputGroupContainer">
@@ -137,8 +137,8 @@ export default class UserProfileEnter extends Component {
                     </div>
                   </div>
                 </div>
-                <ul class="list-group list-group-flush band-profile-list">
-                  <li class="list-group-item band-profile-list">
+                <ul className="list-group list-group-flush band-profile-list">
+                  <li className="list-group-item band-profile-list">
                   </li>
                 </ul>
             </fieldset>

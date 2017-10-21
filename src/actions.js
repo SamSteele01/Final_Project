@@ -37,3 +37,12 @@ export const setDoneMakingCalendar = makeActionCreator(SET_DONE_MAKING_CALENDAR)
 export const setCalendarEvents = makeActionCreator(SET_CALENDAR_EVENTS);
 export const setNew = makeActionCreator(SET_NEW);
 export const unsetNew = makeActionCreator(UNSET_NEW);
+
+const dispatchActions = function (actionType) {
+  return function (payload) {
+    return {
+      type: actionType,
+      payload: payload // list of actions, or object of all key:values to update
+    }
+  }
+}
