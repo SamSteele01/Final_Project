@@ -53,7 +53,7 @@ class App extends Component {
 
   navViewExistingEvent(bandsId, eventId){
     console.log(" Nav to existing. BandsId: "+bandsId+" EventId: "+eventId);
-    debugger
+    // debugger
     this.setState({bandsId: bandsId, eventToken: eventId, displayNew: false});
     // window.location.href = '/event-form';
   }

@@ -113,19 +113,19 @@ export default class BandProfileEnter extends Component {
                 <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" className="card-link">Link to a new w9</a>
               </li>
               <li className="list-group-item band-profile-list">
-                <ImageUploader targetKey={"w9"} label={"Upload your w9"}/>
+                <ImageUploader targetKey={"w9"} label={"Upload your w9"} bandsId={this.props.bandsId}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Stage Plot</a> */}
-                <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot"}/>
+                <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot"} bandsId={this.props.bandsId}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Input List</a> */}
-                <ImageUploader targetKey={"input_list"} label={"Upload your Input List"}/>
+                <ImageUploader targetKey={"input_list"} label={"Upload your Input List"} bandsId={this.props.bandsId}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Promos</a> */}
-                <ImageUploader targetKey={"promo_asset"} label={"Upload your Promo Asset/Image"}/>
+                <ImageUploader targetKey={"promo_asset"} label={"Upload your Promo Asset/Image"} bandsId={this.props.bandsId}/>
               </li>
             </ul>
             {/* <div className="form-group">
