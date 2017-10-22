@@ -66,7 +66,7 @@ export default class EventBandView extends Component {
          this.setState({error: res.body.error});
        }else{
          console.log(res);
-         let data = res.body.event;
+         let data = res.body;
          this.setState({eventInfo: data});
          // setToken('578gh423rebz7zjeno99'); //for testing purposes
        }
