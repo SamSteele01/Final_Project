@@ -33,7 +33,7 @@ export default class ProfilePage extends Component {
     if(this.props.bandsId||this.props.displayNew){
       this.setState({displayBandView: true});
     }
-    console.log(this.props.bandsId+" "+this.props.displayNew);
+    console.log("BandId: "+this.props.bandsId+" displayNew: "+this.props.displayNew);
     this.getProfileInfo()
   }
 

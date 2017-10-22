@@ -40,7 +40,11 @@ export default class EventBandView extends Component {
 
   componentWillMount(){
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
-    console.log(this.props.displayNew);
+    console.log("displayNew: "+this.props.displayNew+" bandsId: "+this.props.bandsId+" eventToken: "+this.props.eventToken);
+
+  }
+
+  componentDidMount(){
     if(!this.props.displayNew&&this.props.bandsId&&this.props.eventToken){
       this.getFormData();
     }
@@ -62,7 +66,7 @@ export default class EventBandView extends Component {
          this.setState({error: res.body.error});
        }else{
          console.log(res);
-         let data = res.body.event;
+         let data = res.body;
          this.setState({eventInfo: data});
          // setToken('578gh423rebz7zjeno99'); //for testing purposes
        }
@@ -79,7 +83,11 @@ export default class EventBandView extends Component {
 
         {this.props.displayNew ?
           <NewFormInput bandsId={this.props.bandsId} noLongerNew={this.props.noLongerNew}/> :
-          <FormInput placeholders={this.state.eventInfo} bandsId={this.props.bandsId}/>
+          <div>
+            {this.state.eventInfo &&
+              <FormInput placeholders={this.state.eventInfo} bandsId={this.props.bandsId}/>
+            }
+          </div>
         }
       </div>
     );
