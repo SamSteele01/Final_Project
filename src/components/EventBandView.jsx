@@ -83,7 +83,11 @@ export default class EventBandView extends Component {
 
         {this.props.displayNew ?
           <NewFormInput bandsId={this.props.bandsId} noLongerNew={this.props.noLongerNew}/> :
-          <FormInput placeholders={this.state.eventInfo} bandsId={this.props.bandsId}/>
+          <div>
+            {this.state.eventInfo &&
+              <FormInput placeholders={this.state.eventInfo} bandsId={this.props.bandsId}/>
+            }
+          </div>
         }
       </div>
     );

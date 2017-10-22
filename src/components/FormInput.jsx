@@ -7,30 +7,30 @@ import AssetToolbar from './AssetToolbar.jsx';
 export default class FormInput extends Component {
   constructor(props) {
     super(props);
-    // this.handleUpdateForm = this.handleUpdateForm.bind(this);
+    this.setUsedImages = this.setUsedImages.bind(this);
 
     this.state = {
-      date: "",
-      venue: "",
-      city: "",
-      state: "",
-      dos_contact: "",
-      parking: "",
-      load_in_time: "",
-      load_in_location: "",
-      door_time: "",
-      set_time: "",
-      backline: "",
-      hospitality: "",
-      green_room: "",
-      showers: "",
-      laundry: "",
-      wifi: "",
-      misc: "",
-      w9: "",
-	    stage_plot: "",
-      input_list: "",
-      hospitality_rider: ""
+      date: this.props.placeholders.date,
+      venue: this.props.placeholders.venue,
+      city: this.props.placeholders.city,
+      state: this.props.placeholders.state,
+      dos_contact: this.props.placeholders.dos_contact,
+      parking: this.props.placeholders.parking,
+      load_in_time: this.props.placeholders.load_in_time,
+      load_in_location: this.props.placeholders.load_in_location,
+      door_time: this.props.placeholders.door_time,
+      set_time: this.props.placeholders.set_time,
+      backline: this.props.placeholders.backline,
+      hospitality: this.props.placeholders.hospitality,
+      green_room: this.props.placeholders.green_room,
+      showers: this.props.placeholders.showers,
+      laundry: this.props.placeholders.laundry,
+      wifi: this.props.placeholders.wifi,
+      misc: this.props.placeholders.misc,
+      w9: this.props.placeholders.w9,
+	    stage_plot: this.props.placeholders.stage_plot,
+      input_list: this.props.placeholders.input_list,
+      hospitality_rider: this.props.placeholders.hospitality_rider
     }
   }
 
@@ -43,6 +43,10 @@ export default class FormInput extends Component {
     return (event) => {
       this.setState({[stateKey]: event.target.value});
     }
+  }
+
+  setUsedImages(){
+
   }
 
  handleUpdateForm = (event) => {
@@ -68,7 +72,12 @@ export default class FormInput extends Component {
     showers: this.state.showers,
     laundry: this.state.laundry,
     wifi: this.state.wifi,
-    misc: this.state.misc})
+    misc: this.state.misc,
+    w9: "",
+    stage_plot: "",
+    input_list: "",
+    hospitality_rider: ""
+    })
     .set('Authorization', `Token token=${this.state.token}`)
     .end((err, res) =>{
       if(err) {
@@ -82,7 +91,7 @@ export default class FormInput extends Component {
   render() {
     return (
       <div>
-        <AssetToolbar bandsId={this.props.bandsId}/>
+        <AssetToolbar bandsId={this.props.bandsId} setUsedImages={this.setUsedImages}/>
         {this.props.placeholders &&
         <form onSubmit={this.handleUpdateForm}>
         <div className="form-group">
