@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "auth0-js": "^8.10.1",
+    "history": "^4.7.2",
     "immutability-helper": "^2.4.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
@@ -15,6 +16,7 @@
     "react-global": "^0.1.8",
     "react-images-upload": "^1.1.1",
     "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
     "react-transition-group": "^2.2.1",
