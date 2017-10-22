@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import FormInput from './FormInput.jsx';
-import AssetToolbar from './AssetToolbar.jsx';
+
 import cookie from 'react-cookies';
 import request from 'superagent';
 import NewFormInput from './NewFormInput.jsx';
-
 
 export default class EventBandView extends Component {
 // displays the asset tool bar on the side of the page.
@@ -38,18 +37,19 @@ export default class EventBandView extends Component {
       userId: null
     }
   }
+
   componentWillMount(){
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
-    if(!this.props.new){
+    console.log(this.props.displayNew);
+    if(!this.props.displayNew&&this.props.bandsId&&this.props.eventToken){
       this.getFormData();
     }
   }
 
-
   getFormData(){
   //needs to post to the DB and call an action for redux
   //  event.preventDefault();
-   let userId = this.props.userId; //or from Redux
+   let userId = this.state.userId; //or from Redux
    let bandsId = this.props.bandsId;
    let eventId = this.props.eventToken; //may need to change
     request
@@ -62,8 +62,8 @@ export default class EventBandView extends Component {
          this.setState({error: res.body.error});
        }else{
          console.log(res);
-         let Data = res.body.event;
-         this.setState({eventInfo: Data});
+         let data = res.body.event;
+         this.setState({eventInfo: data});
          // setToken('578gh423rebz7zjeno99'); //for testing purposes
        }
      })
@@ -73,10 +73,13 @@ export default class EventBandView extends Component {
   render() {
     return (
       <div>
-        <AssetToolbar bandId={this.props.bandId}/>
-        {this.props.new ?
-          <NewFormInput /> :
-          <FormInput placeholders={this.state.eventInfo}/>
+        {/* {this.props.displayNew &&
+          <Dropdown/>
+        } */}
+
+        {this.props.displayNew ?
+          <NewFormInput bandsId={this.props.bandsId} noLongerNew={this.props.noLongerNew}/> :
+          <FormInput placeholders={this.state.eventInfo} bandsId={this.props.bandsId}/>
         }
       </div>
     );
@@ -84,4 +87,7 @@ export default class EventBandView extends Component {
 }
 
 EventBandView.propTypes = {
+  // bandsId: PropTypes.number,
+  // displayNew: PropTypes.bool,
+  // eventToken: PropTypes.node
 };

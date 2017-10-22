@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import request from 'superagent';
 import cookie from 'react-cookies';
+import NewBandProfileEnter from './NewBandProfileEnter.jsx';
 import BandProfileEnter from './BandProfileEnter.jsx';
 import UserProfileEnter from './UserProfileEnter.jsx';
 import {connect} from 'react-redux';
@@ -18,6 +19,7 @@ export default class ProfilePage extends Component {
       profileInfo: null
     }
   }
+  // this.props = displayNew, bandsId
 
   componentWillMount() {
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')});
@@ -28,29 +30,28 @@ export default class ProfilePage extends Component {
     if(this.state.token===null){
       window.location.href = "/";
     }
-    if(this.props.bandsId){
-      console.log(this.props.bandsId);
-      this.setState({displayBandView: true, bandsId: this.props.bandsId});
+    if(this.props.bandsId||this.props.displayNew){
+      this.setState({displayBandView: true});
     }
+    console.log(this.props.bandsId+" "+this.props.displayNew);
     this.getProfileInfo()
   }
 
-// need to check if this is a profile for a user or a band. Should pass as props.source
-  fxnToCheckIfThisIsTheProfileOfTheUser(){
-    if(this.props.userProfile){
-
-    }
-  }
+// need to check if this is a profile for a user or a band. Should pass as props.source. Not needed for MVP
+  // fxnToCheckIfThisIsTheProfileOfTheUser(){
+  //   if(this.props.userProfile){
+  //   }
+  // }
 
   createUrlForPatch(){
     let userId = this.state.userId;
     let url = ``;
     // if no bandId then just a URL for the user
-    if(!this.props.bandId){
+    if(!this.props.bandsId){
       url = `https://ez-tour.herokuapp.com/users/${userId}`;
     }
-    if(this.props.bandId){
-      let bandsId = this.props.bandId;
+    if(this.props.bandsId){
+      let bandsId = this.props.bandsId;
       url = `https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}`;
     }
     return url;
@@ -86,8 +87,13 @@ export default class ProfilePage extends Component {
           <div><button className="button create-new-event-button"><Link to="/event-form">Create New Event</Link></button></div>
         </div>
         {this.state.displayBandView ?
-          <BandProfileEnter profileInfo={this.state.profileInfo}/> :
-          <UserProfileEnter profileInfo={this.state.profileInfo}/>
+          <div>
+            {this.props.displayNew ?
+              <NewBandProfileEnter/> :
+              <BandProfileEnter profileInfo={this.state.profileInfo} bandsId={this.props.bandsId}/>
+            }
+          </div>:
+          <UserProfileEnter profileInfo={this.state.profileInfo}/> //userId from cookie
         }
       </div>);
 

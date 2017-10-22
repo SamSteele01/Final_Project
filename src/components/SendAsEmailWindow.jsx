@@ -44,7 +44,7 @@ export default class SendAsEmailWindow extends Component {
 // with a z-index in CSS
   render() {
     return (
-      <div>
+      <div className="card send-email-window">
         <form onSubmit={this.sendEmailAddressToBackEnd}>
           {this.state.error &&
           <div className="alert alert-danger" role="alert">

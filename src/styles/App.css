@@ -285,3 +285,24 @@
   bottom: 0px;
   background-color: black;
 }
+
+.send-email-window {
+  height: 300px;
+  width: 80vw;
+  z-index: 2;
+  position: absolute;
+}
+
+.thumbnail-holder {
+  display: flex;
+  justify-content: center;
+  padding: 0 auto;
+  height: 100px;
+  width: 25vw;
+}
+
+.img-thumbnail {
+  /*margin: 10px;*/
+  height: 100px;
+  width: 100px;
+}

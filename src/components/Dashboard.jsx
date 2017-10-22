@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link, Redirect, withRouter} from 'react-router-dom';
+import { browserHistory } from 'react-router';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import BigCalendar from 'react-big-calendar';
+import {bindAll} from 'lodash';
 import moment from 'moment';
 import request from 'superagent';
 import cookie from 'react-cookies';
@@ -14,78 +16,65 @@ let formats = {
   dateFormat: 'dd'
 }
 
-class Dashboard extends Component {
+export default class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
-    this.navigateToEvent = this.navigateToEvent.bind(this);
 
     this.state = {
       token: null,
       error: null,
-      dropdownOpen: false,
+      eventDropdownOpen: false,
+      profileDropdownOpen: false,
       userId: null, //from login. May just be this.props.userId
       bandsArray: null, //array of band objects
       doneMapping: false,
       doneMakingCalendarEvents: false,
       eventsArray: [], //array of objects, from fetch. Has band and user Ids
-      calendarEvents: [
-      // {
-      //   'title': "Collins night club",
-      //   'allDay': true,
-      //   'start': new Date(2017, 9, 13),
-      //   'end': new Date(2017, 9, 13)
-      // },
-      // {
-      //   'title': "Lyman's rockin jazz daddio swingers club",
-      //   'start': new Date(2017, 9, 14, 21, 30 ),
-      //   'end': new Date(2017, 9, 14, 1, 0 ),
-      //   desc: 'Pre-meeting meeting, to prepare for the meeting'
-      // },
-      //
-      // {
-      //   'title': 'Spruill concert hall',
-      //   'start': new Date(2017, 9, 20, 19, 0, ),
-      //   'end': new Date(2017, 9, 20, 21, 30, 0)
-      // },
-      //
-      // {
-      //   'title': 'All Things Open',
-      //   'start': new Date(2017, 9, 23, 0, 0, 0),
-      //   'end': new Date(2017, 9, 25, 0, 0, 0)
-      // },
-      // {
-      //   'title': 'Demo Day',
-      //   'start': new Date(2017, 9, 25),
-      //   'end': new Date(2017, 9, 25),
-      //   desc: 'Big conference for important people'
-      // }
-      ]
+      calendarEvents: []
     }
+    bindAll(this, 'navigateToEvent', 'toggleEventDropdown', 'toggleProfileDropdown');
   }
+
+  // props = {
+  //   userId: null,
+  //   bandsId: null,
+  //   event_token: null,
+  //   doneMakingCalendarEvents: false,
+  //   calendarEvents: [],
+  //   displayNew: false
+  // }
 
   componentWillMount(){
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
+    if(this.props.confirmDone&&this.props.calendarEvents){
+      this.setState({doneMapping: true, doneMakingCalendarEvents: true, calendarEvents: this.props.calendarEvents});
+    }else{
+      this.setState({doneMapping: false, doneMakingCalendarEvents: false});
+    }
   }
 
   componentDidMount(){
     if(this.state.token===null){
       window.location.href = "/";
     }else{
-    this.fetchAllEventsForUser(this.state.userId);
+      if(!this.state.eventsArray.length>0){
+        this.fetchAllEventsForUser(this.state.userId);
+      }
     this.fetchFullnameForUser(this.state.userId);
     this.fetchAllBandsForUser(this.state.userId);
     }
   }
 
   fetchAllEventsForUser(userId){
-    request
-      .get(`https://ez-tour.herokuapp.com/users/${userId}/my_events`)
-      .set('Authorization', `Token token=${this.state.token}`)
-      .end((err, res) => {
-        let data = res.body.events;
-        this.setState({eventsArray: data});
-      });
+    // if(!this.state.doneMapping){
+      request
+        .get(`https://ez-tour.herokuapp.com/users/${userId}/my_events`)
+        .set('Authorization', `Token token=${this.state.token}`)
+        .end((err, res) => {
+          let data = res.body.events;
+          this.setState({eventsArray: data});
+        });
+    // }
   }
 
   fetchFullnameForUser(userId){
@@ -133,10 +122,8 @@ class Dashboard extends Component {
 //   }
 //
   createCalendarEvents = (arrayOfEvents) => {
-    console.log(arrayOfEvents);
     let calendarEventArray = this.state.calendarEvents;
     let calEvents = arrayOfEvents.map((event) =>{
-      console.log(event);
       return( calendarEventArray.push(this.createSingleEvent(event)))
     })
     this.setState({calendarEvents: calendarEventArray})
@@ -150,7 +137,6 @@ class Dashboard extends Component {
       'bandId': theDeets.band_id,
       'eventId': theDeets.id
     };
-    console.log(eventObject);
     return eventObject
   }
 
@@ -159,38 +145,49 @@ class Dashboard extends Component {
   // }
 
   componentDidUpdate(){
+    if(this.state.doneMakingCalendarEvents&&!this.props.confirmDone){
+      this.props.doneMakingCalendarEvents(this.state.calendarEvents);
+    }
     if(this.state.eventsArray.length>0 && this.state.doneMapping && !this.state.doneMakingCalendarEvents){
-      console.log(this.state.eventsArray);
       // debugger
       this.createCalendarEvents(this.state.eventsArray);
+      console.log(this.state.eventsArray);
       console.log(this.state.calendarEvents);
       this.setState({doneMakingCalendarEvents: true});
       // this.props.setBandList(this.state.calendarEvents); redux action
     }
-    if(this.state.eventsArray && !this.state.doneMapping){
+    if(this.state.eventsArray.length>0 && !this.state.doneMapping){
       this.setState({doneMapping: true});
     }
   }
 
-  toggle() {
+  toggleEventDropdown() {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+      eventDropdownOpen: !this.state.eventDropdownOpen
+    });
+  }
+
+  toggleProfileDropdown() {
+    this.setState({
+      profileDropdownOpen: !this.state.profileDropdownOpen
     });
   }
 
   navigateToEvent(event){
     console.log("Event "+event.eventId+" has been clicked.");
-    this.props.setBand(event.bandId);
-    this.props.setEvent(event.eventId);
-    window.location.href = '/event-form';
+    // this.props.setBand(event.bandId);
+    this.props.navViewExistingEvent(event.bandId, event.eventId);
+    // to='/event-form';
+     withRouter(({ history}) => {() => { history.push('//event-form') }});
   }
 
-  displayDropdowns(){
+  displayDropdowns(navTo, fxnName){
     if(this.state.bandsArray){
       let bandNameDropdownItem = this.state.bandsArray.map((band, index) => {
         return(
-          <DropdownItem key={index}><Link to="/profile-page" onClick={event => this.props.setBand(band.id)}>{band.name}</Link></DropdownItem>
-          // need to pass bandId and userProfile to redux
+          <DropdownItem key={index}>
+            <Link to={navTo} onClick={event => fxnName(band.id)}>{band.name}</Link>
+          </DropdownItem>
         )
       })
       return(
@@ -209,20 +206,28 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <div className="d-flex justify-content-between">
-          <div><button className="button create-new-event-button"><Link to={{ pathname: "/event-form", state: {newEvent: true}}}>Create New Event</Link></button></div>
+          {/* <div><button className="button create-new-event-button"><Link to="/event-form" onClick={event => this.props.navCreateNewEvent(event)} >Create New Event</Link></button></div> */}
+          <Dropdown className="button create-new-event-button" isOpen={this.state.eventDropdownOpen} toggle={this.toggleEventDropdown}>
+             <DropdownToggle caret color="secondary">
+               Create New Event
+             </DropdownToggle>
+             <DropdownMenu>
+               {this.displayDropdowns("/event-form", this.props.navCreateNewEvent)}
+               <DropdownItem>
+               </DropdownItem>
+             </DropdownMenu>
+          </Dropdown>
           <h1>Dashboard</h1>
           <div>
-            <div><button className="button create-new-event-button"><Link to="/profile-page">Create New Band</Link></button></div>
-            <Dropdown className="button create-new-event-button" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-               <DropdownToggle caret className="button create-new-event-button">
+            <div><button className="button create-new-event-button"><Link to="/profile-page" onClick={event => this.props.navCreateNewBand(event)} >Create New Band</Link></button></div>
+            <Dropdown color="secondary" isOpen={this.state.profileDropdownOpen} toggle={this.toggleProfileDropdown}>
+               <DropdownToggle caret color="secondary">
                  Edit Profile
                </DropdownToggle>
                <DropdownMenu right>
-                 {/* <DropdownItem header>Header</DropdownItem> */}
-                 {/* <DropdownItem disabled>Action</DropdownItem> */}
-                 <DropdownItem><Link to={{ pathname: "/profile-page", state: { userProfile: true} }}>{this.state.fullName}</Link></DropdownItem>
+                 <DropdownItem><Link to="/profile-page" onClick={event => this.props.navUpdateUserProfile(this.state.userId)} >{this.state.fullName}</Link></DropdownItem>
                  <DropdownItem divider />
-                 {this.displayDropdowns()}
+                 {this.displayDropdowns("/profile-page", this.props.navUpdateBandProfile)}
                </DropdownMenu>
             </Dropdown>
           </div>
@@ -240,17 +245,17 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = function(state) {
-    return {setBand: state.setBand}
-}
-
-const mapDispatchToProps = function(dispatch) {
-    return {
-        setBand: function(filter) {
-            dispatch(setBand(filter));
-        }
-    }
-}
+// const mapStateToProps = function(state) {
+//     return {setBand: state.setBand}
+// }
+//
+// const mapDispatchToProps = function(dispatch) {
+//     return {
+//         setBand: function(filter) {
+//             dispatch(setBand(filter));
+//         }
+//     }
+// }
 
 // const mapStateToProps = function(state) {
 //     return {setBand: state.setBand}
@@ -262,8 +267,8 @@ const mapDispatchToProps = function(dispatch) {
 //         setEvent: (filter) =>  dispatch(setEvent(filter))
 //     }
 // )
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
 
 
 Dashboard.propTypes = {

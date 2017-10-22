@@ -32,8 +32,9 @@ export default class EventForm extends Component {
 
   // apply props to conditionally render either EventBandView or EventVenueView
   componentWillMount(){ //finish writing!
-
-    // fxnToGrabTokenFromUrl();
+    if(this.props.displayNew || this.props.bandsId){
+      this.setState({displayBandView: true});
+    }
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')});
   }
 
@@ -41,6 +42,7 @@ export default class EventForm extends Component {
     if(!this.state.token || this.state.eventTokenFromHash){
       window.location.href = "/";
     }
+    console.log(this.props.bandsId+" "+this.props.eventToken+" "+this.props.displayNew);
   }
 
   toggle() {
@@ -49,15 +51,15 @@ export default class EventForm extends Component {
     });
   }
 
-// h1 should be new event if coming from button, should be event if coming from calendar,
+// if displayNew then dropdown needs to show list of bands. If only one, then auto select. Pass displayButtons as props.
   render() {
     return (
       <div>
       {/* <ProfileMini/> */}
         <div className="d-flex justify-content-between">
           <div><button className="button create-new-event-button"><Link to="/dashboard">Dashboard</Link></button></div>
-          {this.props.new ?
-            <h1>New Event</h1> :
+          {this.props.displayNew ?
+            <h1>New Event for</h1> :
             <h1>Scheduled Event</h1>
           }
           <div>
@@ -76,7 +78,7 @@ export default class EventForm extends Component {
           </div>
         </div>
         {this.state.displayBandView ?
-          <EventBandView bandId={this.props.bandId} new={this.props.new} eventToken={this.props.eventToken}/> :
+          <EventBandView bandsId={this.props.bandsId} displayNew={this.props.displayNew} eventToken={this.props.eventToken} noLongerNew={this.props.noLongerNew}/> :
           <EventVenueView eventToken={this.state.eventTokenFromHash}/>
         }
       </div>
@@ -84,4 +86,6 @@ export default class EventForm extends Component {
   }
 }
 EventForm.propTypes = {
+  // displayNew.boolean
+  // bandsId.number
 };

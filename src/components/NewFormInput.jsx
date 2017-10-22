@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import request from 'superagent';
 import cookie from 'react-cookies';
 import SendAsEmailWindow from './SendAsEmailWindow.jsx';
+import AssetToolbar from './AssetToolbar.jsx';
+
 export default class NewFormInput extends Component {
   constructor(props) {
     super(props);
@@ -28,15 +30,20 @@ export default class NewFormInput extends Component {
       laundry: "",
       wifi: "",
       misc: "",
-      w9: "",
-	    stage_plot: "",
-      input_list: "",
-      hospitality_rider: ""
+      w9: "", //Should be URLs passed up from asset-toolbar
+	    stage_plot: "", //Should be URLs passed up from asset-toolbar
+      input_list: "", //Should be URLs passed up from asset-toolbar
+      hospitality_rider: "" //Should be URLs passed up from asset-toolbar
     }
   }
 
   componentWillMount(){
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
+    console.log("loading NewFormInput");
+  }
+
+  setImageAssets(stateKey){
+
   }
 
   updateFromField(stateKey) {
@@ -45,10 +52,11 @@ export default class NewFormInput extends Component {
     }
   }
 
+// maybe post should go in EventBandView. Need to pass up {}
  handleUpdateForm = (event) => {
  //needs to post to the DB and call an action for redux
   event.preventDefault();
-  let userId = this.props.userId;
+  let userId = this.state.userId;
   let bandsId = this.props.bandsId;
    request
     .post(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
@@ -69,25 +77,29 @@ export default class NewFormInput extends Component {
     laundry: this.state.laundry,
     wifi: this.state.wifi,
     misc: this.state.misc})
-    .set('Authorization', `Token token=${this.props.token}`)
+    .set('Authorization', `Token token=${this.state.token}`)
     .end((err, res) =>{
       if(err) {
-        this.setState({error: res.body.error});
+        console.log(err);
+        // this.setState({error: res.body.error});
       }else{
-        //save the form
-        // this.props.setEventInfo(); //Redux??
+        console.log(res);
+        // reroute to FormInput
+        // this.props.noLongerNew();
       }
     })
  }
 
- displayEmailWindow(){
-  //  render a <SendAsEmailWindow/> with a z-index
-  this.setState({displayEmailWindow: !this.state.displayEmailWindow});
- }
+ // displayEmailWindow(event){
+ //  //  render a <SendAsEmailWindow/> with a z-index
+ //    event.preventDefault();
+ //    this.setState({displayEmailWindow: !this.state.displayEmailWindow});
+ // }
 
   render() {
     return (
       <div>
+        <AssetToolbar bandsId={this.props.bandsId} passUpUrls={this.setImageAssets}/>
         <form>
         <div className="form-group">
           <label htmlFor="date">Date of Event</label>
@@ -186,15 +198,16 @@ export default class NewFormInput extends Component {
           <button onClick={event => this.handleUpdateForm(event)} type="submit" className="btn btn-success">Save & Submit</button>
         {/* </div>
         <div className="form-group"> */}
-          <button onClick={event => this.displayEmailWindow(event)} type="submit" className="btn btn-success">Email Form</button>
         </div>
-        </form>
+        {/* <button onClick={event => this.displayEmailWindow(event)} type="submit" className="btn btn-success">Email Form</button>
         {this.state.displayEmailWindow ?
-          <SendAsEmailWindow/> :
+          <SendAsEmailWindow closeWindow={event => this.displayEmailWindow(event)}/> :
           null
-        }
+        } */}
+        </form>
       </div>);
   }
 }
 NewFormInput.propTypes = {
+  // bandsId: propTypes.number,
 };

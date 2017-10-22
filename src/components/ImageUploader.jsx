@@ -11,6 +11,7 @@ export default class ImageUploader extends Component {
       token: null,
       userId: null,
       data_uri: null,
+      uploaded_uri: this.props.currentImage,
       processing: false
     }
     bindAll(this, 'handleFile', 'handleSubmit', 'createUrlForPatch');
@@ -18,6 +19,7 @@ export default class ImageUploader extends Component {
 
   componentWillMount(){
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
+    console.log(this.props.bandsId+" "+this.props.targetKey);
   }
 
   // needs userId and bandId as props to fill in the URL for the patch. Needs key for file to patch.
@@ -25,11 +27,11 @@ export default class ImageUploader extends Component {
     let userId = this.state.userId;
     let url = ``;
     // if no bandId then just a URL for the user
-    if(!this.props.bandId){
+    if(!this.props.bandsId){
       url = `https://ez-tour.herokuapp.com/users/${userId}`;
     }
-    if(this.props.bandId){
-      let bandsId = this.props.bandId;
+    if(this.props.bandsId){
+      let bandsId = this.props.bandsId;
       url = `https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}`;
     }
     return url;
@@ -38,6 +40,7 @@ export default class ImageUploader extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let uploadTargetKey = this.props.targetKey;
+    // let thumb = `res.body.${uploadTargetKey}`;
     this.setState({
       processing: true
     });
@@ -57,7 +60,7 @@ export default class ImageUploader extends Component {
           console.log(res);
           this.setState({
           processing: false,
-          uploaded_uri: this.state.data_uri
+          uploaded_uri: eval(`res.body.${uploadTargetKey}`)
           });
         }
       });
@@ -68,9 +71,9 @@ export default class ImageUploader extends Component {
     const file = e.target.files[0];
     reader.onload = (upload) => {
       this.setState({
-        data_uri: upload.target.result,
-        filename: file.name,
-        filetype: file.type
+        data_uri: upload.target.result
+        // filename: file.name,
+        // filetype: file.type
       });
     };
     reader.readAsDataURL(file);
@@ -81,10 +84,10 @@ export default class ImageUploader extends Component {
     let uploaded;
     if (this.state.uploaded_uri) {
       uploaded = (
-        <div>
-          <h4>Image uploaded!</h4>
-          <img className='image-preview' src={this.state.uploaded_uri} />
-          <pre className='image-link-box'>{this.state.uploaded_uri}</pre>
+        <div >
+          {/* <h4>Image uploaded!</h4> */}
+          <img className='image-preview img-thumbnail' src={this.state.uploaded_uri} />
+          {/* <pre className='image-link-box'>{this.state.uploaded_uri}</pre> */}
         </div>
       );
     }
@@ -92,15 +95,19 @@ export default class ImageUploader extends Component {
       processing = "Processing image, hang tight";
     }
     return (
-      <div className='row'>
-        <div className='col-sm-12'>
-          <label>{this.props.label}</label>
-          <form onSubmit={this.handleSubmit} encType="multipart/form-data">
-            <input type="file" onChange={this.handleFile} />
-            <input disabled={this.state.processing} className='btn btn-primary' type="submit" value="Upload" />
-            {processing}
-          </form>
-          {uploaded}
+      <div className='card-block col-sm-12'>
+        <div className='row justify-content-around'>
+          <div>
+            <label>{this.props.label}</label>
+            <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+              <input type="file" onChange={this.handleFile} />
+              <input disabled={this.state.processing} className='btn btn-primary' type="submit" value="Upload" />
+            </form>
+          </div>
+          {processing}
+          <div className="thumbnail-holder">
+            {uploaded}
+          </div>
         </div>
       </div>
     );

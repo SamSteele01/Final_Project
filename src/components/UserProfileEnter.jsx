@@ -12,18 +12,17 @@ export default class UserProfileEnter extends Component {
     this.state = {
       token: null,
       userId: null,
-      full_name: '',
-      telephone: '',
-      email: '',
-      password: '',
+      full_name: null,
+      telephone: null,
+      email: null,
+      avatar: null,
       // address: '',
       // city: '',
       // state: '',
       // zipcode: '',
       // website: '',
       // info: '',
-      // data_uri: null,
-      // processing: false
+      userInfo: null
     };
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
@@ -31,8 +30,11 @@ export default class UserProfileEnter extends Component {
   }
 
   componentWillMount(){
-    this.setState({token: cookie.load('token')}); //get token from cookie, if it exists
-    this.setState({userId: cookie.load('userId')}); //get token from cookie, if it exists
+    this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
+  }
+
+  componentDidMount(){
+    this.getUserInfo();
   }
 
   updateFromField(stateKey) {
@@ -41,30 +43,59 @@ export default class UserProfileEnter extends Component {
     }
   }
 
+  getUserInfo(){
+    let userId = this.state.userId;
+    request
+      .get(`https://ez-tour.herokuapp.com/users/${userId}`)
+      .set('Authorization', `Token token=${this.state.token}`)
+      .end((err, res) => {
+        if(err) {
+          this.setState({error: res.body.error});
+        }
+        if(res){
+          this.setState({full_name: res.body.full_name,
+          telephone: res.body.telephone,
+          email: res.body.email,
+          avatar: res.body.avatar})
+        }
+      });
+  }
+
 // may be posting to a user or a bands DB. Need to have a dynamic/conditional route
-  handleAddToProfile(){
+  handleAddToProfile(event){
+    event.preventDefault();
     let userId = this.state.userId;
     request
       .patch(`https://ez-tour.herokuapp.com/users/${userId}`)
       .send({full_name: this.state.full_name, telephone: this.state.telephone, email: this.state.email, password: this.state.password})
       .set('Authorization', `Token token=${this.state.token}`)
       .end((err, res) => {
+        if(err) {
+          this.setState({error: res.body.error});
+        }
+        if(res){
+          console.log(res);
+          debugger
+        }
       });
   }
 
   render() {
     return (
       <div>
+        {this.state.full_name &&
         <div className="profile_enter_container">
-          <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleAddToProfile}>
+          <form className="well form-horizontal" method="post"  id="contact_form">
             <fieldset>
-              <legend>Create a User Profile</legend>
+              <legend>Update Your User Profile</legend>
                 <div className="form-group">
                   <label className="col-md-4 control-label">Full Name</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       <span className="input-group-addon"><i className="glyphicon glyphicon-user" aria-hidden="true" ></i></span>
-                      <input  name="full_name" placeholder="Full Name" className="form-control"  type="text" onChange={this.updateFromField('full_name')}value={this.state.full_name}/>
+                      <input  name="full_name"
+                        // placeholder={this.state.userInfo.full_name}
+                        className="form-control"  type="text" onChange={this.updateFromField('full_name')} value={this.state.full_name}/>
                     </div>
                   </div>
                 </div>
@@ -73,7 +104,9 @@ export default class UserProfileEnter extends Component {
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       <span className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></span>
-                      <input name="email" placeholder="E-Mail Address" className="form-control"  type="email" onChange={this.updateFromField('email')} value={this.state.email}/>
+                      <input name="email"
+                        // placeholder={this.state.userInfo.email}
+                        className="form-control"  type="email" onChange={this.updateFromField('email')} value={this.state.email}/>
                     </div>
                   </div>
                 </div>
@@ -82,7 +115,9 @@ export default class UserProfileEnter extends Component {
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span>
-                      <input name="phone" placeholder="(xxx) xxx-xxxx" className="form-control" type="tel" maxLength="14" onChange={this.updateFromField('phone')} value={this.state.phone}/>
+                      <input name="phone"
+                        // placeholder={this.state.userInfo.telephone}
+                        className="form-control" type="tel" maxLength="14" onChange={this.updateFromField('telephone')} value={this.state.telephone}/>
                     </div>
                   </div>
                 </div>
@@ -133,18 +168,19 @@ export default class UserProfileEnter extends Component {
                 <div className="form-group">
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
-                      <button type="button" className="btn btn-primary">Submit</button>
+                      <button onClick={event => this.handleAddToProfile(event)} type="submit" className="btn btn-primary">Submit</button>
                     </div>
                   </div>
                 </div>
-                <ul class="list-group list-group-flush band-profile-list">
-                  <li class="list-group-item band-profile-list">
+                {/* <ul className="list-group list-group-flush band-profile-list">
+                  <li className="list-group-item band-profile-list">
                   </li>
-                </ul>
+                </ul> */}
             </fieldset>
           </form>
-          <ImageUploader targetKey={"avatar"} />
+          <ImageUploader targetKey={"avatar"} label={"Upload your Avatar Image"} currentImage={this.state.avatar}/>
         </div>
+        }
       </div>
 
     )}
