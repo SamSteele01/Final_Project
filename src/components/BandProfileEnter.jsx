@@ -9,23 +9,22 @@ export default class BandProfileEnter extends Component {
     this.state = {
       token: null,
       userId: null,
-      name: '',
-      vehicle: '',
-      num_members: '',
-      num_crew: '',
-      // email: '',
-      // phone: '',
-      // address: '',
-      // city: '',
-      // state: '',
-      // zipcode: '',
-      // website: '',
-      // info: '',
-      avatar: [],
-      w9: '',
-      stage_plot: '',
-      input_list: '',
-      promo_asset: ''
+      name: null,
+      vehicle: null,
+      num_members: null,
+      num_crew: null,
+      // email: null,
+      // phone: null,
+      // address: null,
+      // city: null,
+      // state: null,
+      // zipcode: null,
+      // website: null,
+      // info: null,
+      w9: null,
+      stage_plot: null,
+      input_list: null,
+      hospitality_rider: null
     };
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
@@ -57,22 +56,22 @@ export default class BandProfileEnter extends Component {
         }
         if(res){
           this.setState({
-            name: '',
-            vehicle: '',
-            num_members: '',
-            num_crew: '',
-            // email: '',
-            // phone: '',
-            // address: '',
-            // city: '',
-            // state: '',
-            // zipcode: '',
-            // website: '',
-            // info: '',
-            w9: '',
-            stage_plot: '',
-            input_list: '',
-            promo_asset: ''
+            name: res.body.name,
+            vehicle: res.body.vehicle,
+            num_members: res.body.num_members,
+            num_crew: res.body.num_crew,
+            // email: res.body.email,
+            // phone: res.body.,
+            // address: res.body.address,
+            // city: res.body.city,
+            // state: res.body.state,
+            // zipcode: res.body.zipcode,
+            // website: res.body.website,
+            // info: res.body.info,
+            w9: res.body.w9,
+            stage_plot: res.body.stage_plot,
+            input_list: res.body.input_list,
+            hospitality_rider: res.body.hospitality_rider
           })
         }
       });
@@ -85,32 +84,34 @@ export default class BandProfileEnter extends Component {
     request
       .patch(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}`)
       .send({
-        name: '',
-        vehicle: '',
-        num_members: '',
-        num_crew: '',
-        // email: '',
-        // phone: '',
-        // address: '',
-        // city: '',
-        // state: '',
-        // zipcode: '',
-        // website: '',
-        // info: '',
-        w9: '',
-        stage_plot: '',
-        input_list: '',
-        promo_asset: ''
+        name: this.state.name,
+        vehicle: this.state.vehicle,
+        num_members: this.state.num_members,
+        num_crew: this.state.num_crew
+        // email: this.state.email,
+        // phone: this.state.phone,
+        // address: this.state.address,
+        // city: this.state.city,
+        // state: this.state.state,
+        // zipcode: this.state.zipcode,
+        // website: this.state.website,
+        // info: this.state.info
       })
       .set('Authorization', `Token token=${this.state.token}`)
       .end((err, res) => {
-
+        if(err) {
+          this.setState({error: res.body.error});
+        }
+        if(res){
+          console.log(res);
+        }
       });
   }
 
   render() {
     return (
       <div>
+        {this.state.name &&
         <div className="profile_enter_container">
           <form className="well form-horizontal" method="post"  id="contact_form">
             <fieldset>
@@ -161,19 +162,19 @@ export default class BandProfileEnter extends Component {
                 <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" className="card-link">Link to a new w9</a>
               </li>
               <li className="list-group-item band-profile-list">
-                <ImageUploader targetKey={"w9"} label={"Upload your w9"} bandsId={this.props.bandsId} currentImage={this.state.userInfo.avatar}/>
+                <ImageUploader targetKey={"w9"} label={"Upload your w9"} bandsId={this.props.bandsId} currentImage={this.state.w9}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Stage Plot</a> */}
-                <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot"} bandsId={this.props.bandsId} currentImage={this.state.userInfo.avatar}/>
+                <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot"} bandsId={this.props.bandsId} currentImage={this.state.stage_plot}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Input List</a> */}
-                <ImageUploader targetKey={"input_list"} label={"Upload your Input List"} bandsId={this.props.bandsId} currentImage={this.state.userInfo.avatar}/>
+                <ImageUploader targetKey={"input_list"} label={"Upload your Input List"} bandsId={this.props.bandsId} currentImage={this.state.input_list}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Promos</a> */}
-                <ImageUploader targetKey={"promo_asset"} label={"Upload your Promo Asset/Image"} bandsId={this.props.bandsId} currentImage={this.state.userInfo.avatar}/>
+                <ImageUploader targetKey={"hospitality_rider"} label={"Upload your Hospitality Rider"} bandsId={this.props.bandsId} currentImage={this.state.hospitality_rider}/>
               </li>
             </ul>
             {/* <div className="form-group">
@@ -230,6 +231,7 @@ export default class BandProfileEnter extends Component {
                  </div>
                </div> */}
         </div>
+        }
       </div>
 
     )}
