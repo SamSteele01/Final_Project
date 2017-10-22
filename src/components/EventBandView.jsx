@@ -40,7 +40,7 @@ export default class EventBandView extends Component {
 
   componentWillMount(){
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
-    console.log(this.props.displayNew);
+    console.log("displayNew: "+this.props.displayNew+" bandsId: "+this.props.bandsId+" eventToken: "+this.props.eventToken);
     if(!this.props.displayNew&&this.props.bandsId&&this.props.eventToken){
       this.getFormData();
     }

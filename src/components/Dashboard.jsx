@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
-import { Link, Redirect, withRouter} from 'react-router-dom';
-import { browserHistory } from 'react-router';
-import 'react-big-calendar/lib/css/react-big-calendar.css'
-import BigCalendar from 'react-big-calendar';
-import {bindAll} from 'lodash';
 import moment from 'moment';
+import {bindAll} from 'lodash';
 import request from 'superagent';
 import cookie from 'react-cookies';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import {connect} from 'react-redux';
+import BigCalendar from 'react-big-calendar';
 import {setBand, setEvent} from "../actions";
+import createHistory from 'history/createBrowserHistory';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { Link, Redirect, withRouter} from 'react-router-dom';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 BigCalendar.momentLocalizer(moment);
 let formats = {
   dateFormat: 'dd'
 }
+
+const history = createHistory();
+const location = history.location;
+// Listen for changes to the current location.
+const unlisten = history.listen((location, action) => {
+  // location is an object like window.location
+  console.log(action, location.pathname, location.state)
+})
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -177,8 +185,12 @@ export default class Dashboard extends Component {
     console.log("Event "+event.eventId+" has been clicked.");
     // this.props.setBand(event.bandId);
     this.props.navViewExistingEvent(event.bandId, event.eventId);
-    // to='/event-form';
-     withRouter(({ history}) => {() => { history.push('//event-form') }});
+    // to='/event-form'; // error
+    //  withRouter(({ history}) => {() => { history.push('/event-form') }}); //does not work
+    // history.push('/event-form'); // not working: see the url change but page does not rerender
+    history.push('/event-form', {bandsId: event.bandId, eventToken: event.eventId, displayNew: false}); // not working: see the url change but page does not rerender
+    debugger
+    history.go(); // gets it to nav, but looses the props
   }
 
   displayDropdowns(navTo, fxnName){

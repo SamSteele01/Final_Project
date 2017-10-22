@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
 import {bindAll} from 'lodash';
 import Dashboard from './Dashboard.jsx';
 import EventForm from './EventForm.jsx';
@@ -8,6 +9,8 @@ import LoginPage from './LoginPage.jsx';
 import ProfilePage from './ProfilePage.jsx';
 import BaseLayout from './BaseLayout.jsx';
 import WelcomePage from './WelcomePage.jsx';
+
+const history = createHistory();
 
 class App extends Component {
   constructor(props) {
@@ -68,7 +71,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <BaseLayout>
           <Switch>
             <Route path='/dashboard' render={(props) => (<Dashboard navCreateNewEvent={this.navCreateNewEvent}
@@ -85,6 +88,7 @@ class App extends Component {
             eventToken={this.state.eventToken}
             noLongerNew={this.noLongerNew}
             />)} />
+            {/* <Route path='/event-form' component={EventForm} /> */}
             <Route path='/profile-page' render={(props) => (<ProfilePage displayNew={this.state.displayNew}
             bandsId={this.state.bandsId}
             />)} />
@@ -92,7 +96,7 @@ class App extends Component {
             <Route path='/' component={WelcomePage} />
           </Switch>
         </BaseLayout>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

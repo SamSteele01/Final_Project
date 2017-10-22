@@ -36,13 +36,13 @@ export default class EventForm extends Component {
       this.setState({displayBandView: true});
     }
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')});
+    console.log("displayNew: "+this.props.displayNew+" bandsId: "+this.props.bandsId+" eventToken: "+this.props.eventToken);
   }
 
   componentDidMount(){
     if(!this.state.token || this.state.eventTokenFromHash){
       window.location.href = "/";
     }
-    console.log(this.props.bandsId+" "+this.props.eventToken+" "+this.props.displayNew);
   }
 
   toggle() {
