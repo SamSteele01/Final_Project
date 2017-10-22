@@ -13,12 +13,13 @@ export default class EventForm extends Component {
     this.toggle = this.toggle.bind(this);
 
     this.state = {
-      newEvent: false,
+      displayNew: false,
       displayBandView: true,
       dropdownOpen: false,
       token: null,
       userId: null,
       bandsId: null,
+      eventToken: null,
       eventTokenFromHash: null
     }
   }
@@ -36,13 +37,16 @@ export default class EventForm extends Component {
       this.setState({displayBandView: true});
     }
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')});
-    console.log("displayNew: "+this.props.displayNew+" bandsId: "+this.props.bandsId+" eventToken: "+this.props.eventToken);
+    console.log("Props: displayNew: "+this.props.displayNew+" bandsId: "+this.props.bandsId+" eventToken: "+this.props.eventToken);
+    console.log("State: displayNew: "+this.state.displayNew+" bandsId: "+this.state.bandsId+" eventToken: "+this.state.eventToken);
   }
 
   componentDidMount(){
     if(!this.state.token || this.state.eventTokenFromHash){
       window.location.href = "/";
     }
+    console.log("Props: displayNew: "+this.props.displayNew+" bandsId: "+this.props.bandsId+" eventToken: "+this.props.eventToken);
+    console.log("State: displayNew: "+this.state.displayNew+" bandsId: "+this.state.bandsId+" eventToken: "+this.state.eventToken);
   }
 
   toggle() {

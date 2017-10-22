@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
-import {Router, Route, Switch} from 'react-router-dom';
+import {MemoryRouter, Router, Route, Switch} from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import {bindAll} from 'lodash';
 import Dashboard from './Dashboard.jsx';
@@ -11,6 +11,7 @@ import BaseLayout from './BaseLayout.jsx';
 import WelcomePage from './WelcomePage.jsx';
 
 const history = createHistory();
+const location = history.location;
 
 class App extends Component {
   constructor(props) {
@@ -58,7 +59,7 @@ class App extends Component {
     console.log(" Nav to existing. BandsId: "+bandsId+" EventId: "+eventId);
     // debugger
     this.setState({bandsId: bandsId, eventToken: eventId, displayNew: false});
-    // window.location.href = '/event-form';
+    history.push('/event-form', {bandsId: bandsId, eventToken: eventId, displayNew: false});
   }
 
   doneMakingCalendarEvents(calendarEvents){
@@ -71,9 +72,10 @@ class App extends Component {
 
   render() {
     return (
+      // <MemoryRouter history={history}> //proxyConsole.js:54 Warning: <MemoryRouter> ignores the history prop. To use a custom history, use `import { Router }` instead of `import { MemoryRouter as Router }`.
       <Router history={history}>
         <BaseLayout>
-          <Switch>
+          {/* <Switch> */}
             <Route path='/dashboard' render={(props) => (<Dashboard navCreateNewEvent={this.navCreateNewEvent}
             navCreateNewBand={this.navCreateNewBand}
             navUpdateUserProfile={this.navUpdateUserProfile}
@@ -93,10 +95,11 @@ class App extends Component {
             bandsId={this.state.bandsId}
             />)} />
             <Route path='/login-page' component={LoginPage} />
-            <Route path='/' component={WelcomePage} />
-          </Switch>
+            <Route exact path='/' component={WelcomePage} />
+          {/* </Switch> */}
         </BaseLayout>
       </Router>
+      // </MemoryRouter>
     );
   }
 }

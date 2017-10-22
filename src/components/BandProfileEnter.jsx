@@ -162,19 +162,19 @@ export default class BandProfileEnter extends Component {
                 <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" className="card-link">Link to a new w9</a>
               </li>
               <li className="list-group-item band-profile-list">
-                <ImageUploader targetKey={"w9"} label={"Upload your w9"} bandsId={this.props.bandsId} currentImage={this.state.w9}/>
+                <ImageUploader targetKey={"w9"} label={"Upload your w9 pdf"} bandsId={this.props.bandsId} currentImage={this.state.w9}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Stage Plot</a> */}
-                <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot"} bandsId={this.props.bandsId} currentImage={this.state.stage_plot}/>
+                <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot pdf"} bandsId={this.props.bandsId} currentImage={this.state.stage_plot}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Input List</a> */}
-                <ImageUploader targetKey={"input_list"} label={"Upload your Input List"} bandsId={this.props.bandsId} currentImage={this.state.input_list}/>
+                <ImageUploader targetKey={"input_list"} label={"Upload your Input List pdf"} bandsId={this.props.bandsId} currentImage={this.state.input_list}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Promos</a> */}
-                <ImageUploader targetKey={"hospitality_rider"} label={"Upload your Hospitality Rider"} bandsId={this.props.bandsId} currentImage={this.state.hospitality_rider}/>
+                <ImageUploader targetKey={"hospitality_rider"} label={"Upload your Hospitality Rider pdf"} bandsId={this.props.bandsId} currentImage={this.state.hospitality_rider}/>
               </li>
             </ul>
             {/* <div className="form-group">

@@ -15,14 +15,14 @@ BigCalendar.momentLocalizer(moment);
 let formats = {
   dateFormat: 'dd'
 }
-
-const history = createHistory();
-const location = history.location;
-// Listen for changes to the current location.
-const unlisten = history.listen((location, action) => {
-  // location is an object like window.location
-  console.log(action, location.pathname, location.state)
-})
+//
+// const history = createHistory();
+// const location = history.location;
+// // Listen for changes to the current location.
+// const unlisten = history.listen((location, action) => {
+//   // location is an object like window.location
+//   console.log(action, location.pathname, location.state)
+// })
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -143,7 +143,7 @@ export default class Dashboard extends Component {
       'start': new Date(theDeets.date),
       'end': new Date(theDeets.date),
       'bandId': theDeets.band_id,
-      'eventId': theDeets.id
+      'eventId': theDeets.event_hash
     };
     return eventObject
   }
@@ -183,14 +183,16 @@ export default class Dashboard extends Component {
 
   navigateToEvent(event){
     console.log("Event "+event.eventId+" has been clicked.");
-    // this.props.setBand(event.bandId);
-    this.props.navViewExistingEvent(event.bandId, event.eventId);
+    this.props.navViewExistingEvent(event.bandId, event.eventId); //setting state in App.js
     // to='/event-form'; // error
     //  withRouter(({ history}) => {() => { history.push('/event-form') }}); //does not work
     // history.push('/event-form'); // not working: see the url change but page does not rerender
-    history.push('/event-form', {bandsId: event.bandId, eventToken: event.eventId, displayNew: false}); // not working: see the url change but page does not rerender
-    debugger
-    history.go(); // gets it to nav, but looses the props
+    // this.props.history.push('/event-form', {bandsId: event.bandId, eventToken: event.eventId, displayNew: false}); // not working: see the url change but page does not rerender
+    // debugger
+    // history.go('/event-form', {bandsId: event.bandId, eventToken: event.eventId, displayNew: false}); // not working: no url change or rerender
+    // history.goForward(); // changes url, does not rerender
+    // this.props.history.push({pathname: '/event-form', state: {bandsId: event.bandId, eventToken: event.eventId, displayNew: false}})
+    // history.go(); // gets it to nav/redirect, but looses the props
   }
 
   displayDropdowns(navTo, fxnName){
