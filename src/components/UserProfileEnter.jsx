@@ -157,13 +157,13 @@ export default class UserProfileEnter extends Component {
                     </div>
                   </div>
                 </div>
-                <ul className="list-group list-group-flush band-profile-list">
+                {/* <ul className="list-group list-group-flush band-profile-list">
                   <li className="list-group-item band-profile-list">
                   </li>
-                </ul>
+                </ul> */}
             </fieldset>
           </form>
-          <ImageUploader targetKey={"avatar"} label={"Upload your Avatar Image"} currentImage={this.state.avatar}/>
+          <ImageUploader targetKey={"avatar"} label={"Upload your Avatar Image"} currentImage={this.state.userInfo.avatar}/>
         </div>
         }
       </div>

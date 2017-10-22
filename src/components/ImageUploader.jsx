@@ -84,9 +84,9 @@ export default class ImageUploader extends Component {
     let uploaded;
     if (this.state.uploaded_uri) {
       uploaded = (
-        <div>
-          <h4>Image uploaded!</h4>
-          <img className='image-preview' src={this.state.uploaded_uri} />
+        <div className="thumbnail-holder">
+          {/* <h4>Image uploaded!</h4> */}
+          <img className='image-preview img-thumbnail' src={this.state.uploaded_uri} />
           {/* <pre className='image-link-box'>{this.state.uploaded_uri}</pre> */}
         </div>
       );
@@ -95,13 +95,15 @@ export default class ImageUploader extends Component {
       processing = "Processing image, hang tight";
     }
     return (
-      <div className='col-sm-12'>
+      <div className='card-block col-sm-12'>
         <div className='row justify-content-around'>
-          <label>{this.props.label}</label>
-          <form onSubmit={this.handleSubmit} encType="multipart/form-data">
-            <input type="file" onChange={this.handleFile} />
-            <input disabled={this.state.processing} className='btn btn-primary' type="submit" value="Upload" />
-          </form>
+          <div>
+            <label>{this.props.label}</label>
+            <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+              <input type="file" onChange={this.handleFile} />
+              <input disabled={this.state.processing} className='btn btn-primary' type="submit" value="Upload" />
+            </form>
+          </div>
           <div>
             {processing}
             {uploaded}
