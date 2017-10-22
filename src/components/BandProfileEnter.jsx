@@ -29,19 +29,53 @@ export default class BandProfileEnter extends Component {
     };
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
-    // this.onDrop = this.onDrop.bind(this);
-    // this.handleUpdateBandProfile = this.handleUpdateBandProfile.bind(this);
   }
 
   componentWillMount(){
-    this.setState({token: cookie.load('token')}); //get token from cookie, if it exists
-    this.setState({userId: cookie.load('userId')}); //get token from cookie, if it exists
+    this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
+  }
+
+  componentDidMount(){
+    this.getBandInfo();
   }
 
   updateFromField(stateKey) {
     return (event) => {
       this.setState({[stateKey]: event.target.value});
     }
+  }
+
+  getBandInfo(){
+    let userId = this.state.userId;
+    let bandsId = this.props.bandsId;
+    request
+      .get(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}`)
+      .set('Authorization', `Token token=${this.state.token}`)
+      .end((err, res) => {
+        if(err) {
+          this.setState({error: res.body.error});
+        }
+        if(res){
+          this.setState({
+            name: '',
+            vehicle: '',
+            num_members: '',
+            num_crew: '',
+            // email: '',
+            // phone: '',
+            // address: '',
+            // city: '',
+            // state: '',
+            // zipcode: '',
+            // website: '',
+            // info: '',
+            w9: '',
+            stage_plot: '',
+            input_list: '',
+            promo_asset: ''
+          })
+        }
+      });
   }
 
 // may be posting to a user or a bands DB. Need to have a dynamic/conditional route
@@ -51,7 +85,22 @@ export default class BandProfileEnter extends Component {
     request
       .patch(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}`)
       .send({
-
+        name: '',
+        vehicle: '',
+        num_members: '',
+        num_crew: '',
+        // email: '',
+        // phone: '',
+        // address: '',
+        // city: '',
+        // state: '',
+        // zipcode: '',
+        // website: '',
+        // info: '',
+        w9: '',
+        stage_plot: '',
+        input_list: '',
+        promo_asset: ''
       })
       .set('Authorization', `Token token=${this.state.token}`)
       .end((err, res) => {
@@ -63,8 +112,7 @@ export default class BandProfileEnter extends Component {
     return (
       <div>
         <div className="profile_enter_container">
-
-          <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleAddToProfile}>
+          <form className="well form-horizontal" method="post"  id="contact_form">
             <fieldset>
               <legend>Update Your Band Profile</legend>
                 <div className="form-group">
@@ -104,7 +152,7 @@ export default class BandProfileEnter extends Component {
                   </div>
                 </div>
                 <div>
-                  <button type="button" className="btn btn-primary ">Submit</button>
+                  <button onClick={this.handleAddToProfile} type="button" className="btn btn-primary ">Submit</button>
                 </div>
               </fieldset>
             </form>
@@ -113,19 +161,19 @@ export default class BandProfileEnter extends Component {
                 <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" className="card-link">Link to a new w9</a>
               </li>
               <li className="list-group-item band-profile-list">
-                <ImageUploader targetKey={"w9"} label={"Upload your w9"} bandsId={this.props.bandsId}/>
+                <ImageUploader targetKey={"w9"} label={"Upload your w9"} bandsId={this.props.bandsId} currentImage={this.state.userInfo.avatar}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Stage Plot</a> */}
-                <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot"} bandsId={this.props.bandsId}/>
+                <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot"} bandsId={this.props.bandsId} currentImage={this.state.userInfo.avatar}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Input List</a> */}
-                <ImageUploader targetKey={"input_list"} label={"Upload your Input List"} bandsId={this.props.bandsId}/>
+                <ImageUploader targetKey={"input_list"} label={"Upload your Input List"} bandsId={this.props.bandsId} currentImage={this.state.userInfo.avatar}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Promos</a> */}
-                <ImageUploader targetKey={"promo_asset"} label={"Upload your Promo Asset/Image"} bandsId={this.props.bandsId}/>
+                <ImageUploader targetKey={"promo_asset"} label={"Upload your Promo Asset/Image"} bandsId={this.props.bandsId} currentImage={this.state.userInfo.avatar}/>
               </li>
             </ul>
             {/* <div className="form-group">

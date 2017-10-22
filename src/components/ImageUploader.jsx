@@ -84,7 +84,7 @@ export default class ImageUploader extends Component {
     let uploaded;
     if (this.state.uploaded_uri) {
       uploaded = (
-        <div className="thumbnail-holder">
+        <div >
           {/* <h4>Image uploaded!</h4> */}
           <img className='image-preview img-thumbnail' src={this.state.uploaded_uri} />
           {/* <pre className='image-link-box'>{this.state.uploaded_uri}</pre> */}
@@ -104,8 +104,8 @@ export default class ImageUploader extends Component {
               <input disabled={this.state.processing} className='btn btn-primary' type="submit" value="Upload" />
             </form>
           </div>
-          <div>
-            {processing}
+          {processing}
+          <div className="thumbnail-holder">
             {uploaded}
           </div>
         </div>
