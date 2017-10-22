@@ -45,7 +45,7 @@ export default class FormInput extends Component {
     }
   }
 
-  setUsedImages(){
+  setImagesToSend(){
 
   }
 
@@ -91,7 +91,7 @@ export default class FormInput extends Component {
   render() {
     return (
       <div>
-        <AssetToolbar bandsId={this.props.bandsId} setUsedImages={this.setUsedImages}/>
+        <AssetToolbar bandsId={this.props.bandsId} setImagesToSend={this.setImagesToSend}/>
         {this.props.placeholders &&
         <form onSubmit={this.handleUpdateForm}>
         <div className="form-group">
