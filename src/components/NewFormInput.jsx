@@ -7,33 +7,33 @@ import AssetToolbar from './AssetToolbar.jsx';
 export default class NewFormInput extends Component {
   constructor(props) {
     super(props);
-    // this.handleUpdateForm = this.handleUpdateForm.bind(this);
+    this.updateFromField = this.updateFromField.bind(this);
 
     this.state = {
       token: null,
       userId: null,
       displayEmailWindow: false,
-      date: "",
-      venue: "",
-      city: "",
-      state: "",
-      dos_contact: "",
-      parking: "",
-      load_in_time: "",
-      load_in_location: "",
-      door_time: "",
-      set_time: "",
-      backline: "",
-      hospitality: "",
-      green_room: "",
-      showers: "",
-      laundry: "",
-      wifi: "",
-      misc: "",
-      w9: "", //Should be URLs passed up from asset-toolbar
-	    stage_plot: "", //Should be URLs passed up from asset-toolbar
-      input_list: "", //Should be URLs passed up from asset-toolbar
-      hospitality_rider: "" //Should be URLs passed up from asset-toolbar
+      date: null,
+      venue: null,
+      city: null,
+      state: null,
+      dos_contact: null,
+      parking: null,
+      load_in_time: null,
+      load_in_location: null,
+      door_time: null,
+      set_time: null,
+      backline: null,
+      hospitality: null,
+      green_room: null,
+      showers: null,
+      laundry: null,
+      wifi: null,
+      misc: null,
+      w9: null, //Should be URLs passed up from asset-toolbar
+	    stage_plot: null, //Should be URLs passed up from asset-toolbar
+      input_list: null, //Should be URLs passed up from asset-toolbar
+      hospitality_rider: null //Should be URLs passed up from asset-toolbar
     }
   }
 
@@ -54,7 +54,6 @@ export default class NewFormInput extends Component {
 
 // maybe post should go in EventBandView. Need to pass up {}
  handleUpdateForm = (event) => {
- //needs to post to the DB and call an action for redux
   event.preventDefault();
   let userId = this.state.userId;
   let bandsId = this.props.bandsId;
@@ -198,9 +197,9 @@ export default class NewFormInput extends Component {
           <button onClick={event => this.handleUpdateForm(event)} type="submit" className="btn btn-success">Save & Submit</button>
         {/* </div>
         <div className="form-group"> */}
+          {/* <button onClick={event => this.displayEmailWindow(event)} type="submit" className="btn btn-success">Email Form</button> */}
         </div>
-        {/* <button onClick={event => this.displayEmailWindow(event)} type="submit" className="btn btn-success">Email Form</button>
-        {this.state.displayEmailWindow ?
+        {/* {this.state.displayEmailWindow ?
           <SendAsEmailWindow closeWindow={event => this.displayEmailWindow(event)}/> :
           null
         } */}
