@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "auth0-js": "^8.10.1",
+    "foobar": "^1.1.0",
     "history": "^4.7.2",
     "immutability-helper": "^2.4.0",
     "jwt-decode": "^2.2.0",
@@ -25,11 +26,10 @@
     "superagent": "^3.6.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "nf start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "postinstall": "bower install && grunt build",
-    "start": "nf start"
+    "postinstall": "bower install && grunt build"
   }
 }
