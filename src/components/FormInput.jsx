@@ -3,13 +3,18 @@ import React, {Component} from 'react';
 import request from 'superagent';
 import cookie from 'react-cookies';
 import AssetToolbar from './AssetToolbar.jsx';
+import SendAsEmailWindow from './SendAsEmailWindow.jsx';
 
 export default class FormInput extends Component {
   constructor(props) {
     super(props);
-    this.setUsedImages = this.setUsedImages.bind(this);
+    this.setImagesToSend = this.setImagesToSend.bind(this);
+    this.createUrlForPatch = this.createUrlForPatch.bind(this);
+    this.handleUpdateForm = this.handleUpdateForm.bind(this);
+    this.displayEmailWindow = this.displayEmailWindow.bind(this);
 
     this.state = {
+      displayEmailWindow: false,
       date: this.props.placeholders.date,
       venue: this.props.placeholders.venue,
       city: this.props.placeholders.city,
@@ -30,13 +35,14 @@ export default class FormInput extends Component {
       w9: this.props.placeholders.w9,
 	    stage_plot: this.props.placeholders.stage_plot,
       input_list: this.props.placeholders.input_list,
-      hospitality_rider: this.props.placeholders.hospitality_rider
+      hospitality_rider: this.props.placeholders.hospitality_rider,
+      eventToken: this.props.placeholders.event_hash
     }
   }
 
   componentWillMount(){
     this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
-    console.log("Loading FormInput. BandsId is: "+this.props.bandsId);
+    console.log("Loading FormInput. BandsId is: "+this.props.bandsId+" Hash is: "+this.props.eventTokenFromHash);
   }
 
   updateFromField(stateKey) {
@@ -45,17 +51,37 @@ export default class FormInput extends Component {
     }
   }
 
-  setUsedImages(){
+  setImagesToSend(){
 
+  }
+
+  displayEmailWindow(){
+   //  render a <SendAsEmailWindow/> with a z-index
+    //  event.preventDefault();
+     this.setState({displayEmailWindow: !this.state.displayEmailWindow});
+  }
+
+  createUrlForPatch(){
+    let url = ``;
+    // if no bandId then just a URL for the user
+    if(this.props.eventTokenFromHash){
+      let hash = this.props.eventTokenFromHash;
+      url = `https://ez-tour.herokuapp.com/events/${hash}`;
+    }
+    if(this.props.bandsId){
+      let userId = this.state.userId;
+      let bandsId = this.props.bandsId;
+      let eventHash = this.state.eventToken;
+      url = `https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events/${eventHash}`;
+    }
+    return url;
   }
 
  handleUpdateForm = (event) => {
  //needs to post to the DB and call an action for redux
   event.preventDefault();
-  let userId = this.state.userId;
-  let bandsId = this.props.bandsId;
    request
-    .patch(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events`)
+    .patch(this.createUrlForPatch())
     .send({date: this.state.date,
     venue: this.state.venue,
     city: this.state.city,
@@ -72,18 +98,19 @@ export default class FormInput extends Component {
     showers: this.state.showers,
     laundry: this.state.laundry,
     wifi: this.state.wifi,
-    misc: this.state.misc,
-    w9: "",
-    stage_plot: "",
-    input_list: "",
-    hospitality_rider: ""
+    misc: this.state.misc
+    // w9: "",
+    // stage_plot: "",
+    // input_list: "",
+    // hospitality_rider: ""
     })
     .set('Authorization', `Token token=${this.state.token}`)
     .end((err, res) =>{
       if(err) {
         this.setState({error: res.body.error});
-      }else{
-
+      }
+      if(res){
+        console.log(res);
       }
     })
  }
@@ -91,109 +118,117 @@ export default class FormInput extends Component {
   render() {
     return (
       <div>
-        <AssetToolbar bandsId={this.props.bandsId} setUsedImages={this.setUsedImages}/>
+        {this.props.bandsId &&
+          <AssetToolbar bandsId={this.props.bandsId} setImagesToSend={this.setImagesToSend}/>
+        }
         {this.props.placeholders &&
-        <form onSubmit={this.handleUpdateForm}>
-        <div className="form-group">
-          <label htmlFor="date">Date of Event</label>
-          <input className="form-control" onChange={this.updateFromField('date')}
-            type="text" id="date" placeholder={this.props.placeholders.date} value={this.state.date}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="venue">Venue Information</label>
-          <input className="form-control" onChange={this.updateFromField('venue')}
-            type="text" id="venue" placeholder={this.props.placeholders.venue} value={this.state.venue}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="dos_contact">Day of Event Contact</label>
-          <input className="form-control"
-            onChange={this.updateFromField('dos_contact')}
-            type="text" id="dos_contact" placeholder={this.props.placeholders.dos_contact}
-            value={this.state.dos_contact}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="dos_contact">Day of Event Contact Email</label>
-          <input className="form-control"
-            onChange={this.updateFromField('dos_contact_email')}
-            type="text" id="dos_contact_email" placeholder={this.props.placeholders.dos_contact_email}
-            value={this.state.dos_contact_email}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="parking">Parking Instructions</label>
-          <input className="form-control"
-            onChange={this.updateFromField('parking')} type="parking"
-            id="parking" placeholder={this.props.placeholders.parking} value={this.state.parking}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="load_in_time">Load In</label>
-          <input className="form-control"
-            onChange={this.updateFromField('load_in_time')}
-            type="text" id="load_in_time" placeholder={this.props.placeholders.load_in_time} value={this.state.load_in_time}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="load_in_location">Load In Location</label>
-          <input className="form-control"
-            onChange={this.updateFromField('load_in_location')} type="text"
-             id="load_in_location" placeholder={this.props.placeholders.load_in_location}
-             value={this.state.load_in_location}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="door_time">Door Time</label>
-          <input className="form-control"
-            onChange={this.updateFromField('door_time')}
-            type="text" id="door_time" placeholder={this.props.placeholders.door_time} value={this.state.door_time}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="set_time">Set Time</label>
-          <input className="form-control" onChange={this.updateFromField('set_time')}
-            type="text" id="set_time" placeholder={this.props.placeholders.set_time} value={this.state.set_time}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="backline">Back Line</label>
-          <input className="form-control"
-            onChange={this.updateFromField('backline')}
-            type="text" id="backline" placeholder={this.props.placeholders.backline} value={this.state.backline}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="hospitality">Hospitality</label>
-          <input className="form-control" onChange={this.updateFromField('hospitality')}
-            type="text" id="hospitality" placeholder={this.props.placeholders.hospitality} value={this.state.hospitality}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="green_room">Green Room</label>
-          <input className="form-control"
-            onChange={this.updateFromField('green_room')}
-            type="text" id="green_room" placeholder={this.props.placeholders.green_room} value={this.state.green_room}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="showers">Showers</label>
-          <input className="form-control" onChange={this.updateFromField('showers')}
-            type="text" id="showers" placeholder={this.props.placeholders.showers} value={this.state.showers}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="laundry">Laundry</label>
-          <input className="form-control"
-            onChange={this.updateFromField('laundry')}
-            type="text" id="laundry" placeholder={this.props.placeholders.laundry} value={this.state.laundry}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="wifi">Wifi Information</label>
-          <input className="form-control" onChange={this.updateFromField('wifi')} type="text"
-             id="wifi" placeholder={this.props.placeholders.wifi} value={this.state.wifi}/>
-        </div>
-        <div className="form-group">
-          <label htmlFor="misc">Miscellaneous</label>
-          <textarea className="form-control"
-            onChange={this.updateFromField('misc')}
-            type="text" id="misc" placeholder={this.props.placeholders.misc} value={this.state.misc}/>
-        </div>
-        <div className="form-group">
-          <button onClick={event => this.submit(event)} type="submit" className="btn btn-success">Save & Submit</button>
-        {/* </div>
-        <div className="form-group"> */}
-          <button onClick={event => this.submit(event)} type="submit" className="btn btn-success">Send Form</button>
-        </div>
-        </form>
+          <form>
+            <div className="form-group">
+              <label htmlFor="date">Date of Event</label>
+              <input className="form-control" onChange={this.updateFromField('date')}
+                type="text" id="date" placeholder="Date of Event: YYYY-MM-DD" value={this.state.date}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="venue">Venue Information</label>
+              <input className="form-control" onChange={this.updateFromField('venue')}
+                type="text" id="venue" placeholder="Name & Address of Venue:" value={this.state.venue}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="dos_contact">Day of Event Contact</label>
+              <input className="form-control"
+                onChange={this.updateFromField('dos_contact')}
+                type="text" id="dos_contact" placeholder="Venue Contact Name:"
+                value={this.state.dos_contact}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="dos_contact">Day of Event Contact Email</label>
+              <input className="form-control"
+                onChange={this.updateFromField('dos_contact_email')}
+                type="text" id="dos_contact_email" placeholder="Venue Contact Email:"
+                value={this.state.dos_contact_email}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="parking">Parking Instructions</label>
+              <input className="form-control"
+                onChange={this.updateFromField('parking')} type="parking"
+                id="parking" placeholder="Parking Instructions:" value={this.state.parking}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="load_in_time">Load In</label>
+              <input className="form-control"
+                onChange={this.updateFromField('load_in_time')}
+                type="text" id="load_in_time" placeholder="Load In:" value={this.state.load_in_time}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="load_in_location">Load In Location</label>
+              <input className="form-control"
+                onChange={this.updateFromField('load_in_location')} type="text"
+                 id="load_in_location" placeholder="Load In Location:"
+                 value={this.state.load_in_location}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="door_time">Door Time</label>
+              <input className="form-control"
+                onChange={this.updateFromField('door_time')}
+                type="text" id="door_time" placeholder="Door Time:" value={this.state.door_time}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="set_time">Set Time</label>
+              <input className="form-control" onChange={this.updateFromField('set_time')}
+                type="text" id="set_time" placeholder="Set Time:" value={this.state.set_time}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="backline">Back Line</label>
+              <input className="form-control"
+                onChange={this.updateFromField('backline')}
+                type="text" id="backline" placeholder="Back Line:" value={this.state.backline}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="hospitality">Hospitality</label>
+              <input className="form-control" onChange={this.updateFromField('hospitality')}
+                type="text" id="hospitality" placeholder="Hospitality Offered:" value={this.state.hospitality}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="green_room">Green Room</label>
+              <input className="form-control"
+                onChange={this.updateFromField('green_room')}
+                type="text" id="green_room" placeholder="Green Room Availability:" value={this.state.green_room}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="showers">Showers</label>
+              <input className="form-control" onChange={this.updateFromField('showers')}
+                type="text" id="showers" placeholder="Shower Availability:" value={this.state.showers}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="laundry">Laundry</label>
+              <input className="form-control"
+                onChange={this.updateFromField('laundry')}
+                type="text" id="laundry" placeholder="Laundry Availability:" value={this.state.laundry}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="wifi">Wifi Information</label>
+              <input className="form-control" onChange={this.updateFromField('wifi')} type="text"
+                 id="wifi" placeholder="Wifi Information:" value={this.state.wifi}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="misc">Miscellaneous</label>
+              <textarea className="form-control"
+                onChange={this.updateFromField('misc')}
+                type="text" id="misc" placeholder="Other Information needed for Day of Event & or questions for performers" value={this.state.misc}/>
+            </div>
+            <div className="form-group">
+              <button onClick={event => this.handleUpdateForm(event)} type="submit" className="btn btn-success">Save & Submit</button>
+              {this.props.bandsId &&
+                <button onClick={this.displayEmailWindow} type="button" className="btn btn-success">Email Form</button>
+              }
+            </div>
+          </form>
+        }
+        {this.state.displayEmailWindow &&
+          <SendAsEmailWindow closeEmailWindow={this.displayEmailWindow}
+            eventTokenFromHash={this.props.eventTokenFromHash}
+            eventToken={this.state.eventToken}
+          />
         }
       </div>);
   }

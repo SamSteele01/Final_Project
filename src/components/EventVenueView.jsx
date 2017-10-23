@@ -10,61 +10,29 @@ export default class EventVenueView extends Component {
     super(props);
 
     this.state= {
-      date: "",
-      venue: "",
-      city: "",
-      state: "",
-      dos_contact: "",
-      parking: "",
-      load_in_time: "",
-      load_in_location: "",
-      door_time: "",
-      set_time: "",
-      backline: "",
-      hospitality: "",
-      green_room: "",
-      showers: "",
-      laundry: "",
-      wifi: "",
-      misc: "",
-      w9: "",
-      stage_plot: "",
-      input_list: "",
-      hospitality_rider: "",
+      eventInfo: null,
       token: null,
       userId: null
     }
   }
-  // componentWillMount(){
-  //   this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
-  // }
 
-  handleUpdateForm = (event) => {
-  //needs to post to the DB and call an action for redux
-   event.preventDefault();
-   let userId = this.props.userId;
-   let bandsId = this.props.bandsId;
-   let eventId = this.props.eventId; //may need to change
+  componentWillMount(){
+    if(!this.props.eventTokenFromHash){
+      window.location.href = "/";
+    }
+  }
+
+  componentDidMount(){
+    console.log(this.props.eventTokenFromHash);
+    if(this.props.eventTokenFromHash){
+      this.getFormData();
+    }
+  }
+
+  getFormData(){
+   let eventId = this.props.eventTokenFromHash; //may need to change
     request
-     .patch(`https://ez-tour.herokuapp.com/users/${userId}/bands/${bandsId}/events/${eventId}`)
-     .send({date: this.state.date,
-     venue: this.state.venue,
-     city: this.state.city,
-     state: this.state.state,
-     dos_contact: this.state.dos_contact,
-     parking: this.state.parking,
-     load_in_time: this.state.load_in_time,
-     load_in_location: this.state.load_in_location,
-     door_time: this.state.door_time,
-     set_time: this.state.set_time,
-     backline: this.state.backline,
-     hospitality: this.state.hospitality,
-     green_room: this.state.green_room,
-     showers: this.state.showers,
-     laundry: this.state.laundry,
-     wifi: this.state.wifi,
-     misc: this.state.misc})
-    //  .set('Authorization', `Token token=${this.props.token}`)
+     .get(`https://ez-tour.herokuapp.com/events/${eventId}`)
      .end((err, res) =>{
        if(err) {
          console.log(err);
@@ -72,18 +40,22 @@ export default class EventVenueView extends Component {
          this.setState({error: res.body.error});
        }else{
          console.log(res);
-         let Data = res.body.event;
-         this.setState({eventInfo: Data});
-         // setToken('578gh423rebz7zjeno99'); //for testing purposes
+         let data = res.body;
+         this.setState({eventInfo: data});
        }
      })
   }
+
   render() {
     return (
       <div>
-        <ProfileMini/>
-        <AssetContainer/>
-        <FormInput/>
+        {/* <ProfileMini/> */}
+        {/* <AssetContainer/> */}
+        {this.state.eventInfo &&
+          <FormInput placeholders={this.state.eventInfo} eventTokenFromHash={this.props.eventTokenFromHash}/>
+        }
+        {/* <h1>VenueView!!</h1> */}
+        {/* <p>Your hash is: {this.props.eventToken}</p> */}
       </div>
     );
   }
