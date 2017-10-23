@@ -1,9 +1,9 @@
 // component
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 import EventBandView from './EventBandView.jsx';
 import EventVenueView from './EventVenueView.jsx';
 import ProfileMini from './ProfileMini.jsx';
+import { Link, Redirect, withRouter, Switch, Route} from 'react-router-dom';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import cookie from 'react-cookies';
 
@@ -42,9 +42,6 @@ export default class EventForm extends Component {
   }
 
   componentDidMount(){
-    if(!this.state.token || this.state.eventTokenFromHash){
-      window.location.href = "/";
-    }
     console.log("Props: displayNew: "+this.props.displayNew+" bandsId: "+this.props.bandsId+" eventToken: "+this.props.eventToken);
     console.log("State: displayNew: "+this.state.displayNew+" bandsId: "+this.state.bandsId+" eventToken: "+this.state.eventToken);
   }
@@ -81,10 +78,10 @@ export default class EventForm extends Component {
             </Dropdown>
           </div>
         </div>
-        {this.state.displayBandView ?
-          <EventBandView bandsId={this.props.bandsId} displayNew={this.props.displayNew} eventToken={this.props.eventToken} noLongerNew={this.props.noLongerNew}/> :
-          <EventVenueView eventToken={this.state.eventTokenFromHash}/>
-        }
+        <Switch>
+          <Route exact path='/event-form' render={(props) => (<EventBandView bandsId={this.props.bandsId} displayNew={this.props.displayNew} eventToken={this.props.eventToken} noLongerNew={this.props.noLongerNew}/>)} />
+          <Route exact path='/event-form/:hash' render={(props) => (<EventVenueView eventTokenFromHash={props.match.params.hash}/>)} />
+        </Switch>
       </div>
     );
   }

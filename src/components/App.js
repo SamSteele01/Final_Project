@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
-import {MemoryRouter, Router, Route, Switch} from 'react-router-dom';
+import {MemoryRouter, Router, Route, Switch, Link} from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import {bindAll} from 'lodash';
 import Dashboard from './Dashboard.jsx';
@@ -85,10 +85,14 @@ class App extends Component {
             confirmDone={this.state.doneMakingCalendarEvents}
             calendarEvents={this.state.calendarEvents}
             />)} />
-            <Route path='/event-form' render={(props) => (<EventForm displayNew={this.state.displayNew}
-            bandsId={this.state.bandsId}
-            eventToken={this.state.eventToken}
-            noLongerNew={this.noLongerNew}
+            {/* <Route path='/event-form/:hash' render={(props) => (<EventForm
+              // eventToken={match.params.hash}
+            />)} /> */}
+            <Route path='/event-form' render={(props) => (<EventForm
+              displayNew={this.state.displayNew}
+              bandsId={this.state.bandsId}
+              eventToken={this.state.eventToken}
+              noLongerNew={this.noLongerNew}
             />)} />
             {/* <Route path='/event-form' component={EventForm} /> */}
             <Route path='/profile-page' render={(props) => (<ProfilePage displayNew={this.state.displayNew}

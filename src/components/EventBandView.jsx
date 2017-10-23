@@ -45,6 +45,9 @@ export default class EventBandView extends Component {
   }
 
   componentDidMount(){
+    if(!this.state.token){
+      window.location.href = "/";
+    }
     if(!this.props.displayNew&&this.props.bandsId&&this.props.eventToken){
       this.getFormData();
     }
@@ -68,7 +71,6 @@ export default class EventBandView extends Component {
          console.log(res);
          let data = res.body;
          this.setState({eventInfo: data});
-         // setToken('578gh423rebz7zjeno99'); //for testing purposes
        }
      })
   }

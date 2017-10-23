@@ -62,14 +62,14 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount(){
-    if(this.state.token===null){
+    if(!this.state.token||!this.state.userId){
       window.location.href = "/";
     }else{
       if(!this.state.eventsArray.length>0){
         this.fetchAllEventsForUser(this.state.userId);
       }
-    this.fetchFullnameForUser(this.state.userId);
-    this.fetchAllBandsForUser(this.state.userId);
+      this.fetchFullnameForUser(this.state.userId);
+      this.fetchAllBandsForUser(this.state.userId);
     }
   }
 

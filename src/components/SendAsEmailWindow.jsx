@@ -6,6 +6,7 @@ export default class SendAsEmailWindow extends Component {
   constructor(props) {
     super(props);
     this.updateFromField = this.updateFromField.bind(this);
+    this.sendEmailAddressToBackEnd = this.sendEmailAddressToBackEnd.bind(this);
 
     this.state = {
       email: '',
@@ -23,21 +24,33 @@ export default class SendAsEmailWindow extends Component {
     }
   }
 
-  sendEmailAddressToBackEnd(event){
-    event.preventDefault();
+  createEventHashPatch(){
+    let hash = '';
+    if(this.props.eventTokenFromHash){
+      hash = this.props.eventTokenFromHash;
+    }
+    if(this.props.eventToken){
+      hash = this.props.eventToken;
+    }
+    return hash;
+  }
+
+  sendEmailAddressToBackEnd(){
+    // event.preventDefault();
     let setCookie = this.setCookie;
     request
-      .post('https://ez-tour.herokuapp.com/users/')
-      .send({email: this.state.email})
-      .set('Authorization', `Token token=${this.props.token}`)
+      .post('https://ez-tour.herokuapp.com/send_event')
+      .send( {email: this.state.email, event_hash: this.createEventHashPatch()})
+      .set('Authorization', `Token token=${this.state.token}`)
       .end((err, res) =>{
         if(err) {
           console.log(err);
           console.log(res);
           this.setState({error: res.body.error});
-        }else{
-          let user_id = res.body.user_id;
-          this.props.closeWindow(false);
+        }
+        if(res){
+          console.log(res);
+          this.props.closeEmailWindow(); // causing eventForm to go away 
         }
       })
   }
@@ -45,17 +58,17 @@ export default class SendAsEmailWindow extends Component {
   render() {
     return (
       <div className="card send-email-window">
-        <form onSubmit={this.sendEmailAddressToBackEnd}>
+        <form>
           {this.state.error &&
-          <div className="alert alert-danger" role="alert">
+            <div className="alert alert-danger" role="alert">
             <h3>{this.state.error}</h3>
           </div>}
-          <div class="form-group">
+          <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email address</label>
-            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={this.updateFromField('email')} placeholder="Enter email" value={this.state.email}/>
             <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
+          <button type="button" onClick={this.sendEmailAddressToBackEnd} className="btn btn-primary">Submit</button>
         </form>
       </div>
     );
