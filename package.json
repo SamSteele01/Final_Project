@@ -25,12 +25,10 @@
     "superagent": "^3.6.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "nf start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "postinstall": "bower install && grunt build",
-    "start": "nf start"
+    "eject": "react-scripts eject"
   },
   "engines": {
     "node": "7.8.0",
