@@ -24,10 +24,10 @@ export default class Header extends Component {
       // auth2.signOut().then(function () {
       //   console.log('User signed out.');
       // });
-      this.logoutAtBackend();
+      // this.logoutAtBackend();
       cookie.remove('token'); //deletes token from cookie
       this.setState({token: null});
-
+      window.location.href = "/";
     }
 
     logoutAtBackend(){
