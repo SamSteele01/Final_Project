@@ -222,8 +222,8 @@ export default class Dashboard extends Component {
       <div className="dashboard">
         <div className="d-flex justify-content-between">
           {/* <div><button className="button create-new-event-button"><Link to="/event-form" onClick={event => this.props.navCreateNewEvent(event)} >Create New Event</Link></button></div> */}
-          <Dropdown className="button create-new-event-button" isOpen={this.state.eventDropdownOpen} toggle={this.toggleEventDropdown}>
-             <DropdownToggle caret color="secondary">
+          <Dropdown isOpen={this.state.eventDropdownOpen} toggle={this.toggleEventDropdown}>
+             <DropdownToggle caret className="toggle-button">
                Create New Event
              </DropdownToggle>
              <DropdownMenu>
@@ -232,11 +232,11 @@ export default class Dashboard extends Component {
                </DropdownItem>
              </DropdownMenu>
           </Dropdown>
-          <h1>Dashboard</h1>
-          <div>
+          {/* <h1>Dashboard</h1> */}
+          <div className="row">
             <div><button className="button create-new-event-button"><Link to="/profile-page" onClick={event => this.props.navCreateNewBand(event)} >Create New Band</Link></button></div>
-            <Dropdown color="secondary" isOpen={this.state.profileDropdownOpen} toggle={this.toggleProfileDropdown}>
-               <DropdownToggle caret color="secondary">
+            <Dropdown isOpen={this.state.profileDropdownOpen} toggle={this.toggleProfileDropdown}>
+               <DropdownToggle caret className="toggle-button">
                  Edit Profile
                </DropdownToggle>
                <DropdownMenu right>

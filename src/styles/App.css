@@ -41,7 +41,7 @@
 }
 
 /*end styling for welcome page*/
-
+ /*navbar - start*/
 .navbar{
   /*display: flex;*/
   flex-direction: row;
@@ -57,6 +57,7 @@
 .navbar div.sign-out-button{
   margin: 20px 0;
 }
+/*navbar - end*/
 
 .card {
   margin: 30px;
@@ -64,6 +65,19 @@
 
 .dashboard {
   height: 80vh;
+}
+
+.create-new-event-button {
+  color: #0C5DCF;
+  background-color: #E0E0E0;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  border-radius: .25rem;
+}
+
+.toggle-button {
+  color: #0C5DCF;
+  background-color: #E0E0E0;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 
 .profile_enter_container {
