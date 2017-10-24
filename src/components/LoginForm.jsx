@@ -171,7 +171,7 @@ export default class LoginForm extends Component {
               <div>
                 <div className="form-group">
                   {/* <label htmlFor="full_name">Full Name</label> */}
-                  <input className="form-control" onChange={this.updateFromField('full_name')} type="text" id="full_name" placeholder="Fullname:" value={this.state.full_name}/>
+                  <input className="form-control" onChange={this.updateFromField('full_name')} type="text" id="full_name" placeholder="Full name:" value={this.state.full_name}/>
                 </div>
                 <div className="form-group">
                   {/* <label htmlFor="telephone">Phone Number</label> */}
@@ -194,7 +194,7 @@ export default class LoginForm extends Component {
               <div>
                 <div className="form-group">
                   {/* <label htmlFor="email">Email</label> */}
-                  <input className="form-control" onChange={this.updateFromField('email')} type="email" id="email" placeholder="email:" value={this.state.email}/>
+                  <input className="form-control" onChange={this.updateFromField('email')} type="email" id="email" placeholder="Email:" value={this.state.email}/>
                 </div>
                 <div className="form-group">
                   {/* <label htmlFor="password">Password</label> */}
@@ -212,7 +212,7 @@ export default class LoginForm extends Component {
                 <div className="form-group">
                   <button onClick={event => this.login(event)} type="submit" className="btn btn-success">Login</button>
                 </div>
-                <div id="g-signin2" />
+                {/* <div id="g-signin2" /> */}
               </div>
             }
           </form>

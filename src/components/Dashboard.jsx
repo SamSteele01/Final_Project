@@ -249,6 +249,7 @@ export default class Dashboard extends Component {
         </div>
       {this.state.doneMakingCalendarEvents &&
         <BigCalendar
+          popup
           selectable
           culture='en'
           onSelectEvent={event => this.navigateToEvent(event)}
