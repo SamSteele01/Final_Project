@@ -36,9 +36,6 @@ export default class EventForm extends Component {
   }
 
   componentDidMount(){
-    if(!this.state.token||!this.state.userId){
-      window.location.href = "/";
-    }
     console.log("Props: displayNew: "+this.props.displayNew+" bandsId: "+this.props.bandsId+" eventToken: "+this.props.eventToken);
     console.log("State: displayNew: "+this.state.displayNew+" bandsId: "+this.state.bandsId+" eventToken: "+this.state.eventToken);
   }
