@@ -9,20 +9,27 @@ export default class Header extends Component {
     this.signOut = this.signOut.bind(this);
 
     this.state = {
-      loggedIn: true,
-      // display: null
+      token: null
     }
   }
 
-
+  componentWillMount(){
+    this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
+  }
 
     signOut() {
-      let auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-        console.log('User signed out.');
-      });
+      // let auth2 = gapi.auth2.getAuthInstance();
+      // auth2.signOut().then(function () {
+      //   console.log('User signed out.');
+      // });
+      logoutAtBackend();
+      cookie.remove('token'); //deletes token from cookie
+      this.setState({token: null});
     }
 
+    logoutAtBackend(){
+      
+    }
 
   render() {
     return (
@@ -41,7 +48,7 @@ export default class Header extends Component {
           }
           </div>
         }
-        {this.state.loggedIn &&
+        {this.state.token &&
           <div className="sign-out-button">
             <a className="button" onClick={this.signOut}>Sign out</a>
           </div>
