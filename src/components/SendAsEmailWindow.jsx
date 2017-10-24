@@ -50,7 +50,7 @@ export default class SendAsEmailWindow extends Component {
         }
         if(res){
           console.log(res);
-          this.props.closeEmailWindow(); // causing eventForm to go away 
+          this.props.closeEmailWindow(); 
         }
       })
   }
