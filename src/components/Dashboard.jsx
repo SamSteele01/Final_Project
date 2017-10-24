@@ -144,6 +144,7 @@ export default class Dashboard extends Component {
       'end': new Date(theDeets.date),
       'bandId': theDeets.band_id,
       'eventId': theDeets.event_hash
+      // +" "+theDeets.
     };
     return eventObject
   }
