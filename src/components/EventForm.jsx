@@ -24,12 +24,6 @@ export default class EventForm extends Component {
     }
   }
 
-// need a function to catch token from url if coming from an email. This will cause VenueView to render.
-
-  fxnToGrabTokenFromUrl(){ //finish writing!
-    // doTheThing()
-    // this.setState({eventTokenFromHash: theHash, displayBandView: false});
-  }
 
   // apply props to conditionally render either EventBandView or EventVenueView
   componentWillMount(){ //finish writing!
