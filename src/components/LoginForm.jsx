@@ -187,7 +187,7 @@ export default class LoginForm extends Component {
                   {/* <label htmlFor="password">Password</label> */}
                   <input className="form-control"
                     onChange={this.updateFromField('password')}
-                    type="text" id="password" placeholder="Password:" value={this.state.password}/>
+                    type="password" id="password" placeholder="Password:" value={this.state.password}/>
                 </div>
               </div>
               :
@@ -200,7 +200,7 @@ export default class LoginForm extends Component {
                   {/* <label htmlFor="password">Password</label> */}
                   <input className="form-control"
                     onChange={this.updateFromField('password')}
-                    type="text" id="password" placeholder="Password:" value={this.state.password}/>
+                    type="password" id="password" placeholder="Password:" value={this.state.password}/>
                 </div>
               </div>
             }
