@@ -68,6 +68,10 @@
   left: 70px;
 }
 
+.welcome-text-2 a:hover{
+  text-decoration: none;
+}
+
 .welcome-button {
   /*font-family: 'Germania One';*/
   background-color: black;
