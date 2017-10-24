@@ -45,7 +45,7 @@ export default class EventBandView extends Component {
   }
 
   componentDidMount(){
-    if(!this.state.token){
+    if(!this.state.token||!this.state.userId){
       window.location.href = "/";
     }
     if(!this.props.displayNew&&this.props.bandsId&&this.props.eventToken){

@@ -1,5 +1,7 @@
 /* global gapi */
 import React, {Component} from 'react';
+import cookie from 'react-cookies';
+import request from 'superagent';
 import { Link } from 'react-router-dom';
 import Logo from '../styles/two_tickets_white1600.png';
 
@@ -9,20 +11,43 @@ export default class Header extends Component {
     this.signOut = this.signOut.bind(this);
 
     this.state = {
-      loggedIn: true,
-      // display: null
+      token: null
     }
   }
 
-
+  componentWillMount(){
+    this.setState({token: cookie.load('token'), userId: cookie.load('userId')}); //get token from cookie, if it exists
+  }
 
     signOut() {
-      let auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-        console.log('User signed out.');
-      });
+      // let auth2 = gapi.auth2.getAuthInstance();
+      // auth2.signOut().then(function () {
+      //   console.log('User signed out.');
+      // });
+      // this.logoutAtBackend();
+      cookie.remove('token'); //deletes token from cookie
+      this.setState({token: null});
+      window.location.href = "/";
     }
 
+    logoutAtBackend(){
+      let setCookie = this.setCookie;
+      request
+        .post('https://ez-tour.herokuapp.com/send_event')
+        .send( {email: this.state.email, event_hash: this.createEventHashPatch()})
+        .set('Authorization', `Token token=${this.state.token}`)
+        .end((err, res) =>{
+          if(err) {
+            console.log(err);
+            console.log(res);
+            this.setState({error: res.body.error});
+          }
+          if(res){
+            console.log(res);
+            this.props.closeEmailWindow();
+          }
+        })
+    }
 
   render() {
     return (
@@ -41,7 +66,7 @@ export default class Header extends Component {
           }
           </div>
         }
-        {this.state.loggedIn &&
+        {this.state.token &&
           <div className="sign-out-button">
             <a className="button" onClick={this.signOut}>Sign out</a>
           </div>
