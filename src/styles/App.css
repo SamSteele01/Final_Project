@@ -1,56 +1,7 @@
-/*.App {
-  margin: 0;
-  padding: 0;
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
 }
-
-.header{
-  text-align: center;
-  background-color: black;
-  color: white;
-  height: 10vh;
-}
-
-.login-page{
-  width: 100%;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background: url('./wall-of-band-stickers.jpg');
-  position: absolute;
-  filter: contrast(.4) sepia(80%) blur(2px) brightness(.7);
-  z-index: -1;
-}
-
-.form-container{
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.form-wrapper{
-  width: 70vw;
-  height: 40vh;
-  background: url('./ticket-pic.jpg');
-  border-radius: 4px;
-  filter: contrast(2.5);
-  filter: saturate(200%);
-  filter: brightness(100%);
-  background-size: contain;
-  background-position: center center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  z-index: 1;
-}
-
-.login-form{
-  margin-left: 20vw;
-  margin-top: 15vh;
-  font-family: 'Germania One';
-}*/
 
 /*styling for welcome page*/
 .welcome-text {
@@ -100,7 +51,7 @@
 }
 
 .navbar img{
-  margin-right: 5vw;
+  margin-right: 8px;
 }
 
 .navbar div.sign-out-button{
