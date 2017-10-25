@@ -135,7 +135,7 @@ export default class BandProfileEnter extends Component {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="num_members">Number of Members:</label
+                  <label className="col-md-4 control-label" htmlFor="num_members">Number of Members:</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       {/* <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span> */}
@@ -144,7 +144,7 @@ export default class BandProfileEnter extends Component {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="num_crew">Number of Crew Members:</label
+                  <label className="col-md-4 control-label" htmlFor="num_crew">Number of Crew Members:</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       {/* <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span> */}
