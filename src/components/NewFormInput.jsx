@@ -103,7 +103,7 @@ export default class NewFormInput extends Component {
 
   render() {
     return (
-      <div>
+      <div className="profile_enter_container">
         <AssetToolbar bandsId={this.props.bandsId} passUpUrls={this.setImageAssets}/>
         <form>
           <div className="form-group">

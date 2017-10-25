@@ -124,7 +124,7 @@ export default class FormInput extends Component {
 
   render() {
     return (
-      <div>
+      <div className="profile_enter_container">
         {this.props.bandsId &&
           <AssetToolbar bandsId={this.props.bandsId} setImagesToSend={this.setImagesToSend}/>
         }

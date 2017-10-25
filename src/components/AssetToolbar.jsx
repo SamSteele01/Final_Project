@@ -39,45 +39,57 @@ export default class AssetToolbar extends Component {
   render() {
     return (
       <div>
-        <div className="form-group asset-toolbar" >
-            <div className="card-block">
+        <div className="asset-toolbar" >
+            <div>
               <h4 className="card-title">Assets</h4>
-              <p className="card-text"></p>
+              <p className="card-text">These will be attached in the email</p>
             </div>
             {this.state.bandData &&
-              <form>
-                <object className='image-preview img-thumbnail' data={this.state.bandData.w9} />
-                <label className="checkbox-inline">
-                  <input type="checkbox"
-                    // value={value}
-                    // checked={this.props.filter === value}
-                    // onChange={event => this.props.setImagesToSend(value)}
-                  />  w9
-                </label>
-                <object className='image-preview img-thumbnail' data={this.state.bandData.stage_plot} />
-                <label className="checkbox-inline">
-                  <input type="checkbox"
-                    // value={value}
-                    // checked={this.props.filter === value}
-                    // onChange={event => this.props.setImagesToSend(value)}
-                  />  Stage Plot
-                </label>
-                <object className='image-preview img-thumbnail' data={this.state.bandData.input_list} />
-                <label className="checkbox-inline">
-                  <input type="checkbox"
-                    // value={value}
-                    // checked={this.props.filter === value}
-                    // onChange={event => this.props.setImagesToSend(value)}
-                  />  Input List
-                </label>
-                <object className='image-preview img-thumbnail' data={this.state.bandData.hospitality_rider} />
-                <label className="checkbox-inline">
-                  <input type="checkbox"
-                    // value={value}
-                    // checked={this.props.filter === value}
-                    // onChange={event => this.props.setImagesToSend(value)}
-                  />  Hospitality Rider
-                </label>
+              <form className="d-flex justify-content-around">
+                <div className="d-flex image-object">
+                  <object className='image-preview img-thumbnail' data={this.state.bandData.w9} />
+                  <label className="checkbox-inline">
+                    {/* <input type="checkbox"
+                      // value={value}
+                      // checked={this.props.filter === value}
+                      // onChange={event => this.props.setImagesToSend(value)}
+                    />   */}
+                    W9
+                  </label>
+                </div>
+                <div className="d-flex image-object">
+                  <object className='image-preview img-thumbnail' data={this.state.bandData.stage_plot} />
+                  <label className="checkbox-inline">
+                    {/* <input type="checkbox"
+                      // value={value}
+                      // checked={this.props.filter === value}
+                      // onChange={event => this.props.setImagesToSend(value)}
+                    />   */}
+                    Stage Plot
+                  </label>
+                </div>
+                <div className="d-flex image-object">
+                  <object className='image-preview img-thumbnail' data={this.state.bandData.input_list} />
+                  <label className="checkbox-inline">
+                    {/* <input type="checkbox"
+                      // value={value}
+                      // checked={this.props.filter === value}
+                      // onChange={event => this.props.setImagesToSend(value)}
+                    />   */}
+                    Input List
+                  </label>
+                </div>
+                <div className="d-flex image-object">
+                  <object className='image-preview img-thumbnail' data={this.state.bandData.hospitality_rider} />
+                  <label className="checkbox-inline">
+                    {/* <input type="checkbox"
+                      // value={value}
+                      // checked={this.props.filter === value}
+                      // onChange={event => this.props.setImagesToSend(value)}
+                    />   */}
+                    Hospitality Rider
+                  </label>
+                </div>
               </form>
             }
         </div>
