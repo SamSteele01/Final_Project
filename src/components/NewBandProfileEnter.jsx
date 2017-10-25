@@ -50,11 +50,15 @@ export default class BandProfileEnter extends Component {
     request
       .post(`https://ez-tour.herokuapp.com/users/${userId}/bands`)
       .send({
-
+        name: this.state.name,
+        vehicle: this.state.vehicle,
+        num_members: this.state.num_members,
+        num_crew: this.state.num_crew,
       })
       .set('Authorization', `Token token=${this.state.token}`)
       .end((err, res) => {
-
+        console.log(err);
+        console.log(res);
       });
   }
 
@@ -63,7 +67,7 @@ export default class BandProfileEnter extends Component {
       <div>
         <div className="profile_enter_container">
 
-          <form className="well form-horizontal" action=" " method="post"  id="contact_form" onSubmit={this.handleAddToProfile}>
+          <form >
             <fieldset>
               <legend>Create a New Band Profile</legend>
                 <div className="form-group">
@@ -103,7 +107,7 @@ export default class BandProfileEnter extends Component {
                   </div>
                 </div>
                 <div>
-                  <button type="button" className="btn btn-primary ">Submit</button>
+                  <button onClick={this.handleAddToProfile} type="button" className="btn btn-primary ">Submit</button>
                 </div>
               </fieldset>
             </form>
