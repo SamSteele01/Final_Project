@@ -137,7 +137,6 @@ export default class FormInput extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="venue">Venue Name:</label>
-              <label htmlFor="venue">Venue Information:</label>
               <input className="form-control" onChange={this.updateFromField('venue')}
                 type="text" id="venue" placeholder="Name of Venue:" value={this.state.venue}/>
             </div>
