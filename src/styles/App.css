@@ -54,14 +54,12 @@
 
 /*styling for welcome page*/
 .welcome-text {
-  /*font-family: 'Germania One';*/
   display: flex;
   justify-content: center;
   margin-top: 150px;
 }
 
 .welcome-text-2 {
-  /*font-family: 'Germania One';*/
   display: flex;
   justify-content: center;
   position: relative;
@@ -69,7 +67,6 @@
 }
 
 .welcome-button {
-  /*font-family: 'Germania One';*/
   background-color: black;
   display: flex;
   justify-content: center;
@@ -81,7 +78,7 @@
 }
 
 .welcome-button:hover {
-  background-color: lightgray;
+  background-color: black;
   text-decoration: none;
 }
 
@@ -93,6 +90,7 @@
   justify-content: space-between;
   background-color: black;
   color: white;
+
 }
 
 .navbar img{
