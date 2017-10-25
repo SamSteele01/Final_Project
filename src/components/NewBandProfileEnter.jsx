@@ -67,38 +67,38 @@ export default class BandProfileEnter extends Component {
             <fieldset>
               <legend>Create a New Band Profile</legend>
                 <div className="form-group">
-                  <label className="col-md-4 control-label">Name of Performer(s)</label>
+                  <label className="col-md-4 control-label">Name of Act:</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       {/* <span className="input-group-addon"><i className="glyphicon glyphicon-user" aria-hidden="true" ></i></span> */}
-                      <input  name="name" placeholder="Performer(s)" className="form-control"  type="text" onChange={this.updateFromField('name')}value={this.state.name}/>
+                      <input  name="name" placeholder="e.g. Rush, Sara Watkins, Death Cab for Cutie" className="form-control"  type="text" onChange={this.updateFromField('name')}value={this.state.name}/>
                     </div>
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="vehicle">Vehicle(s)</label>
+                  <label className="col-md-4 control-label" htmlFor="vehicle">Traveling in:</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       {/* <span className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></span> */}
-                      <input name="vehicle" placeholder="Vehicle(s)" className="form-control"  type="text" onChange={this.updateFromField('vehicle')}value={this.state.vehicle}/>
+                      <input name="vehicle" placeholder="e.g Ford E-350" className="form-control"  type="text" onChange={this.updateFromField('vehicle')}value={this.state.vehicle}/>
                     </div>
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="num_members">Number of Members</label>
+                  <label className="col-md-4 control-label" htmlFor="num_members">Number of members:</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       {/* <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span> */}
-                      <input name="num_members" placeholder="No. of Members" className="form-control" type="text" onChange={this.updateFromField('num_members')} value={this.state.num_members}/>
+                      <input name="num_members" className="form-control" type="text" onChange={this.updateFromField('num_members')} value={this.state.num_members}/>
                     </div>
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="num_crew">Number of Crew Members</label>
+                  <label className="col-md-4 control-label" htmlFor="num_crew">Number of crew:</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       {/* <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span> */}
-                      <input name="num_crew" placeholder="No. of Crew Members" className="form-control" type="text" onChange={this.updateFromField('num_crew')} value={this.state.num_crew}/>
+                      <input name="num_crew" className="form-control" type="text" onChange={this.updateFromField('num_crew')} value={this.state.num_crew}/>
                     </div>
                   </div>
                 </div>
@@ -109,10 +109,7 @@ export default class BandProfileEnter extends Component {
             </form>
             <ul class="list-group list-group-flush band-profile-list">
               <li class="list-group-item band-profile-list">
-                <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" class="card-link">Link to a new w9</a>
-              </li>
-              <li class="list-group-item band-profile-list">
-                <ImageUploader targetKey={"w9"} label={"Upload your w9"}/>
+                <ImageUploader targetKey={"w9"} label={"Upload your W-9"}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Stage Plot</a> */}
@@ -124,7 +121,7 @@ export default class BandProfileEnter extends Component {
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Promos</a> */}
-                <ImageUploader targetKey={"promo_asset"} label={"Upload your Promo Asset/Image"}/>
+                <ImageUploader targetKey={"promo_asset"} label={"Upload your Hospitality Rider"}/>
               </li>
             </ul>
             {/* <div className="form-group">
