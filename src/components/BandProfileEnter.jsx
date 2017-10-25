@@ -108,6 +108,7 @@ export default class BandProfileEnter extends Component {
         }
         if(res){
           console.log(res);
+          window.location.href = "/dashboard";
         }
       });
   }
@@ -162,9 +163,6 @@ export default class BandProfileEnter extends Component {
               </fieldset>
             </form>
             <ul className="list-group list-group-flush band-profile-list">
-              {/* <li className="list-group-item band-profile-list">
-                <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" className="card-link">Link to a new w9</a>
-              </li> */}
               <li className="list-group-item band-profile-list">
                 <ImageUploader targetKey={"w9"} label={"Upload your w9 pdf"} bandsId={this.props.bandsId} currentImage={this.state.w9} image_content_type={this.state.w9_content_type}/>
               </li>

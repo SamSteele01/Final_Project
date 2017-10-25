@@ -76,7 +76,7 @@ export default class UserProfileEnter extends Component {
         }
         if(res){
           console.log(res);
-          debugger
+          window.location.href = "/dashboard";
         }
       });
   }
