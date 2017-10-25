@@ -88,9 +88,12 @@ export default class FormInput extends Component {
     .patch(this.createUrlForPatch())
     .send({date: this.state.date,
     venue: this.state.venue,
+    address_line_1: this.state.address_line_1,
     city: this.state.city,
     state: this.state.state,
     dos_contact: this.state.dos_contact,
+    dos_contact_email: this.state.dos_contact_email,
+    dos_contact_telephone: this.state.dos_contact_telephone,
     parking: this.state.parking,
     load_in_time: this.state.load_in_time,
     load_in_location: this.state.load_in_location,
@@ -130,12 +133,17 @@ export default class FormInput extends Component {
             <div className="form-group">
               <label htmlFor="date">Date of Event:</label>
               <input className="form-control" onChange={this.updateFromField('date')}
-                type="text" id="date" placeholder="Date of Event: YYYY-MM-DD" value={this.state.date}/>
+                type="text" id="date" placeholder="YYYY-MM-DD  *needs to be in this format*" value={this.state.date} required/>
             </div>
             <div className="form-group">
-              <label htmlFor="venue">Venue Information:</label>
+              <label htmlFor="venue">Venue Name:</label>
               <input className="form-control" onChange={this.updateFromField('venue')}
-                type="text" id="venue" placeholder="Name & Address of Venue:" value={this.state.venue}/>
+                type="text" id="venue" placeholder="Name of Venue:" value={this.state.venue}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="venue">Venue Address:</label>
+              <input className="form-control" onChange={this.updateFromField('venue')}
+                type="text" id="venue" placeholder="Address of Venue:" value={this.state.venue}/>
             </div>
             <div className="form-group">
               <label htmlFor="dos_contact">Day of Event Contact:</label>
@@ -148,7 +156,7 @@ export default class FormInput extends Component {
               <label htmlFor="dos_contact">Day of Event Contact Email:</label>
               <input className="form-control"
                 onChange={this.updateFromField('dos_contact_email')}
-                type="text" id="dos_contact_email" placeholder="Venue Contact Email:"
+                type="email" id="dos_contact_email" placeholder="Venue Contact Email:"
                 value={this.state.dos_contact_email}/>
             </div>
             <div className="form-group">
@@ -210,9 +218,8 @@ export default class FormInput extends Component {
                 type="text" id="laundry" placeholder="Laundry Availability:" value={this.state.laundry}/>
             </div>
             <div className="form-group">
-              <label htmlFor="wifi">Wifi Information:</label>
               <input className="form-control" onChange={this.updateFromField('wifi')} type="text"
-                 id="wifi" placeholder="Wifi Information:" value={this.state.wifi}/>
+                 id="wifi" placeholder="ex: Network name and password" value={this.state.wifi}/>
             </div>
             <div className="form-group">
               <label htmlFor="misc">Miscellaneous:</label>
