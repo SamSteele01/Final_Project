@@ -136,23 +136,16 @@ export default class FormInput extends Component {
                 type="text" id="date" placeholder="YYYY-MM-DD  *needs to be in this format*" value={this.state.date} required/>
             </div>
             <div className="form-group">
-<<<<<<< HEAD
               <label htmlFor="venue">Venue Name:</label>
-=======
-              <label htmlFor="venue">Venue Information:</label>
->>>>>>> 8a84bf644c42a95892567febd8a517a92ff38c9f
               <input className="form-control" onChange={this.updateFromField('venue')}
                 type="text" id="venue" placeholder="Name of Venue:" value={this.state.venue}/>
             </div>
             <div className="form-group">
-<<<<<<< HEAD
               <label htmlFor="venue">Venue Address:</label>
               <input className="form-control" onChange={this.updateFromField('venue')}
                 type="text" id="venue" placeholder="Address of Venue:" value={this.state.venue}/>
             </div>
             <div className="form-group">
-=======
->>>>>>> 8a84bf644c42a95892567febd8a517a92ff38c9f
               <label htmlFor="dos_contact">Day of Event Contact:</label>
               <input className="form-control"
                 onChange={this.updateFromField('dos_contact')}
