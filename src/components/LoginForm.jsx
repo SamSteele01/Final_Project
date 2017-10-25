@@ -29,16 +29,16 @@ export default class LoginForm extends Component {
     }
   }
 
-  componentDidMount() {
-    gapi.signin2.render('g-signin2', {
-      'scope': 'https://www.googleapis.com/auth/plus.login',
-      'width': 150,
-      'height': 40,
-      'longtitle': false,
-      'theme': 'dark',
-      'onsuccess': this.onSignIn
-    });
-  }
+  // componentDidMount() {
+  //   gapi.signin2.render('g-signin2', {
+  //     'scope': 'https://www.googleapis.com/auth/plus.login',
+  //     'width': 150,
+  //     'height': 40,
+  //     'longtitle': false,
+  //     'theme': 'dark',
+  //     'onsuccess': this.onSignIn
+  //   });
+  // }
 
   toggleLoginRegisterForm(event){
     event.preventDefault();
@@ -171,7 +171,7 @@ export default class LoginForm extends Component {
               <div>
                 <div className="form-group">
                   {/* <label htmlFor="full_name">Full Name</label> */}
-                  <input className="form-control" onChange={this.updateFromField('full_name')} type="text" id="full_name" placeholder="Full name:" value={this.state.full_name}/>
+                  <input className="form-control" onChange={this.updateFromField('full_name')} type="text" id="full_name" placeholder="Full Name:" value={this.state.full_name}/>
                 </div>
                 <div className="form-group">
                   {/* <label htmlFor="telephone">Phone Number</label> */}
