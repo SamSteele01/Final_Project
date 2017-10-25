@@ -65,7 +65,7 @@ export default class UpdateUserProfile extends Component {
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       <span className="input-group-addon"><i className="glyphicon glyphicon-user" aria-hidden="true" ></i></span>
-                      <input  name="full_name" placeholder="Full Name" className="form-control"  type="text" onChange={this.updateFromField('full_name')}value={this.state.full_name}/>
+                      <input  name="full_name" placeholder="John Smith" className="form-control"  type="text" onChange={this.updateFromField('full_name')}value={this.state.full_name}/>
                     </div>
                   </div>
                 </div>
@@ -74,7 +74,7 @@ export default class UpdateUserProfile extends Component {
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       <span className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></span>
-                      <input name="email" placeholder="E-Mail Address" className="form-control"  type="text" onChange={this.updateFromField('email')}value={this.state.email}/>
+                      <input name="email" placeholder="john.smith@example.com" className="form-control"  type="text" onChange={this.updateFromField('email')}value={this.state.email}/>
                     </div>
                   </div>
                 </div>
