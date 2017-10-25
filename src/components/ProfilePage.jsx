@@ -26,8 +26,7 @@ export default class ProfilePage extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.token);
-    if(this.state.token===null){
+    if(!this.state.token||!this.state.userId){
       window.location.href = "/";
     }
     if(this.props.bandsId||this.props.displayNew){

@@ -12,6 +12,7 @@ export default class ImageUploader extends Component {
       userId: null,
       data_uri: null,
       uploaded_uri: this.props.currentImage,
+      filetype: null,
       processing: false
     }
     bindAll(this, 'handleFile', 'handleSubmit', 'createUrlForPatch');
@@ -60,7 +61,8 @@ export default class ImageUploader extends Component {
           console.log(res);
           this.setState({
           processing: false,
-          uploaded_uri: eval(`res.body.${uploadTargetKey}`)
+          uploaded_uri: eval(`res.body.${uploadTargetKey}`),
+          filetype: eval(`res.body.${uploadTargetKey}_content_type`)
           });
         }
       });
@@ -75,6 +77,7 @@ export default class ImageUploader extends Component {
         // filename: file.name,
         // filetype: file.type
       });
+      console.log(file.type);
     };
     reader.readAsDataURL(file);
   }
@@ -82,11 +85,20 @@ export default class ImageUploader extends Component {
   render() {
     let processing;
     let uploaded;
-    if (this.state.uploaded_uri) {
+    if (this.state.uploaded_uri&&this.state.filetype==="image/jpeg") { // application/pdf or image/jpeg
       uploaded = (
         <div >
           {/* <h4>Image uploaded!</h4> */}
           <img className='image-preview img-thumbnail' src={this.state.uploaded_uri} />
+          {/* <pre className='image-link-box'>{this.state.uploaded_uri}</pre> */}
+        </div>
+      );
+    }
+    if (this.state.uploaded_uri&&this.state.filetype==="application/pdf") {
+      uploaded = (
+        <div >
+          {/* <h4>Image uploaded!</h4> */}
+          <object className='image-preview img-thumbnail' data={this.state.uploaded_uri} />
           {/* <pre className='image-link-box'>{this.state.uploaded_uri}</pre> */}
         </div>
       );

@@ -83,8 +83,8 @@ export default class NewFormInput extends Component {
         // this.setState({error: res.body.error});
       }else{
         console.log(res);
-        // reroute to FormInput
-        // this.props.noLongerNew();
+        // reroute to FormInput - need the event_token from backend
+        // this.props.routeToForm();
       }
     })
  }

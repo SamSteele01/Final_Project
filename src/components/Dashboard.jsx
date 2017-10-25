@@ -144,6 +144,7 @@ export default class Dashboard extends Component {
       'end': new Date(theDeets.date),
       'bandId': theDeets.band_id,
       'eventId': theDeets.event_hash
+      // +" "+theDeets.
     };
     return eventObject
   }
@@ -219,10 +220,10 @@ export default class Dashboard extends Component {
 
     return (
       <div className="dashboard">
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between dash-buttons">
           {/* <div><button className="button create-new-event-button"><Link to="/event-form" onClick={event => this.props.navCreateNewEvent(event)} >Create New Event</Link></button></div> */}
-          <Dropdown className="button create-new-event-button" isOpen={this.state.eventDropdownOpen} toggle={this.toggleEventDropdown}>
-             <DropdownToggle caret color="secondary">
+          <Dropdown isOpen={this.state.eventDropdownOpen} toggle={this.toggleEventDropdown}>
+             <DropdownToggle caret className="toggle-button">
                Create New Event
              </DropdownToggle>
              <DropdownMenu>
@@ -231,16 +232,18 @@ export default class Dashboard extends Component {
                </DropdownItem>
              </DropdownMenu>
           </Dropdown>
-          <h1>Dashboard</h1>
-          <div>
+          {/* <h1>Dashboard</h1> */}
+          <div className="row right-dash-buttons">
             <div><button className="button create-new-event-button"><Link to="/profile-page" onClick={event => this.props.navCreateNewBand(event)} >Create New Band</Link></button></div>
-            <Dropdown color="secondary" isOpen={this.state.profileDropdownOpen} toggle={this.toggleProfileDropdown}>
-               <DropdownToggle caret color="secondary">
+            <Dropdown isOpen={this.state.profileDropdownOpen} toggle={this.toggleProfileDropdown}>
+               <DropdownToggle caret className="toggle-button">
                  Edit Profile
                </DropdownToggle>
                <DropdownMenu right>
+                 <DropdownItem>User:</DropdownItem>
                  <DropdownItem><Link to="/profile-page" onClick={event => this.props.navUpdateUserProfile(this.state.userId)} >{this.state.fullName}</Link></DropdownItem>
                  <DropdownItem divider />
+                 <DropdownItem>Bands:</DropdownItem>
                  {this.displayDropdowns("/profile-page", this.props.navUpdateBandProfile)}
                </DropdownMenu>
             </Dropdown>
@@ -248,6 +251,7 @@ export default class Dashboard extends Component {
         </div>
       {this.state.doneMakingCalendarEvents &&
         <BigCalendar
+          popup
           selectable
           culture='en'
           onSelectEvent={event => this.navigateToEvent(event)}
