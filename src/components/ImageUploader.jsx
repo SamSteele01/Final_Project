@@ -73,9 +73,9 @@ export default class ImageUploader extends Component {
     const file = e.target.files[0];
     reader.onload = (upload) => {
       this.setState({
-        data_uri: upload.target.result,
+        data_uri: upload.target.result
         // filename: file.name,
-        filetype: file.type
+        // filetype: file.type
       });
       console.log(file.type);
     };
