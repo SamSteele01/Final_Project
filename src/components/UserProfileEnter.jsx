@@ -15,7 +15,8 @@ export default class UserProfileEnter extends Component {
       full_name: null,
       telephone: null,
       email: null,
-      avatar: null,
+      avatar: this.props.profileInfo.avatar,
+      avatar_content_type: this.props.profileInfo.avatar_content_type,
       // address: '',
       // city: '',
       // state: '',
@@ -87,7 +88,7 @@ export default class UserProfileEnter extends Component {
         <div className="profile_enter_container">
           <form className="well form-horizontal" method="post"  id="contact_form">
             <fieldset>
-              <legend>Update Your User Profile</legend>
+              <h3>Update Your User Profile</h3>
                 <div className="form-group">
                   <label className="col-md-4 control-label">Full Name:</label>
                   <div className="col-md-4 inputGroupContainer">
@@ -178,7 +179,7 @@ export default class UserProfileEnter extends Component {
                 </ul> */}
             </fieldset>
           </form>
-          <ImageUploader targetKey={"avatar"} label={"Upload Photo"} currentImage={this.state.avatar}/>
+          <ImageUploader targetKey={"avatar"} label={"Upload Photo"} currentImage={this.state.avatar} image_content_type={this.state.avatar_content_type}/>
         </div>
         }
       </div>

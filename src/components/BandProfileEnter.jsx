@@ -24,7 +24,11 @@ export default class BandProfileEnter extends Component {
       w9: null,
       stage_plot: null,
       input_list: null,
-      hospitality_rider: null
+      hospitality_rider: null,
+      w9_content_type: this.props.profileInfo.w9_content_type,
+      stage_plot_content_type: this.props.profileInfo.stage_plot_content_type,
+      input_list_content_type: this.props.profileInfo.input_list_content_type,
+      hospitality_rider_content_type: this.props.profileInfo.hospitality_rider_content_type
     };
     this.handleAddToProfile = this.handleAddToProfile.bind(this);
     this.updateFromField = this.updateFromField.bind(this);
@@ -115,9 +119,9 @@ export default class BandProfileEnter extends Component {
         <div className="profile_enter_container">
           <form className="well form-horizontal" method="post"  id="contact_form">
             <fieldset>
-              <legend>Update Your Band Profile</legend>
+              <h3>Update Your Band Profile</h3>
                 <div className="form-group">
-                  <label className="col-md-4 control-label">Name of Performer(s):</label>
+                  <label className="col-md-4 control-label">Name of Artist(s):</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       {/* <span className="input-group-addon"><i className="glyphicon glyphicon-user" aria-hidden="true" ></i></span> */}
@@ -158,23 +162,23 @@ export default class BandProfileEnter extends Component {
               </fieldset>
             </form>
             <ul className="list-group list-group-flush band-profile-list">
-              <li className="list-group-item band-profile-list">
+              {/* <li className="list-group-item band-profile-list">
                 <a href="https://www.irs.gov/pub/irs-pdf/fw9.pdf" className="card-link">Link to a new w9</a>
-              </li>
+              </li> */}
               <li className="list-group-item band-profile-list">
-                <ImageUploader targetKey={"w9"} label={"Upload your w9 pdf"} bandsId={this.props.bandsId} currentImage={this.state.w9}/>
+                <ImageUploader targetKey={"w9"} label={"Upload your w9 pdf"} bandsId={this.props.bandsId} currentImage={this.state.w9} image_content_type={this.state.w9_content_type}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Stage Plot</a> */}
-                <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot pdf"} bandsId={this.props.bandsId} currentImage={this.state.stage_plot}/>
+                <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot pdf"} bandsId={this.props.bandsId} currentImage={this.state.stage_plot} image_content_type={this.state.stage_plot_content_type}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Input List</a> */}
-                <ImageUploader targetKey={"input_list"} label={"Upload your Input List pdf"} bandsId={this.props.bandsId} currentImage={this.state.input_list}/>
+                <ImageUploader targetKey={"input_list"} label={"Upload your Input List pdf"} bandsId={this.props.bandsId} currentImage={this.state.input_list} image_content_type={this.state.input_list_content_type}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Promos</a> */}
-                <ImageUploader targetKey={"hospitality_rider"} label={"Upload your Hospitality Rider pdf"} bandsId={this.props.bandsId} currentImage={this.state.hospitality_rider}/>
+                <ImageUploader targetKey={"hospitality_rider"} label={"Upload your Hospitality Rider pdf"} bandsId={this.props.bandsId} currentImage={this.state.hospitality_rider} image_content_type={this.state.hospitality_rider_content_type}/>
               </li>
             </ul>
             {/* <div className="form-group">

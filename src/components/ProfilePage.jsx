@@ -71,28 +71,38 @@ export default class ProfilePage extends Component {
           this.setState({error: res.body.error});
         }else{
           console.log(res);
-          let proData = res.body.user;
+          let proData = res.body;
           this.setState({profileInfo: proData});
         }
       })
   }
 
   render() {
+    let name = "";
+    if(this.state.profileInfo){
+      if(this.props.bandsId){name=this.state.profileInfo.name}
+      else{name=this.state.profileInfo.full_name};
+    }
     return (
       <div>
-        <div className="d-flex justify-content-between">
-          <div><button className="button create-new-event-button"><Link to="/dashboard">Dashboard</Link></button></div>
-          <h1>Profile</h1>
-          <div><button className="button create-new-event-button"><Link to="/event-form">Create New Event</Link></button></div>
+        {this.state.profileInfo &&
+        <div>
+          <div className="d-flex justify-content-between dash-buttons">
+            <div><button className="button create-new-event-button"><Link to="/dashboard">Back to Calendar</Link></button></div>
+            <h3>Profile for: {name}</h3>
+            {/* <div><button className="button create-new-event-button"><Link to="/event-form">Create New Event</Link></button></div> */}
+            <div></div>
+          </div>
+          {this.state.displayBandView ?
+            <div>
+              {this.props.displayNew ?
+                <NewBandProfileEnter/> :
+                <BandProfileEnter profileInfo={this.state.profileInfo} bandsId={this.props.bandsId}/>
+              }
+            </div>:
+            <UserProfileEnter profileInfo={this.state.profileInfo}/> //userId from cookie
+          }
         </div>
-        {this.state.displayBandView ?
-          <div>
-            {this.props.displayNew ?
-              <NewBandProfileEnter/> :
-              <BandProfileEnter profileInfo={this.state.profileInfo} bandsId={this.props.bandsId}/>
-            }
-          </div>:
-          <UserProfileEnter profileInfo={this.state.profileInfo}/> //userId from cookie
         }
       </div>);
 

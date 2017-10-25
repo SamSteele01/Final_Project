@@ -50,7 +50,7 @@ export default class SendAsEmailWindow extends Component {
         }
         if(res){
           console.log(res);
-          this.props.closeEmailWindow(); 
+          this.props.closeEmailWindow();
         }
       })
   }
@@ -64,8 +64,8 @@ export default class SendAsEmailWindow extends Component {
             <h3>{this.state.error}</h3>
           </div>}
           <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Email address</label>
-            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={this.updateFromField('email')} placeholder="Enter email" value={this.state.email}/>
+            <label htmlFor="exampleInputEmail1">Email address of venue contact:</label>
+            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={this.updateFromField('email')} placeholder="ex: Mr-shows@club.com" value={this.state.email}/>
             <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <button type="button" onClick={this.sendEmailAddressToBackEnd} className="btn btn-primary">Submit</button>

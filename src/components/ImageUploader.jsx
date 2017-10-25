@@ -12,7 +12,7 @@ export default class ImageUploader extends Component {
       userId: null,
       data_uri: null,
       uploaded_uri: this.props.currentImage,
-      filetype: null,
+      filetype: this.props.image_content_type,
       processing: false
     }
     bindAll(this, 'handleFile', 'handleSubmit', 'createUrlForPatch');

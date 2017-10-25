@@ -5,14 +5,12 @@
 
 /*styling for welcome page*/
 .welcome-text {
-  /*font-family: 'Germania One';*/
   display: flex;
   justify-content: center;
   margin-top: 150px;
 }
 
 .welcome-text-2 {
-  /*font-family: 'Germania One';*/
   display: flex;
   justify-content: center;
   position: relative;
@@ -24,7 +22,6 @@
 }
 
 .welcome-button {
-  /*font-family: 'Germania One';*/
   background-color: black;
   display: flex;
   justify-content: center;
@@ -36,7 +33,7 @@
 }
 
 .welcome-button:hover {
-  background-color: lightgray;
+  background-color: black;
   text-decoration: none;
 }
 
@@ -48,6 +45,7 @@
   justify-content: space-between;
   background-color: black;
   color: white;
+
 }
 
 .navbar img{
@@ -57,11 +55,13 @@
 .navbar div.sign-out-button{
   margin: 20px 0;
 }
-/*navbar - end*/
 
 .sign-out-button {
   border: solid white 1px;
+  border-radius: .25rem;
+  padding: .25rem;
 }
+/*navbar - end*/
 
 .card {
   margin: 30px;
@@ -103,10 +103,19 @@
 
 .profile_enter_container {
   background-color: lightgrey;
+  padding: 2rem;
+}
+
+.profile_enter_container h3{
+  margin-left: 1rem;
 }
 
 .glyphicon   {
   width: 20px;
+}
+
+fieldset {
+  padding: 1rem;
 }
 
 .btn-success {
@@ -248,9 +257,31 @@
 
 /*styling for AssetToolbar.jsx*/
 .asset-toolbar {
-  width: 50rem;
+  width: 100%;
+  /*padding: 1rem;*/
   border: 2px solid lightgray;
 }
+
+.image-container {
+  display: flex;
+
+}
+
+.image-object {
+  flex-direction: column;
+  /*padding: 1rem;*/
+}
+
+.image-preview{
+  margin: 0 1rem;
+}
+
+.checkbox-inline {
+  text-align: center;
+
+}
+
+
 
 .band-profile {
   width: 50rem;
@@ -277,9 +308,12 @@
   background-color: black;
 }
 
+
 .send-email-window {
-  height: 300px;
+  height: 200px;
   width: 80vw;
+  padding: 1.5rem;
+  border: solid gray 1px;
   z-index: 2;
   position: absolute;
 }
