@@ -130,7 +130,7 @@ export default class BandProfileEnter extends Component {
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       {/* <span className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></span> */}
-                      <input name="vehicle" placeholder="Vehicle(s)" className="form-control"  type="text" onChange={this.updateFromField('vehicle')}value={this.state.vehicle}/>
+                      <input name="vehicle" placeholder="Traveling in" className="form-control"  type="text" onChange={this.updateFromField('vehicle')}value={this.state.vehicle}/>
                     </div>
                   </div>
                 </div>
