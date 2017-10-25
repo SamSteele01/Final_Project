@@ -71,7 +71,7 @@ export default class Header extends Component {
         }
         {this.state.token &&
           <div className="sign-out-button">
-            <a className="button" onClick={this.signOut}>Sign out</a>
+            <a className="button sign-out-button" onClick={this.signOut}>Sign out</a>
           </div>
         }
       </nav>

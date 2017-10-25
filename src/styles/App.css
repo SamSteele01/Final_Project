@@ -57,6 +57,10 @@
 }
 /*navbar - end*/
 
+.sign-out-button {
+  border: solid white 1px;
+}
+
 .card {
   margin: 30px;
 }
