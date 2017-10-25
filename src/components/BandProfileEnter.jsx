@@ -117,7 +117,7 @@ export default class BandProfileEnter extends Component {
             <fieldset>
               <legend>Update Your Band Profile</legend>
                 <div className="form-group">
-                  <label className="col-md-4 control-label">Name of Performer(s)</label>
+                  <label className="col-md-4 control-label">Name of Performer(s):</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       {/* <span className="input-group-addon"><i className="glyphicon glyphicon-user" aria-hidden="true" ></i></span> */}
@@ -126,16 +126,16 @@ export default class BandProfileEnter extends Component {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="vehicle">Vehicle(s)</label>
+                  <label className="col-md-4 control-label" htmlFor="vehicle">Traveling in:</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       {/* <span className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></span> */}
-                      <input name="vehicle" placeholder="Vehicle(s)" className="form-control"  type="text" onChange={this.updateFromField('vehicle')}value={this.state.vehicle}/>
+                      <input name="vehicle" placeholder="Traveling in" className="form-control"  type="text" onChange={this.updateFromField('vehicle')}value={this.state.vehicle}/>
                     </div>
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="num_members">Number of Members</label>
+                  <label className="col-md-4 control-label" htmlFor="num_members">Number of Members:</label
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       {/* <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span> */}
@@ -144,7 +144,7 @@ export default class BandProfileEnter extends Component {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="num_crew">Number of Crew Members</label>
+                  <label className="col-md-4 control-label" htmlFor="num_crew">Number of Crew Members:</label
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       {/* <span className="input-group-addon"><i className="glyphicon glyphicon-earphone"></i></span> */}
@@ -178,7 +178,7 @@ export default class BandProfileEnter extends Component {
               </li>
             </ul>
             {/* <div className="form-group">
-              <label className="col-md-4 control-label" htmlFor="address">Address</label>
+              <label className="col-md-4 control-label" htmlFor="address">Address:</label
               <div className="col-md-4 inputGroupContainer">
                 <div className="input-group">
                   <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
@@ -187,7 +187,7 @@ export default class BandProfileEnter extends Component {
               </div>
             </div>
             <div className="form-group">
-              <label className="col-md-4 control-label" htmlFor="city">City</label>
+              <label className="col-md-4 control-label" htmlFor="city">City:</label
               <div className="col-md-4 inputGroupContainer">
                 <div className="input-group">
                   <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
@@ -196,7 +196,7 @@ export default class BandProfileEnter extends Component {
               </div>
             </div>
             <div className="form-group">
-              <label className="col-md-4 control-label" htmlFor="state">State</label>
+              <label className="col-md-4 control-label" htmlFor="state">State:</label
               <div className="col-md-4 inputGroupContainer">
                 <div className="input-group">
                   <span className="input-group-addon"><i className="glyphicon glyphicon-list"></i></span>
@@ -205,7 +205,7 @@ export default class BandProfileEnter extends Component {
               </div>
             </div>
             <div className="form-group">
-              <label className="col-md-4 control-label" htmlFor="zipcode">Zip Code</label>
+              <label className="col-md-4 control-label" htmlFor="zipcode">Zip Code:</label
               <div className="col-md-4 inputGroupContainer">
                 <div className="input-group">
                   <span className="input-group-addon"><i className="glyphicon glyphicon-home"></i></span>
@@ -214,7 +214,7 @@ export default class BandProfileEnter extends Component {
               </div>
             </div>
             <div className="form-group">
-              <label className="col-md-4 control-label" htmlFor="website">Website or domain name</label>
+              <label className="col-md-4 control-label" htmlFor="website">Website or domain name:</label
               <div className="col-md-4 inputGroupContainer">
                 <div className="input-group">
                   <span className="input-group-addon"><i className="glyphicon glyphicon-globe"></i></span>
@@ -223,7 +223,7 @@ export default class BandProfileEnter extends Component {
               </div>
             </div> */}
               {/* <div className="form-group    organization-info">
-                <span><label className="col-md-4  control-label info" htmlFor="info">Tell Us  About Your Organization</label></span>
+                <span><label className="col-md-4  control-label info" htmlFor="info">Tell Us  About Your Organization:</label</span>
                 <div className="col-md-4  inputGroupContainer">
                   <div className="input-group">
     	               <textarea className="form-control"  name="comment" placeholder="Organization  Description" rows="10" cols="50"  onChange={this.handleUpdateProfile}   value={this.state.info}></textarea>

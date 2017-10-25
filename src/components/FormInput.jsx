@@ -218,7 +218,6 @@ export default class FormInput extends Component {
                 type="text" id="laundry" placeholder="Laundry Availability:" value={this.state.laundry}/>
             </div>
             <div className="form-group">
-              <label htmlFor="wifi">WIFI Information:</label>
               <input className="form-control" onChange={this.updateFromField('wifi')} type="text"
                  id="wifi" placeholder="ex: Network name and password" value={this.state.wifi}/>
             </div>
