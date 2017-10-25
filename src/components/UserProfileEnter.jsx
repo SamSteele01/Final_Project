@@ -88,7 +88,7 @@ export default class UserProfileEnter extends Component {
         <div className="profile_enter_container">
           <form className="well form-horizontal" method="post"  id="contact_form">
             <fieldset>
-              <legend>Update Your User Profile</legend>
+              <h3>Update Your User Profile</h3>
                 <div className="form-group">
                   <label className="col-md-4 control-label">Full Name:</label>
                   <div className="col-md-4 inputGroupContainer">

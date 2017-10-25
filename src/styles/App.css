@@ -61,6 +61,8 @@
 
 .sign-out-button {
   border: solid white 1px;
+  border-radius: .25rem;
+  padding: .25rem;
 }
 
 .card {
@@ -105,8 +107,16 @@
   background-color: lightgrey;
 }
 
+.profile_enter_container h3{
+  margin-left: 1rem;
+}
+
 .glyphicon   {
   width: 20px;
+}
+
+fieldset {
+  padding: 1rem;
 }
 
 .btn-success {

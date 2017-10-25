@@ -119,9 +119,9 @@ export default class BandProfileEnter extends Component {
         <div className="profile_enter_container">
           <form className="well form-horizontal" method="post"  id="contact_form">
             <fieldset>
-              <legend>Update Your Band Profile</legend>
+              <h3>Update Your Band Profile</h3>
                 <div className="form-group">
-                  <label className="col-md-4 control-label">Name of Performer(s):</label>
+                  <label className="col-md-4 control-label">Name of Artist(s):</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       {/* <span className="input-group-addon"><i className="glyphicon glyphicon-user" aria-hidden="true" ></i></span> */}
