@@ -178,7 +178,7 @@ export default class UserProfileEnter extends Component {
                 </ul> */}
             </fieldset>
           </form>
-          <ImageUploader targetKey={"avatar"} label={"Upload your Avatar Image"} currentImage={this.state.avatar}/>
+          <ImageUploader targetKey={"avatar"} label={"Upload Photo"} currentImage={this.state.avatar}/>
         </div>
         }
       </div>
