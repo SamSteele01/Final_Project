@@ -109,19 +109,19 @@ export default class BandProfileEnter extends Component {
             </form>
             <ul class="list-group list-group-flush band-profile-list">
               <li class="list-group-item band-profile-list">
-                <ImageUploader targetKey={"w9"} label={"Upload your W-9"}/>
+                <ImageUploader targetKey={"w9"} label={"Upload your W-9:"}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Stage Plot</a> */}
-                <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot"}/>
+                <ImageUploader targetKey={"stage_plot"} label={"Upload your Stage Plot:"}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Input List</a> */}
-                <ImageUploader targetKey={"input_list"} label={"Upload your Input List"}/>
+                <ImageUploader targetKey={"input_list"} label={"Upload your Input List:"}/>
               </li>
               <li className="list-group-item band-profile-list">
                 {/* <a href="" className="card-link">Promos</a> */}
-                <ImageUploader targetKey={"promo_asset"} label={"Upload your Hospitality Rider"}/>
+                <ImageUploader targetKey={"promo_asset"} label={"Upload your Hospitality Rider:"}/>
               </li>
             </ul>
             {/* <div className="form-group">
