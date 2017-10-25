@@ -70,7 +70,7 @@ export default class UpdateUserProfile extends Component {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="email">E-Mail</label>
+                  <label className="col-md-4 control-label" htmlFor="email">Email</label>
                   <div className="col-md-4 inputGroupContainer">
                     <div className="input-group">
                       <span className="input-group-addon"><i className="glyphicon glyphicon-envelope"></i></span>
