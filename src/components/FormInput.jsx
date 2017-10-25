@@ -118,6 +118,7 @@ export default class FormInput extends Component {
       }
       if(res){
         console.log(res);
+        window.location.href = "/dashboard";
       }
     })
  }

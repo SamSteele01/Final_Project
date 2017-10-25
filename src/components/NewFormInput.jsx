@@ -89,8 +89,7 @@ export default class NewFormInput extends Component {
         // this.setState({error: res.body.error});
       }else{
         console.log(res);
-        // reroute to FormInput - need the event_token from backend
-        // this.props.routeToForm();
+        window.location.href = "/dashboard";
       }
     })
  }
