@@ -183,9 +183,9 @@ export default class NewFormInput extends Component {
             type="text" id="laundry" placeholder="Laundry Availability:" value={this.state.laundry}/>
         </div>
         <div className="form-group">
-          <label htmlFor="wifi">Wifi Information</label>
+          <label htmlFor="wifi">WIFI Information</label>
           <input className="form-control" onChange={this.updateFromField('wifi')} type="text"
-             id="wifi" placeholder="Wifi Information:" value={this.state.wifi}/>
+             id="wifi" placeholder="WIFI Information:" value={this.state.wifi}/>
         </div>
         <div className="form-group">
           <label htmlFor="misc">Miscellaneous</label>

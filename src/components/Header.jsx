@@ -4,6 +4,7 @@ import cookie from 'react-cookies';
 import request from 'superagent';
 import { Link } from 'react-router-dom';
 import Logo from '../styles/two_tickets_white1600.png';
+import cookie from 'react-cookies';
 
 export default class Header extends Component {
   constructor(props) {
@@ -24,7 +25,9 @@ export default class Header extends Component {
       // auth2.signOut().then(function () {
       //   console.log('User signed out.');
       // });
+
       // this.logoutAtBackend();
+
       cookie.remove('token'); //deletes token from cookie
       this.setState({token: null});
       window.location.href = "/";
