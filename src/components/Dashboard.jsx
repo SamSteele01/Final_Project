@@ -240,8 +240,10 @@ export default class Dashboard extends Component {
                  Edit Profile
                </DropdownToggle>
                <DropdownMenu right>
+                 <DropdownItem>User:</DropdownItem>
                  <DropdownItem><Link to="/profile-page" onClick={event => this.props.navUpdateUserProfile(this.state.userId)} >{this.state.fullName}</Link></DropdownItem>
                  <DropdownItem divider />
+                 <DropdownItem>Bands:</DropdownItem>
                  {this.displayDropdowns("/profile-page", this.props.navUpdateBandProfile)}
                </DropdownMenu>
             </Dropdown>

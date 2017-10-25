@@ -61,7 +61,8 @@ export default class ImageUploader extends Component {
           console.log(res);
           this.setState({
           processing: false,
-          uploaded_uri: eval(`res.body.${uploadTargetKey}`)
+          uploaded_uri: eval(`res.body.${uploadTargetKey}`),
+          filetype: eval(`res.body.${uploadTargetKey}_content_type`)
           });
         }
       });
@@ -84,7 +85,7 @@ export default class ImageUploader extends Component {
   render() {
     let processing;
     let uploaded;
-    if (this.state.uploaded_uri&&this.state.filetype==="") {
+    if (this.state.uploaded_uri&&this.state.filetype==="image/jpeg") { // application/pdf or image/jpeg
       uploaded = (
         <div >
           {/* <h4>Image uploaded!</h4> */}
@@ -93,7 +94,7 @@ export default class ImageUploader extends Component {
         </div>
       );
     }
-    if (this.state.uploaded_uri&&this.state.filetype===".pdf") {
+    if (this.state.uploaded_uri&&this.state.filetype==="application/pdf") {
       uploaded = (
         <div >
           {/* <h4>Image uploaded!</h4> */}
